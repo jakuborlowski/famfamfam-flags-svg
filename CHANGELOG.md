@@ -4,6 +4,12 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); flag changes are
 listed by code so a refresh from upstream reads as a diff.
 
+## [Unreleased]
+
+### Changed
+- The npm package contains only `dist/svg`, the CSS and the manifest; PNGs
+  are in the release zip.
+
 ## [0.1.0] - 2026-09-26
 
 ### Added

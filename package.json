@@ -6,7 +6,7 @@
   "author": "Jakub Orłowski",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jakuborlowski/famfamfam-flags-svg.git"
+    "url": "git+https://github.com/jakuborlowski/famfamfam-flags-svg.git"
   },
   "homepage": "https://github.com/jakuborlowski/famfamfam-flags-svg#readme",
   "bugs": "https://github.com/jakuborlowski/famfamfam-flags-svg/issues",
@@ -24,7 +24,9 @@
   "type": "module",
   "style": "dist/famfamfam-flags.css",
   "files": [
-    "dist",
+    "dist/svg",
+    "dist/famfamfam-flags.css",
+    "dist/manifest.json",
     "README.md",
     "CHANGELOG.md",
     "LICENSE"

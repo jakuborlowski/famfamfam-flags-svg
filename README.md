@@ -24,9 +24,10 @@ missing then, and current designs wherever a flag has changed since.
 
 Get the files as a zip of `dist/` from the
 [latest release](https://github.com/jakuborlowski/famfamfam-flags-svg/releases/latest/download/famfamfam-flags-svg.zip)
-(SVGs, PNGs at 1×, 2× and 4×, the CSS, a manifest, the license), or hot-link
-one flag from jsDelivr pinned to a tag:
-`https://cdn.jsdelivr.net/gh/jakuborlowski/famfamfam-flags-svg@v0.1.0/dist/svg/pl.svg`.
+(SVGs, PNGs at 1×, 2× and 4×, the CSS, a manifest, the license), from npm
+with `npm install famfamfam-flags-svg` (SVGs, CSS and manifest), or hot-link
+one flag from jsDelivr pinned to a version:
+`https://cdn.jsdelivr.net/npm/famfamfam-flags-svg@0.1.0/dist/svg/pl.svg`.
 `preview.html` shows every flag at four sizes.
 
 Files are named by lowercase ISO 3166-1 alpha-2 code where one exists and
