@@ -12,22 +12,28 @@ missing then, and current designs wherever a flag has changed since.
 
 ## Use
 
+Straight from a CDN, nothing to install:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/famfamfam-flags-svg@0.1.0/dist/famfamfam-flags.css">
+<span class="famfamfam-flag famfamfam-flag-pl" role="img" aria-label="Poland"></span>
+
+<img src="https://cdn.jsdelivr.net/npm/famfamfam-flags-svg@0.1.0/dist/svg/pl.svg" width="16" height="11" alt="Poland">
+```
+
+Or host the files yourself, which is better for production sites since it
+avoids a third-party request. Get them as a zip of `dist/` from the
+[latest release](https://github.com/jakuborlowski/famfamfam-flags-svg/releases/latest/download/famfamfam-flags-svg.zip)
+(SVGs, PNGs at 1×, 2× and 4×, the CSS, a manifest, the license) or with
+`npm install famfamfam-flags-svg` (SVGs, CSS and manifest), then:
+
 ```html
 <img src="svg/pl.svg" width="16" height="11" alt="Poland">
 <img src="svg/pl.svg" width="32" alt="Poland">      <!-- any size -->
-```
 
-```html
 <link rel="stylesheet" href="famfamfam-flags.css">   <!-- keep svg/ next to it -->
-<span class="famfamfam-flag famfamfam-flag-pl" role="img" aria-label="Poland"></span>
 ```
 
-Get the files as a zip of `dist/` from the
-[latest release](https://github.com/jakuborlowski/famfamfam-flags-svg/releases/latest/download/famfamfam-flags-svg.zip)
-(SVGs, PNGs at 1×, 2× and 4×, the CSS, a manifest, the license), from npm
-with `npm install famfamfam-flags-svg` (SVGs, CSS and manifest), or hot-link
-one flag from jsDelivr pinned to a version:
-`https://cdn.jsdelivr.net/npm/famfamfam-flags-svg@0.1.0/dist/svg/pl.svg`.
 [Every flag at four sizes](https://jakuborlowski.github.io/famfamfam-flags-svg/preview.html).
 
 Files are named by lowercase ISO 3166-1 alpha-2 code where one exists and
