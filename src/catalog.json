@@ -1,0 +1,1434 @@
+[
+ {
+  "code": "ad",
+  "name": "Andorra",
+  "legacy": true
+ },
+ {
+  "code": "ae",
+  "name": "United Arab Emirates",
+  "legacy": true
+ },
+ {
+  "code": "af",
+  "name": "Afghanistan",
+  "legacy": true
+ },
+ {
+  "code": "ag",
+  "name": "Antigua and Barbuda",
+  "legacy": true
+ },
+ {
+  "code": "ai",
+  "name": "Anguilla",
+  "legacy": true
+ },
+ {
+  "code": "al",
+  "name": "Albania",
+  "legacy": true
+ },
+ {
+  "code": "am",
+  "name": "Armenia",
+  "legacy": true
+ },
+ {
+  "code": "an",
+  "legacy": true,
+  "name": "Netherlands Antilles (1986-2010)",
+  "source": "an.svg"
+ },
+ {
+  "code": "ao",
+  "name": "Angola",
+  "legacy": true
+ },
+ {
+  "code": "aq",
+  "name": "Antarctica",
+  "legacy": false
+ },
+ {
+  "code": "ar",
+  "name": "Argentina",
+  "legacy": true
+ },
+ {
+  "code": "arab",
+  "name": "League of Arab States",
+  "legacy": false
+ },
+ {
+  "code": "as",
+  "name": "American Samoa",
+  "legacy": true
+ },
+ {
+  "code": "asean",
+  "name": "Association of Southeast Asian Nations",
+  "legacy": false
+ },
+ {
+  "code": "at",
+  "name": "Austria",
+  "legacy": true
+ },
+ {
+  "code": "au",
+  "name": "Australia",
+  "legacy": true
+ },
+ {
+  "code": "aw",
+  "name": "Aruba",
+  "legacy": true
+ },
+ {
+  "code": "ax",
+  "name": "Aland Islands",
+  "legacy": true,
+  "source": "ax.svg",
+  "note": "icon-native artwork: cross arms on whole pixels at 1x"
+ },
+ {
+  "code": "az",
+  "name": "Azerbaijan",
+  "legacy": true
+ },
+ {
+  "code": "ba",
+  "name": "Bosnia and Herzegovina",
+  "legacy": true
+ },
+ {
+  "code": "bb",
+  "name": "Barbados",
+  "legacy": true
+ },
+ {
+  "code": "bd",
+  "name": "Bangladesh",
+  "legacy": true
+ },
+ {
+  "code": "be",
+  "name": "Belgium",
+  "legacy": true
+ },
+ {
+  "code": "bf",
+  "name": "Burkina Faso",
+  "legacy": true
+ },
+ {
+  "code": "bg",
+  "name": "Bulgaria",
+  "legacy": true
+ },
+ {
+  "code": "bh",
+  "name": "Bahrain",
+  "legacy": true
+ },
+ {
+  "code": "bi",
+  "name": "Burundi",
+  "legacy": true
+ },
+ {
+  "code": "bj",
+  "name": "Benin",
+  "legacy": true
+ },
+ {
+  "code": "bl",
+  "name": "Saint Barth\u00e9lemy",
+  "legacy": false
+ },
+ {
+  "code": "bm",
+  "name": "Bermuda",
+  "legacy": true
+ },
+ {
+  "code": "bn",
+  "name": "Brunei Darussalam",
+  "legacy": true
+ },
+ {
+  "code": "bo",
+  "name": "Bolivia",
+  "legacy": true
+ },
+ {
+  "code": "bq",
+  "name": "Bonaire, Sint Eustatius and Saba",
+  "legacy": false
+ },
+ {
+  "code": "br",
+  "name": "Brazil",
+  "legacy": true
+ },
+ {
+  "code": "bs",
+  "name": "Bahamas",
+  "legacy": true
+ },
+ {
+  "code": "bt",
+  "name": "Bhutan",
+  "legacy": true
+ },
+ {
+  "code": "bv",
+  "name": "Bouvet Island",
+  "legacy": true
+ },
+ {
+  "code": "bw",
+  "name": "Botswana",
+  "legacy": true
+ },
+ {
+  "code": "by",
+  "name": "Belarus",
+  "legacy": true
+ },
+ {
+  "code": "bz",
+  "name": "Belize",
+  "legacy": true
+ },
+ {
+  "code": "ca",
+  "name": "Canada",
+  "legacy": true
+ },
+ {
+  "code": "cc",
+  "name": "Cocos (Keeling) Islands",
+  "legacy": true
+ },
+ {
+  "code": "cd",
+  "name": "Democratic Republic of the Congo",
+  "legacy": true
+ },
+ {
+  "code": "cefta",
+  "name": "Central European Free Trade Agreement",
+  "legacy": false
+ },
+ {
+  "code": "cf",
+  "name": "Central African Republic",
+  "legacy": true
+ },
+ {
+  "code": "cg",
+  "name": "Republic of the Congo",
+  "legacy": true
+ },
+ {
+  "code": "ch",
+  "name": "Switzerland",
+  "legacy": true,
+  "shape": "1x1"
+ },
+ {
+  "code": "ci",
+  "name": "C\u00f4te d'Ivoire",
+  "legacy": true
+ },
+ {
+  "code": "ck",
+  "name": "Cook Islands",
+  "legacy": true
+ },
+ {
+  "code": "cl",
+  "name": "Chile",
+  "legacy": true
+ },
+ {
+  "code": "cm",
+  "name": "Cameroon",
+  "legacy": true
+ },
+ {
+  "code": "cn",
+  "name": "China",
+  "legacy": true
+ },
+ {
+  "code": "co",
+  "name": "Colombia",
+  "legacy": true
+ },
+ {
+  "code": "cp",
+  "name": "Clipperton Island",
+  "legacy": false
+ },
+ {
+  "code": "cr",
+  "name": "Costa Rica",
+  "legacy": true
+ },
+ {
+  "code": "cs",
+  "legacy": true,
+  "name": "Serbia and Montenegro (2003-2006)",
+  "source": "cs.svg"
+ },
+ {
+  "code": "cu",
+  "name": "Cuba",
+  "legacy": true
+ },
+ {
+  "code": "cv",
+  "name": "Cabo Verde",
+  "legacy": true
+ },
+ {
+  "code": "cw",
+  "name": "Cura\u00e7ao",
+  "legacy": false
+ },
+ {
+  "code": "cx",
+  "name": "Christmas Island",
+  "legacy": true
+ },
+ {
+  "code": "cy",
+  "name": "Cyprus",
+  "legacy": true
+ },
+ {
+  "code": "cz",
+  "name": "Czech Republic",
+  "legacy": true
+ },
+ {
+  "code": "de",
+  "name": "Germany",
+  "legacy": true
+ },
+ {
+  "code": "dg",
+  "name": "Diego Garcia",
+  "legacy": false
+ },
+ {
+  "code": "dj",
+  "name": "Djibouti",
+  "legacy": true
+ },
+ {
+  "code": "dk",
+  "name": "Denmark",
+  "legacy": true,
+  "source": "dk.svg",
+  "note": "icon-native artwork: cross arms on whole pixels at 1x"
+ },
+ {
+  "code": "dm",
+  "name": "Dominica",
+  "legacy": true
+ },
+ {
+  "code": "do",
+  "name": "Dominican Republic",
+  "legacy": true
+ },
+ {
+  "code": "dz",
+  "name": "Algeria",
+  "legacy": true
+ },
+ {
+  "code": "eac",
+  "name": "East African Community",
+  "legacy": false
+ },
+ {
+  "code": "ec",
+  "name": "Ecuador",
+  "legacy": true
+ },
+ {
+  "code": "ee",
+  "name": "Estonia",
+  "legacy": true
+ },
+ {
+  "code": "eg",
+  "name": "Egypt",
+  "legacy": true
+ },
+ {
+  "code": "eh",
+  "name": "Western Sahara",
+  "legacy": true
+ },
+ {
+  "code": "er",
+  "name": "Eritrea",
+  "legacy": true
+ },
+ {
+  "code": "es",
+  "name": "Spain",
+  "legacy": true
+ },
+ {
+  "code": "es-ct",
+  "name": "Catalonia",
+  "legacy": true,
+  "aliases": [
+   "catalonia"
+  ]
+ },
+ {
+  "code": "es-ga",
+  "name": "Galicia",
+  "legacy": false
+ },
+ {
+  "code": "es-pv",
+  "name": "Basque Country",
+  "legacy": false
+ },
+ {
+  "code": "et",
+  "name": "Ethiopia",
+  "legacy": true
+ },
+ {
+  "code": "eu",
+  "name": "Europe",
+  "legacy": true,
+  "aliases": [
+   "europeanunion"
+  ]
+ },
+ {
+  "code": "fam",
+  "legacy": true,
+  "name": "famfamfam",
+  "source": "fam.svg",
+  "colors": "keep",
+  "note": "already in the famfamfam palette; colours kept as drawn"
+ },
+ {
+  "code": "fi",
+  "name": "Finland",
+  "legacy": true,
+  "source": "fi.svg",
+  "note": "icon-native artwork: cross arms on whole pixels at 1x"
+ },
+ {
+  "code": "fj",
+  "name": "Fiji",
+  "legacy": true
+ },
+ {
+  "code": "fk",
+  "name": "Falkland Islands",
+  "legacy": true
+ },
+ {
+  "code": "fm",
+  "name": "Federated States of Micronesia",
+  "legacy": true
+ },
+ {
+  "code": "fo",
+  "name": "Faroe Islands",
+  "legacy": true,
+  "source": "fo.svg",
+  "note": "icon-native artwork: cross arms on whole pixels at 1x"
+ },
+ {
+  "code": "fr",
+  "name": "France",
+  "legacy": true
+ },
+ {
+  "code": "ga",
+  "name": "Gabon",
+  "legacy": true
+ },
+ {
+  "code": "gb",
+  "name": "United Kingdom",
+  "legacy": true,
+  "source": "gb.svg",
+  "note": "icon-native artwork: cross arms on whole pixels at 1x"
+ },
+ {
+  "code": "gb-eng",
+  "name": "England",
+  "legacy": true,
+  "aliases": [
+   "england"
+  ]
+ },
+ {
+  "code": "gb-nir",
+  "name": "Northern Ireland",
+  "legacy": false
+ },
+ {
+  "code": "gb-sct",
+  "name": "Scotland",
+  "legacy": true,
+  "aliases": [
+   "scotland"
+  ]
+ },
+ {
+  "code": "gb-wls",
+  "name": "Wales",
+  "legacy": true,
+  "aliases": [
+   "wales"
+  ]
+ },
+ {
+  "code": "gd",
+  "name": "Grenada",
+  "legacy": true
+ },
+ {
+  "code": "ge",
+  "name": "Georgia",
+  "legacy": true
+ },
+ {
+  "code": "gf",
+  "name": "French Guiana",
+  "legacy": true,
+  "from": "fr"
+ },
+ {
+  "code": "gg",
+  "name": "Guernsey",
+  "legacy": true
+ },
+ {
+  "code": "gh",
+  "name": "Ghana",
+  "legacy": true
+ },
+ {
+  "code": "gi",
+  "name": "Gibraltar",
+  "legacy": true
+ },
+ {
+  "code": "gl",
+  "name": "Greenland",
+  "legacy": true
+ },
+ {
+  "code": "gm",
+  "name": "Gambia",
+  "legacy": true
+ },
+ {
+  "code": "gn",
+  "name": "Guinea",
+  "legacy": true
+ },
+ {
+  "code": "gp",
+  "name": "Guadeloupe",
+  "legacy": true,
+  "source": "gp.svg",
+  "note": "no official flag: the widely used local flag; the 2005 icon showed an independence-movement flag"
+ },
+ {
+  "code": "gq",
+  "name": "Equatorial Guinea",
+  "legacy": true
+ },
+ {
+  "code": "gr",
+  "name": "Greece",
+  "legacy": true,
+  "source": "gr.svg",
+  "note": "icon-native artwork: stripes on pixel rows at 1x"
+ },
+ {
+  "code": "gs",
+  "name": "South Georgia and the South Sandwich Islands",
+  "legacy": true
+ },
+ {
+  "code": "gt",
+  "name": "Guatemala",
+  "legacy": true
+ },
+ {
+  "code": "gu",
+  "name": "Guam",
+  "legacy": true
+ },
+ {
+  "code": "gw",
+  "name": "Guinea-Bissau",
+  "legacy": true
+ },
+ {
+  "code": "gy",
+  "name": "Guyana",
+  "legacy": true
+ },
+ {
+  "code": "hk",
+  "name": "Hong Kong",
+  "legacy": true
+ },
+ {
+  "code": "hm",
+  "name": "Heard Island and McDonald Islands",
+  "legacy": true
+ },
+ {
+  "code": "hn",
+  "name": "Honduras",
+  "legacy": true
+ },
+ {
+  "code": "hr",
+  "name": "Croatia",
+  "legacy": true
+ },
+ {
+  "code": "ht",
+  "name": "Haiti",
+  "legacy": true
+ },
+ {
+  "code": "hu",
+  "name": "Hungary",
+  "legacy": true
+ },
+ {
+  "code": "ic",
+  "name": "Canary Islands",
+  "legacy": false
+ },
+ {
+  "code": "id",
+  "name": "Indonesia",
+  "legacy": true
+ },
+ {
+  "code": "ie",
+  "name": "Ireland",
+  "legacy": true
+ },
+ {
+  "code": "il",
+  "name": "Israel",
+  "legacy": true
+ },
+ {
+  "code": "im",
+  "name": "Isle of Man",
+  "legacy": false
+ },
+ {
+  "code": "in",
+  "name": "India",
+  "legacy": true
+ },
+ {
+  "code": "io",
+  "name": "British Indian Ocean Territory",
+  "legacy": true
+ },
+ {
+  "code": "iq",
+  "name": "Iraq",
+  "legacy": true
+ },
+ {
+  "code": "ir",
+  "name": "Iran",
+  "legacy": true
+ },
+ {
+  "code": "is",
+  "name": "Iceland",
+  "legacy": true,
+  "source": "is.svg",
+  "note": "icon-native artwork: cross arms on whole pixels at 1x"
+ },
+ {
+  "code": "it",
+  "name": "Italy",
+  "legacy": true
+ },
+ {
+  "code": "je",
+  "name": "Jersey",
+  "legacy": true
+ },
+ {
+  "code": "jm",
+  "name": "Jamaica",
+  "legacy": true
+ },
+ {
+  "code": "jo",
+  "name": "Jordan",
+  "legacy": true
+ },
+ {
+  "code": "jp",
+  "name": "Japan",
+  "legacy": true
+ },
+ {
+  "code": "ke",
+  "name": "Kenya",
+  "legacy": true
+ },
+ {
+  "code": "kg",
+  "name": "Kyrgyzstan",
+  "legacy": true
+ },
+ {
+  "code": "kh",
+  "name": "Cambodia",
+  "legacy": true
+ },
+ {
+  "code": "ki",
+  "name": "Kiribati",
+  "legacy": true
+ },
+ {
+  "code": "km",
+  "name": "Comoros",
+  "legacy": true
+ },
+ {
+  "code": "kn",
+  "name": "Saint Kitts and Nevis",
+  "legacy": true
+ },
+ {
+  "code": "kp",
+  "name": "North Korea",
+  "legacy": true
+ },
+ {
+  "code": "kr",
+  "name": "South Korea",
+  "legacy": true
+ },
+ {
+  "code": "kw",
+  "name": "Kuwait",
+  "legacy": true
+ },
+ {
+  "code": "ky",
+  "name": "Cayman Islands",
+  "legacy": true
+ },
+ {
+  "code": "kz",
+  "name": "Kazakhstan",
+  "legacy": true
+ },
+ {
+  "code": "la",
+  "name": "Laos",
+  "legacy": true
+ },
+ {
+  "code": "lb",
+  "name": "Lebanon",
+  "legacy": true
+ },
+ {
+  "code": "lc",
+  "name": "Saint Lucia",
+  "legacy": true
+ },
+ {
+  "code": "li",
+  "name": "Liechtenstein",
+  "legacy": true
+ },
+ {
+  "code": "lk",
+  "name": "Sri Lanka",
+  "legacy": true
+ },
+ {
+  "code": "lr",
+  "name": "Liberia",
+  "legacy": true,
+  "source": "lr.svg",
+  "note": "icon-native artwork: stripes on pixel rows at 1x"
+ },
+ {
+  "code": "ls",
+  "name": "Lesotho",
+  "legacy": true
+ },
+ {
+  "code": "lt",
+  "name": "Lithuania",
+  "legacy": true
+ },
+ {
+  "code": "lu",
+  "name": "Luxembourg",
+  "legacy": true
+ },
+ {
+  "code": "lv",
+  "name": "Latvia",
+  "legacy": true
+ },
+ {
+  "code": "ly",
+  "name": "Libya",
+  "legacy": true
+ },
+ {
+  "code": "ma",
+  "name": "Morocco",
+  "legacy": true
+ },
+ {
+  "code": "mc",
+  "name": "Monaco",
+  "legacy": true
+ },
+ {
+  "code": "md",
+  "name": "Moldova",
+  "legacy": true
+ },
+ {
+  "code": "me",
+  "name": "Montenegro",
+  "legacy": true
+ },
+ {
+  "code": "mf",
+  "name": "Saint Martin",
+  "legacy": false
+ },
+ {
+  "code": "mg",
+  "name": "Madagascar",
+  "legacy": true
+ },
+ {
+  "code": "mh",
+  "name": "Marshall Islands",
+  "legacy": true
+ },
+ {
+  "code": "mk",
+  "name": "North Macedonia",
+  "legacy": true
+ },
+ {
+  "code": "ml",
+  "name": "Mali",
+  "legacy": true
+ },
+ {
+  "code": "mm",
+  "name": "Myanmar",
+  "legacy": true
+ },
+ {
+  "code": "mn",
+  "name": "Mongolia",
+  "legacy": true
+ },
+ {
+  "code": "mo",
+  "name": "Macau",
+  "legacy": true
+ },
+ {
+  "code": "mp",
+  "name": "Northern Mariana Islands",
+  "legacy": true
+ },
+ {
+  "code": "mq",
+  "name": "Martinique",
+  "legacy": true
+ },
+ {
+  "code": "mr",
+  "name": "Mauritania",
+  "legacy": true
+ },
+ {
+  "code": "ms",
+  "name": "Montserrat",
+  "legacy": true
+ },
+ {
+  "code": "mt",
+  "name": "Malta",
+  "legacy": true
+ },
+ {
+  "code": "mu",
+  "name": "Mauritius",
+  "legacy": true
+ },
+ {
+  "code": "mv",
+  "name": "Maldives",
+  "legacy": true
+ },
+ {
+  "code": "mw",
+  "name": "Malawi",
+  "legacy": true
+ },
+ {
+  "code": "mx",
+  "name": "Mexico",
+  "legacy": true
+ },
+ {
+  "code": "my",
+  "name": "Malaysia",
+  "legacy": true,
+  "source": "my.svg",
+  "note": "icon-native artwork: stripes on pixel rows at 1x"
+ },
+ {
+  "code": "mz",
+  "name": "Mozambique",
+  "legacy": true
+ },
+ {
+  "code": "na",
+  "name": "Namibia",
+  "legacy": true
+ },
+ {
+  "code": "nc",
+  "name": "New Caledonia",
+  "legacy": true
+ },
+ {
+  "code": "ne",
+  "name": "Niger",
+  "legacy": true
+ },
+ {
+  "code": "nf",
+  "name": "Norfolk Island",
+  "legacy": true
+ },
+ {
+  "code": "ng",
+  "name": "Nigeria",
+  "legacy": true
+ },
+ {
+  "code": "ni",
+  "name": "Nicaragua",
+  "legacy": true
+ },
+ {
+  "code": "nl",
+  "name": "Netherlands",
+  "legacy": true
+ },
+ {
+  "code": "no",
+  "name": "Norway",
+  "legacy": true,
+  "source": "no.svg",
+  "note": "icon-native artwork: cross arms on whole pixels at 1x"
+ },
+ {
+  "code": "np",
+  "name": "Nepal",
+  "legacy": true,
+  "source": "np.svg",
+  "width": 9,
+  "outline": "M0 11L8.782 11L3.035 5.458L9 5.465L0.002 0z"
+ },
+ {
+  "code": "nr",
+  "name": "Nauru",
+  "legacy": true
+ },
+ {
+  "code": "nu",
+  "name": "Niue",
+  "legacy": true
+ },
+ {
+  "code": "nz",
+  "name": "New Zealand",
+  "legacy": true
+ },
+ {
+  "code": "om",
+  "name": "Oman",
+  "legacy": true
+ },
+ {
+  "code": "pa",
+  "name": "Panama",
+  "legacy": true
+ },
+ {
+  "code": "pc",
+  "name": "Pacific Community",
+  "legacy": false
+ },
+ {
+  "code": "pe",
+  "name": "Peru",
+  "legacy": true
+ },
+ {
+  "code": "pf",
+  "name": "French Polynesia",
+  "legacy": true
+ },
+ {
+  "code": "pg",
+  "name": "Papua New Guinea",
+  "legacy": true
+ },
+ {
+  "code": "ph",
+  "name": "Philippines",
+  "legacy": true
+ },
+ {
+  "code": "pk",
+  "name": "Pakistan",
+  "legacy": true
+ },
+ {
+  "code": "pl",
+  "name": "Poland",
+  "legacy": true
+ },
+ {
+  "code": "pm",
+  "name": "Saint Pierre and Miquelon",
+  "legacy": true,
+  "source": "pm.svg",
+  "note": "no official flag: the local flag, as in the 2005 icon"
+ },
+ {
+  "code": "pn",
+  "name": "Pitcairn",
+  "legacy": true
+ },
+ {
+  "code": "pr",
+  "name": "Puerto Rico",
+  "legacy": true
+ },
+ {
+  "code": "ps",
+  "name": "State of Palestine",
+  "legacy": true
+ },
+ {
+  "code": "pt",
+  "name": "Portugal",
+  "legacy": true
+ },
+ {
+  "code": "pw",
+  "name": "Palau",
+  "legacy": true
+ },
+ {
+  "code": "py",
+  "name": "Paraguay",
+  "legacy": true
+ },
+ {
+  "code": "qa",
+  "name": "Qatar",
+  "legacy": true
+ },
+ {
+  "code": "re",
+  "name": "R\u00e9union",
+  "legacy": true,
+  "from": "fr"
+ },
+ {
+  "code": "ro",
+  "name": "Romania",
+  "legacy": true
+ },
+ {
+  "code": "rs",
+  "name": "Serbia",
+  "legacy": true
+ },
+ {
+  "code": "ru",
+  "name": "Russia",
+  "legacy": true
+ },
+ {
+  "code": "rw",
+  "name": "Rwanda",
+  "legacy": true
+ },
+ {
+  "code": "sa",
+  "name": "Saudi Arabia",
+  "legacy": true
+ },
+ {
+  "code": "sb",
+  "name": "Solomon Islands",
+  "legacy": true
+ },
+ {
+  "code": "sc",
+  "name": "Seychelles",
+  "legacy": true
+ },
+ {
+  "code": "sd",
+  "name": "Sudan",
+  "legacy": true
+ },
+ {
+  "code": "se",
+  "name": "Sweden",
+  "legacy": true,
+  "source": "se.svg",
+  "note": "icon-native artwork: cross arms on whole pixels at 1x"
+ },
+ {
+  "code": "sg",
+  "name": "Singapore",
+  "legacy": true
+ },
+ {
+  "code": "sh",
+  "name": "Saint Helena, Ascension and Tristan da Cunha",
+  "legacy": true
+ },
+ {
+  "code": "sh-ac",
+  "name": "Ascension Island",
+  "legacy": false
+ },
+ {
+  "code": "sh-hl",
+  "name": "Saint Helena",
+  "legacy": false
+ },
+ {
+  "code": "sh-ta",
+  "name": "Tristan da Cunha",
+  "legacy": false
+ },
+ {
+  "code": "si",
+  "name": "Slovenia",
+  "legacy": true
+ },
+ {
+  "code": "sj",
+  "name": "Svalbard and Jan Mayen",
+  "legacy": true
+ },
+ {
+  "code": "sk",
+  "name": "Slovakia",
+  "legacy": true
+ },
+ {
+  "code": "sl",
+  "name": "Sierra Leone",
+  "legacy": true
+ },
+ {
+  "code": "sm",
+  "name": "San Marino",
+  "legacy": true
+ },
+ {
+  "code": "sn",
+  "name": "Senegal",
+  "legacy": true
+ },
+ {
+  "code": "so",
+  "name": "Somalia",
+  "legacy": true
+ },
+ {
+  "code": "sr",
+  "name": "Suriname",
+  "legacy": true
+ },
+ {
+  "code": "ss",
+  "name": "South Sudan",
+  "legacy": false
+ },
+ {
+  "code": "st",
+  "name": "Sao Tome and Principe",
+  "legacy": true
+ },
+ {
+  "code": "sv",
+  "name": "El Salvador",
+  "legacy": true
+ },
+ {
+  "code": "sx",
+  "name": "Sint Maarten",
+  "legacy": false
+ },
+ {
+  "code": "sy",
+  "name": "Syria",
+  "legacy": true
+ },
+ {
+  "code": "sz",
+  "name": "Eswatini",
+  "legacy": true
+ },
+ {
+  "code": "tc",
+  "name": "Turks and Caicos Islands",
+  "legacy": true
+ },
+ {
+  "code": "td",
+  "name": "Chad",
+  "legacy": true
+ },
+ {
+  "code": "tf",
+  "name": "French Southern Territories",
+  "legacy": true
+ },
+ {
+  "code": "tg",
+  "name": "Togo",
+  "legacy": true
+ },
+ {
+  "code": "th",
+  "name": "Thailand",
+  "legacy": true
+ },
+ {
+  "code": "tj",
+  "name": "Tajikistan",
+  "legacy": true
+ },
+ {
+  "code": "tk",
+  "name": "Tokelau",
+  "legacy": true
+ },
+ {
+  "code": "tl",
+  "name": "Timor-Leste",
+  "legacy": true
+ },
+ {
+  "code": "tm",
+  "name": "Turkmenistan",
+  "legacy": true
+ },
+ {
+  "code": "tn",
+  "name": "Tunisia",
+  "legacy": true
+ },
+ {
+  "code": "to",
+  "name": "Tonga",
+  "legacy": true
+ },
+ {
+  "code": "tr",
+  "name": "T\u00fcrkiye",
+  "legacy": true
+ },
+ {
+  "code": "tt",
+  "name": "Trinidad and Tobago",
+  "legacy": true
+ },
+ {
+  "code": "tv",
+  "name": "Tuvalu",
+  "legacy": true
+ },
+ {
+  "code": "tw",
+  "name": "Taiwan",
+  "legacy": true
+ },
+ {
+  "code": "tz",
+  "name": "Tanzania",
+  "legacy": true
+ },
+ {
+  "code": "ua",
+  "name": "Ukraine",
+  "legacy": true
+ },
+ {
+  "code": "ug",
+  "name": "Uganda",
+  "legacy": true
+ },
+ {
+  "code": "um",
+  "name": "United States Minor Outlying Islands",
+  "legacy": true,
+  "source": "us.svg",
+  "note": "icon-native artwork: stripes on pixel rows at 1x"
+ },
+ {
+  "code": "un",
+  "name": "United Nations",
+  "legacy": false
+ },
+ {
+  "code": "us",
+  "name": "United States of America",
+  "legacy": true,
+  "source": "us.svg",
+  "note": "icon-native artwork: stripes on pixel rows at 1x"
+ },
+ {
+  "code": "uy",
+  "name": "Uruguay",
+  "legacy": true,
+  "source": "uy.svg",
+  "note": "icon-native artwork: stripes on pixel rows at 1x"
+ },
+ {
+  "code": "uz",
+  "name": "Uzbekistan",
+  "legacy": true
+ },
+ {
+  "code": "va",
+  "name": "Holy See",
+  "legacy": true
+ },
+ {
+  "code": "vc",
+  "name": "Saint Vincent and the Grenadines",
+  "legacy": true
+ },
+ {
+  "code": "ve",
+  "name": "Venezuela",
+  "legacy": true
+ },
+ {
+  "code": "vg",
+  "name": "Virgin Islands (British)",
+  "legacy": true
+ },
+ {
+  "code": "vi",
+  "name": "Virgin Islands (U.S.)",
+  "legacy": true
+ },
+ {
+  "code": "vn",
+  "name": "Vietnam",
+  "legacy": true
+ },
+ {
+  "code": "vu",
+  "name": "Vanuatu",
+  "legacy": true
+ },
+ {
+  "code": "wf",
+  "name": "Wallis and Futuna",
+  "legacy": true,
+  "source": "wf.svg",
+  "note": "no official flag: the local flag, as in the 2005 icon"
+ },
+ {
+  "code": "ws",
+  "name": "Samoa",
+  "legacy": true
+ },
+ {
+  "code": "xk",
+  "name": "Kosovo",
+  "legacy": false
+ },
+ {
+  "code": "xx",
+  "name": "Unknown",
+  "legacy": false
+ },
+ {
+  "code": "ye",
+  "name": "Yemen",
+  "legacy": true
+ },
+ {
+  "code": "yt",
+  "name": "Mayotte",
+  "legacy": true,
+  "source": "yt.svg",
+  "note": "no official flag: the local flag, as in the 2005 icon"
+ },
+ {
+  "code": "za",
+  "name": "South Africa",
+  "legacy": true
+ },
+ {
+  "code": "zm",
+  "name": "Zambia",
+  "legacy": true
+ },
+ {
+  "code": "zw",
+  "name": "Zimbabwe",
+  "legacy": true
+ }
+]

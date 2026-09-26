@@ -1,0 +1,70 @@
+MIT License
+
+Copyright (c) 2026 Jakub Orłowski
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+--------------------------------------------------------------------------
+
+Third-party material
+
+The original "Flags" icons (ref/png) are by Mark James, famfamfam.com. His
+terms: "These icons are public domain, and as such are free for any use
+(attribution appreciated but not required)." ref/png/gg.png is by Damien
+Guard, from Silk Companion #1, CC BY 2.5
+(https://creativecommons.org/licenses/by/2.5/).
+
+The flag artwork in dist/ is derived from flag-icons
+(https://github.com/lipis/flag-icons), whose license is reproduced here as
+it requires:
+
+    The MIT License (MIT)
+
+    Copyright (c) 2013 Panayiotis Lipiridis
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy of
+    this software and associated documentation files (the "Software"), to deal in
+    the Software without restriction, including without limitation the rights to
+    use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+    of the Software, and to permit persons to whom the Software is furnished to do
+    so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+
+Files in src/flags:
+
+    an.svg  Wikimedia Commons "Flag of the Netherlands Antilles (1986–2010).svg", public domain
+    cs.svg  Wikimedia Commons "Flag of Serbia and Montenegro (1992–2006).svg", public domain
+    gp.svg  Wikimedia Commons "Unofficial flag of Guadeloupe (local).svg", public domain
+    pm.svg  Wikimedia Commons "Flag of Saint-Pierre and Miquelon.svg", public domain
+    wf.svg  Wikimedia Commons "Flag of Wallis and Futuna.svg", public domain
+    yt.svg  Wikimedia Commons "Flag of Mayotte (local).svg", public domain
+    np.svg  geometry from flag-icons (MIT, above), border widened
+    fam.svg, us.svg, lr.svg, my.svg, gr.svg, uy.svg, dk.svg, se.svg, no.svg,
+    fi.svg, is.svg, fo.svg, ax.svg, gb.svg
+            drawn for this project, MIT (above)

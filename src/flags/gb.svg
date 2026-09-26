@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 11">
+  <!-- United Kingdom: drawn on the 16x11 icon grid with the cross arms on whole pixels at 1x, following the original famfamfam icon. Saltires are geometric and will anti-alias at 1x, as they did in the original. -->
+  <path fill="#012169" d="M0 0h16v11H0z"/>
+  <path fill="#fff" d="M7.433 6.324L-3.039 -0.876L-1.906 -2.524L8.567 4.676zM7.433 4.676L17.906 -2.524L19.039 -0.876L8.567 6.324zM7.433 4.676L-3.039 11.876L-1.906 13.524L8.567 6.324zM7.433 6.324L17.906 13.524L19.039 11.876L8.567 4.676z"/>
+  <path fill="#c8102e" d="M7.83 5.747L-2.642 -1.452L-3.039 -0.876L7.433 6.324zM7.83 5.253L18.302 -1.947L17.906 -2.524L7.433 4.676zM7.83 5.253L-2.642 12.452L-3.039 11.876L7.433 4.676zM7.83 5.747L18.302 12.947L17.906 13.524L7.433 6.324z"/>
+  <path fill="#fff" d="M6 0h4v11H6zM0 4h16v3H0z"/>
+  <path fill="#c8102e" d="M7 0h2v11H7zM0 5h16v1H0z"/>
+</svg>

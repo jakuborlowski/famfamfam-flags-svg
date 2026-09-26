@@ -1,0 +1,49 @@
+{
+  "name": "famfamfam-flags-svg",
+  "version": "0.1.0",
+  "description": "The classic famfamfam flag icons by Mark James, rebuilt as resolution-independent SVGs in the original glossy 16x11 style.",
+  "license": "MIT",
+  "author": "Jakub Orłowski",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jakuborlowski/famfamfam-flags-svg.git"
+  },
+  "homepage": "https://github.com/jakuborlowski/famfamfam-flags-svg#readme",
+  "bugs": "https://github.com/jakuborlowski/famfamfam-flags-svg/issues",
+  "keywords": [
+    "famfamfam",
+    "flags",
+    "flag icons",
+    "svg",
+    "icons",
+    "country flags"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "type": "module",
+  "style": "dist/famfamfam-flags.css",
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node tools/build.js",
+    "pack": "node tools/pack.js",
+    "png": "node tools/rasterize.js",
+    "test": "node tools/test.js",
+    "compare": "node tools/compare.js"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "@xmldom/xmldom": "^0.9.12",
+    "fit-curve": "^0.2.0",
+    "flag-icons": "^7.5.0",
+    "pngjs": "^7.0.0",
+    "simplify-js": "^1.2.4",
+    "svgo": "^4.1.0",
+    "svgpath": "^2.6.0"
+  }
+}

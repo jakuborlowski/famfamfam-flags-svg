@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 11">
+  <!-- Åland Islands: drawn on the 16x11 icon grid with the cross arms on whole pixels at 1x, following the original famfamfam icon. -->
+  <path fill="#0053a5" d="M0 0h16v11H0z"/>
+  <path fill="#ffce00" d="M4 0h3v11H4zM0 4h16v3H0z"/>
+  <path fill="#d21034" d="M5 0h1v11H5zM0 5h16v1H0z"/>
+</svg>

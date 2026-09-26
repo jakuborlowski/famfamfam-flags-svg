@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 11">
+  <!-- Liberia: drawn on the 16x11 icon grid so stripes land on pixel rows at 1x, as the original famfamfam icon did. -->
+  <path fill="#fff" d="M0 0h16v11H0z"/>
+  <path fill="#bf0a30" d="M0 0h16v1H0zM0 2h16v1H0zM0 4h16v1H0zM0 6h16v1H0zM0 8h16v1H0zM0 10h16v1H0z"/>
+  <path fill="#002868" d="M0 0h5v5H0z"/>
+  <path fill="#fff" d="M2.5 0.4L3 1.812L4.497 1.851L3.308 2.763L3.734 4.199L2.5 3.35L1.266 4.199L1.692 2.763L0.503 1.851L2 1.812z"/>
+</svg>

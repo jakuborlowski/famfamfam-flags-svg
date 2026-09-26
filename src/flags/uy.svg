@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 11">
+  <!-- Uruguay: drawn on the 16x11 icon grid so stripes land on pixel rows at 1x, as the original famfamfam icon did. -->
+  <path fill="#fff" d="M0 0h16v11H0z"/>
+  <path fill="#0038a8" d="M0 2h16v1H0zM0 4h16v1H0zM0 6h16v1H0zM0 8h16v1H0z"/>
+  <path fill="#fcd116" d="M3 3.35L5.8 3L3 2.65zM2.866 3.323L5.033 3.842L3.134 2.677zM2.753 3.247L4.98 4.98L3.247 2.753zM2.677 3.134L3.842 5.033L3.323 2.866zM2.65 3L3 5.8L3.35 3zM2.677 2.866L2.158 5.033L3.323 3.134zM2.753 2.753L1.02 4.98L3.247 3.247zM2.866 2.677L0.967 3.842L3.134 3.323zM3 2.65L0.2 3L3 3.35zM3.134 2.677L0.967 2.158L2.866 3.323zM3.247 2.753L1.02 1.02L2.753 3.247zM3.323 2.866L2.158 0.967L2.677 3.134zM3.35 3L3 0.2L2.65 3zM3.323 3.134L3.842 0.967L2.677 2.866zM3.247 3.247L4.98 1.02L2.753 2.753zM3.134 3.323L5.033 2.158L2.866 2.677z"/>
+  <circle cx="3" cy="3" r="1.45" fill="#fcd116"/>
+  <circle cx="3" cy="3" r="1.15" fill="#fff" fill-opacity="0"/>
+</svg>

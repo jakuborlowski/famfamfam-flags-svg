@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 11">
+  <!-- Malaysia: drawn on the 16x11 icon grid so stripes land on pixel rows at 1x, as the original famfamfam icon did. -->
+  <path fill="#fff" d="M0 0h16v11H0z"/>
+  <path fill="#cc0001" d="M0 0h16v1H0zM0 2h16v1H0zM0 4h16v1H0zM0 6h16v1H0zM0 8h16v1H0zM0 10h16v1H0z"/>
+  <path fill="#010066" d="M0 0h8v6H0z"/>
+  <circle cx="3" cy="3" r="2.1" fill="#ffcc00"/>
+  <circle cx="3.6" cy="3" r="1.75" fill="#010066"/>
+  <path fill="#ffcc00" d="M5.6 1.3L5.811 2.074L6.338 1.468L6.192 2.257L6.929 1.94L6.456 2.588L7.257 2.622L6.55 3L7.257 3.378L6.456 3.412L6.929 4.06L6.192 3.743L6.338 4.532L5.811 3.926L5.6 4.7L5.389 3.926L4.862 4.532L5.008 3.743L4.271 4.06L4.744 3.412L3.943 3.378L4.65 3L3.943 2.622L4.744 2.588L4.271 1.94L5.008 2.257L4.862 1.468L5.389 2.074z"/>
+</svg>

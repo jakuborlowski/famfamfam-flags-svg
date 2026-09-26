@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 11">
+  <!-- Denmark: drawn on the 16x11 icon grid with the cross arms on whole pixels at 1x, following the original famfamfam icon. -->
+  <path fill="#c8102e" d="M0 0h16v11H0z"/>
+  <path fill="#fff" d="M5 0h2v11H5zM0 5h16v2H0z"/>
+</svg>

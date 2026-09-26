@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 11">
+  <!-- Greece: drawn on the 16x11 icon grid so stripes land on pixel rows at 1x, as the original famfamfam icon did. -->
+  <path fill="#fff" d="M0 0h16v11H0z"/>
+  <path fill="#0d5eaf" d="M0 0h16v1H0zM0 1h16v1H0zM0 3h16v1H0zM0 5h16v1H0zM0 7h16v1H0zM0 9h16v1H0zM0 10h16v1H0z"/>
+  <path fill="#0d5eaf" d="M0 0h7v6H0z"/>
+  <path fill="#fff" d="M3 0h1v6H3zM0 3h7v1H0z"/>
+</svg>

@@ -1,0 +1,2537 @@
+[
+ {
+  "code": "ad",
+  "name": "Andorra",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ae",
+  "name": "United Arab Emirates",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "af",
+  "name": "Afghanistan",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ag",
+  "name": "Antigua and Barbuda",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ai",
+  "name": "Anguilla",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "al",
+  "name": "Albania",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "am",
+  "name": "Armenia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "an",
+  "name": "Netherlands Antilles (1986-2010)",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ao",
+  "name": "Angola",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "aq",
+  "name": "Antarctica",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "ar",
+  "name": "Argentina",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "arab",
+  "name": "League of Arab States",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "as",
+  "name": "American Samoa",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "asean",
+  "name": "Association of Southeast Asian Nations",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "at",
+  "name": "Austria",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "au",
+  "name": "Australia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "aw",
+  "name": "Aruba",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ax",
+  "name": "Aland Islands",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": true,
+  "note": "icon-native artwork: cross arms on whole pixels at 1x"
+ },
+ {
+  "code": "az",
+  "name": "Azerbaijan",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ba",
+  "name": "Bosnia and Herzegovina",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "bb",
+  "name": "Barbados",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "bd",
+  "name": "Bangladesh",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "be",
+  "name": "Belgium",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "bf",
+  "name": "Burkina Faso",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "bg",
+  "name": "Bulgaria",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "bh",
+  "name": "Bahrain",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "bi",
+  "name": "Burundi",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "bj",
+  "name": "Benin",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "bl",
+  "name": "Saint Barthélemy",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "bm",
+  "name": "Bermuda",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "bn",
+  "name": "Brunei Darussalam",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "bo",
+  "name": "Bolivia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "bq",
+  "name": "Bonaire, Sint Eustatius and Saba",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "br",
+  "name": "Brazil",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "bs",
+  "name": "Bahamas",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "bt",
+  "name": "Bhutan",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "bv",
+  "name": "Bouvet Island",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "bw",
+  "name": "Botswana",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "by",
+  "name": "Belarus",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "bz",
+  "name": "Belize",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ca",
+  "name": "Canada",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "catalonia",
+  "name": "Catalonia",
+  "width": 16,
+  "height": 11,
+  "aliasOf": "es-ct",
+  "legacy": true
+ },
+ {
+  "code": "cc",
+  "name": "Cocos (Keeling) Islands",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "cd",
+  "name": "Democratic Republic of the Congo",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "cefta",
+  "name": "Central European Free Trade Agreement",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "cf",
+  "name": "Central African Republic",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "cg",
+  "name": "Republic of the Congo",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ch",
+  "name": "Switzerland",
+  "width": 11,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ci",
+  "name": "Côte d'Ivoire",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ck",
+  "name": "Cook Islands",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "cl",
+  "name": "Chile",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "cm",
+  "name": "Cameroon",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "cn",
+  "name": "China",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "co",
+  "name": "Colombia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "cp",
+  "name": "Clipperton Island",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "cr",
+  "name": "Costa Rica",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "cs",
+  "name": "Serbia and Montenegro (2003-2006)",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "cu",
+  "name": "Cuba",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "cv",
+  "name": "Cabo Verde",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "cw",
+  "name": "Curaçao",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "cx",
+  "name": "Christmas Island",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "cy",
+  "name": "Cyprus",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "cz",
+  "name": "Czech Republic",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "de",
+  "name": "Germany",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "dg",
+  "name": "Diego Garcia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "dj",
+  "name": "Djibouti",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "dk",
+  "name": "Denmark",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": true,
+  "note": "icon-native artwork: cross arms on whole pixels at 1x"
+ },
+ {
+  "code": "dm",
+  "name": "Dominica",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "do",
+  "name": "Dominican Republic",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "dz",
+  "name": "Algeria",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "eac",
+  "name": "East African Community",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "ec",
+  "name": "Ecuador",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ee",
+  "name": "Estonia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "eg",
+  "name": "Egypt",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "eh",
+  "name": "Western Sahara",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "england",
+  "name": "England",
+  "width": 16,
+  "height": 11,
+  "aliasOf": "gb-eng",
+  "legacy": true
+ },
+ {
+  "code": "er",
+  "name": "Eritrea",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "es",
+  "name": "Spain",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "es-ct",
+  "name": "Catalonia",
+  "width": 16,
+  "height": 11,
+  "aliases": [
+   "catalonia"
+  ],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "es-ga",
+  "name": "Galicia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "es-pv",
+  "name": "Basque Country",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "et",
+  "name": "Ethiopia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "eu",
+  "name": "Europe",
+  "width": 16,
+  "height": 11,
+  "aliases": [
+   "europeanunion"
+  ],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "europeanunion",
+  "name": "Europe",
+  "width": 16,
+  "height": 11,
+  "aliasOf": "eu",
+  "legacy": true
+ },
+ {
+  "code": "fam",
+  "name": "famfamfam",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false,
+  "note": "already in the famfamfam palette; colours kept as drawn"
+ },
+ {
+  "code": "fi",
+  "name": "Finland",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": true,
+  "note": "icon-native artwork: cross arms on whole pixels at 1x"
+ },
+ {
+  "code": "fj",
+  "name": "Fiji",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "fk",
+  "name": "Falkland Islands",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "fm",
+  "name": "Federated States of Micronesia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "fo",
+  "name": "Faroe Islands",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": true,
+  "note": "icon-native artwork: cross arms on whole pixels at 1x"
+ },
+ {
+  "code": "fr",
+  "name": "France",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ga",
+  "name": "Gabon",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "gb",
+  "name": "United Kingdom",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": true,
+  "note": "icon-native artwork: cross arms on whole pixels at 1x"
+ },
+ {
+  "code": "gb-eng",
+  "name": "England",
+  "width": 16,
+  "height": 11,
+  "aliases": [
+   "england"
+  ],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "gb-nir",
+  "name": "Northern Ireland",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "gb-sct",
+  "name": "Scotland",
+  "width": 16,
+  "height": 11,
+  "aliases": [
+   "scotland"
+  ],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "gb-wls",
+  "name": "Wales",
+  "width": 16,
+  "height": 11,
+  "aliases": [
+   "wales"
+  ],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "gd",
+  "name": "Grenada",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ge",
+  "name": "Georgia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "gf",
+  "name": "French Guiana",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "gg",
+  "name": "Guernsey",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "gh",
+  "name": "Ghana",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "gi",
+  "name": "Gibraltar",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "gl",
+  "name": "Greenland",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "gm",
+  "name": "Gambia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "gn",
+  "name": "Guinea",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "gp",
+  "name": "Guadeloupe",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false,
+  "note": "no official flag: the widely used local flag; the 2005 icon showed an independence-movement flag"
+ },
+ {
+  "code": "gq",
+  "name": "Equatorial Guinea",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "gr",
+  "name": "Greece",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": true,
+  "note": "icon-native artwork: stripes on pixel rows at 1x"
+ },
+ {
+  "code": "gs",
+  "name": "South Georgia and the South Sandwich Islands",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "gt",
+  "name": "Guatemala",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "gu",
+  "name": "Guam",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "gw",
+  "name": "Guinea-Bissau",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "gy",
+  "name": "Guyana",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "hk",
+  "name": "Hong Kong",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "hm",
+  "name": "Heard Island and McDonald Islands",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "hn",
+  "name": "Honduras",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "hr",
+  "name": "Croatia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ht",
+  "name": "Haiti",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "hu",
+  "name": "Hungary",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ic",
+  "name": "Canary Islands",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "id",
+  "name": "Indonesia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ie",
+  "name": "Ireland",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "il",
+  "name": "Israel",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "im",
+  "name": "Isle of Man",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "in",
+  "name": "India",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "io",
+  "name": "British Indian Ocean Territory",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "iq",
+  "name": "Iraq",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ir",
+  "name": "Iran",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "is",
+  "name": "Iceland",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": true,
+  "note": "icon-native artwork: cross arms on whole pixels at 1x"
+ },
+ {
+  "code": "it",
+  "name": "Italy",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "je",
+  "name": "Jersey",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "jm",
+  "name": "Jamaica",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "jo",
+  "name": "Jordan",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "jp",
+  "name": "Japan",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ke",
+  "name": "Kenya",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "kg",
+  "name": "Kyrgyzstan",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "kh",
+  "name": "Cambodia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ki",
+  "name": "Kiribati",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "km",
+  "name": "Comoros",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "kn",
+  "name": "Saint Kitts and Nevis",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "kp",
+  "name": "North Korea",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "kr",
+  "name": "South Korea",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "kw",
+  "name": "Kuwait",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ky",
+  "name": "Cayman Islands",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "kz",
+  "name": "Kazakhstan",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "la",
+  "name": "Laos",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "lb",
+  "name": "Lebanon",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "lc",
+  "name": "Saint Lucia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "li",
+  "name": "Liechtenstein",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "lk",
+  "name": "Sri Lanka",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "lr",
+  "name": "Liberia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": true,
+  "note": "icon-native artwork: stripes on pixel rows at 1x"
+ },
+ {
+  "code": "ls",
+  "name": "Lesotho",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "lt",
+  "name": "Lithuania",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "lu",
+  "name": "Luxembourg",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "lv",
+  "name": "Latvia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ly",
+  "name": "Libya",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ma",
+  "name": "Morocco",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "mc",
+  "name": "Monaco",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "md",
+  "name": "Moldova",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "me",
+  "name": "Montenegro",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "mf",
+  "name": "Saint Martin",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "mg",
+  "name": "Madagascar",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "mh",
+  "name": "Marshall Islands",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "mk",
+  "name": "North Macedonia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ml",
+  "name": "Mali",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "mm",
+  "name": "Myanmar",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "mn",
+  "name": "Mongolia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "mo",
+  "name": "Macau",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "mp",
+  "name": "Northern Mariana Islands",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "mq",
+  "name": "Martinique",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "mr",
+  "name": "Mauritania",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ms",
+  "name": "Montserrat",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "mt",
+  "name": "Malta",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "mu",
+  "name": "Mauritius",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "mv",
+  "name": "Maldives",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "mw",
+  "name": "Malawi",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "mx",
+  "name": "Mexico",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "my",
+  "name": "Malaysia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": true,
+  "note": "icon-native artwork: stripes on pixel rows at 1x"
+ },
+ {
+  "code": "mz",
+  "name": "Mozambique",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "na",
+  "name": "Namibia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "nc",
+  "name": "New Caledonia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ne",
+  "name": "Niger",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "nf",
+  "name": "Norfolk Island",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ng",
+  "name": "Nigeria",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ni",
+  "name": "Nicaragua",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "nl",
+  "name": "Netherlands",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "no",
+  "name": "Norway",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": true,
+  "note": "icon-native artwork: cross arms on whole pixels at 1x"
+ },
+ {
+  "code": "np",
+  "name": "Nepal",
+  "width": 9,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "nr",
+  "name": "Nauru",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "nu",
+  "name": "Niue",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "nz",
+  "name": "New Zealand",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "om",
+  "name": "Oman",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "pa",
+  "name": "Panama",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "pc",
+  "name": "Pacific Community",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "pe",
+  "name": "Peru",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "pf",
+  "name": "French Polynesia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "pg",
+  "name": "Papua New Guinea",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ph",
+  "name": "Philippines",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "pk",
+  "name": "Pakistan",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "pl",
+  "name": "Poland",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "pm",
+  "name": "Saint Pierre and Miquelon",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false,
+  "note": "no official flag: the local flag, as in the 2005 icon"
+ },
+ {
+  "code": "pn",
+  "name": "Pitcairn",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "pr",
+  "name": "Puerto Rico",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ps",
+  "name": "State of Palestine",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "pt",
+  "name": "Portugal",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "pw",
+  "name": "Palau",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "py",
+  "name": "Paraguay",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "qa",
+  "name": "Qatar",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "re",
+  "name": "Réunion",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ro",
+  "name": "Romania",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "rs",
+  "name": "Serbia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ru",
+  "name": "Russia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "rw",
+  "name": "Rwanda",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "sa",
+  "name": "Saudi Arabia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "sb",
+  "name": "Solomon Islands",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "sc",
+  "name": "Seychelles",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "scotland",
+  "name": "Scotland",
+  "width": 16,
+  "height": 11,
+  "aliasOf": "gb-sct",
+  "legacy": true
+ },
+ {
+  "code": "sd",
+  "name": "Sudan",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "se",
+  "name": "Sweden",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": true,
+  "note": "icon-native artwork: cross arms on whole pixels at 1x"
+ },
+ {
+  "code": "sg",
+  "name": "Singapore",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "sh",
+  "name": "Saint Helena, Ascension and Tristan da Cunha",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "sh-ac",
+  "name": "Ascension Island",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "sh-hl",
+  "name": "Saint Helena",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "sh-ta",
+  "name": "Tristan da Cunha",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "si",
+  "name": "Slovenia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "sj",
+  "name": "Svalbard and Jan Mayen",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "sk",
+  "name": "Slovakia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "sl",
+  "name": "Sierra Leone",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "sm",
+  "name": "San Marino",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "sn",
+  "name": "Senegal",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "so",
+  "name": "Somalia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "sr",
+  "name": "Suriname",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ss",
+  "name": "South Sudan",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "st",
+  "name": "Sao Tome and Principe",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "sv",
+  "name": "El Salvador",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "sx",
+  "name": "Sint Maarten",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "sy",
+  "name": "Syria",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "sz",
+  "name": "Eswatini",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "tc",
+  "name": "Turks and Caicos Islands",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "td",
+  "name": "Chad",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "tf",
+  "name": "French Southern Territories",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "tg",
+  "name": "Togo",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "th",
+  "name": "Thailand",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "tj",
+  "name": "Tajikistan",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "tk",
+  "name": "Tokelau",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "tl",
+  "name": "Timor-Leste",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "tm",
+  "name": "Turkmenistan",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "tn",
+  "name": "Tunisia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "to",
+  "name": "Tonga",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "tr",
+  "name": "Türkiye",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "tt",
+  "name": "Trinidad and Tobago",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "tv",
+  "name": "Tuvalu",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "tw",
+  "name": "Taiwan",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "tz",
+  "name": "Tanzania",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ua",
+  "name": "Ukraine",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ug",
+  "name": "Uganda",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "um",
+  "name": "United States Minor Outlying Islands",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": true,
+  "note": "icon-native artwork: stripes on pixel rows at 1x"
+ },
+ {
+  "code": "un",
+  "name": "United Nations",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "us",
+  "name": "United States of America",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": true,
+  "note": "icon-native artwork: stripes on pixel rows at 1x"
+ },
+ {
+  "code": "uy",
+  "name": "Uruguay",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": true,
+  "note": "icon-native artwork: stripes on pixel rows at 1x"
+ },
+ {
+  "code": "uz",
+  "name": "Uzbekistan",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "va",
+  "name": "Holy See",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "vc",
+  "name": "Saint Vincent and the Grenadines",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "ve",
+  "name": "Venezuela",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "vg",
+  "name": "Virgin Islands (British)",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "vi",
+  "name": "Virgin Islands (U.S.)",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "vn",
+  "name": "Vietnam",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "vu",
+  "name": "Vanuatu",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "wales",
+  "name": "Wales",
+  "width": 16,
+  "height": 11,
+  "aliasOf": "gb-wls",
+  "legacy": true
+ },
+ {
+  "code": "wf",
+  "name": "Wallis and Futuna",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false,
+  "note": "no official flag: the local flag, as in the 2005 icon"
+ },
+ {
+  "code": "ws",
+  "name": "Samoa",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "xk",
+  "name": "Kosovo",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "xx",
+  "name": "Unknown",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": false,
+  "iconNative": false
+ },
+ {
+  "code": "ye",
+  "name": "Yemen",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "yt",
+  "name": "Mayotte",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false,
+  "note": "no official flag: the local flag, as in the 2005 icon"
+ },
+ {
+  "code": "za",
+  "name": "South Africa",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "zm",
+  "name": "Zambia",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ },
+ {
+  "code": "zw",
+  "name": "Zimbabwe",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": false
+ }
+]

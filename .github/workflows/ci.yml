@@ -1,0 +1,22 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build && npm run pack
+      # The rasterizer's anti-aliasing can differ by a level between CPUs, and
+      # every reduction decision keys on rendered pixels, so a rebuild on another
+      # machine may differ by a few bytes. Report it; the committed dist is canonical.
+      - name: Report differences from the committed dist
+        run: git status --porcelain -- dist || true
