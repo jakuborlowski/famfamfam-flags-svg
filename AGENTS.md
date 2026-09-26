@@ -35,6 +35,7 @@ npm run pack         # dist/famfamfam-flags.css, dist/manifest.json, preview.htm
 npm test             # well-formed, titled, prefixed ids, no scripts/aria/external refs, size budget, 1× crispness
 npm run png          # dist/png at 1×, 2×, 4× (gitignored; the release workflow builds it)
 node tools/hero.js   # docs/hero.png for the README
+node tools/social.js # docs/social.png, the repo's social preview (upload by hand in Settings)
 npm run compare      # error vs originals + tmp/compare.png side-by-side sheet
                      #   baseline: interior 24.3, border 27.5 (mean abs diff /255; artwork differences dominate)
 npm run compare pl,jp,us   # subset
