@@ -28,7 +28,7 @@ Get the files as a zip of `dist/` from the
 with `npm install famfamfam-flags-svg` (SVGs, CSS and manifest), or hot-link
 one flag from jsDelivr pinned to a version:
 `https://cdn.jsdelivr.net/npm/famfamfam-flags-svg@0.1.0/dist/svg/pl.svg`.
-`preview.html` shows every flag at four sizes.
+[Every flag at four sizes](https://jakuborlowski.github.io/famfamfam-flags-svg/preview.html).
 
 Files are named by lowercase ISO 3166-1 alpha-2 code where one exists and
 by flag-icons' code otherwise (`gb-sct`, `eu`, `un`). `dist/manifest.json`

@@ -9,8 +9,8 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
@@ -18,7 +18,7 @@ jobs:
       - run: npm test
       - run: npm run png
       - run: cp LICENSE dist/ && cd dist && zip -qr ../famfamfam-flags-svg.zip .
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v3
         with:
           files: famfamfam-flags-svg.zip
           body_path: .github/release-notes.md
