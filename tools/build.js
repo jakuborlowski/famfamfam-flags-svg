@@ -16,7 +16,7 @@ import { render, mae } from './render.js';
 
 export const BUDGET = 8 * 1024;         // bytes per flag
 const CHECK_SCALE = 4;                  // every geometry change is verified at this zoom
-const PRECISION = 2;                    // decimals in icon units (0.01 = 1/25 px at 4x)
+const PRECISION = [2, 3];               // decimals in icon units (0.01 = 1/25 px at 4x); 3 if 2 is too coarse
 const MAX_FLATTEN_ERR = 0.9;            // mean abs pixel error allowed for flattening alone
 const MAX_REDUCE_ERR = [1.0, 1.5, 2.0]; // ... and for reducing oversize flags, tried in turn
 
@@ -72,12 +72,12 @@ function overlay(p, W, H, outline) {
     `<path d="M0 0h${W}v${H}H0zM1 1v${ih}h${iw}V1z" fill="url(#${p}-edge)" fill-rule="evenodd"/>`;
 }
 
-export function compose({ code, source, width: W, title, outline, keepColors }) {
+export function compose({ code, source, width: W, title, outline, keepColors, yellow }) {
   const H = 11;
   const src = loadSource(source);
   const p = 'f' + code.replace(/[^a-z0-9]/gi, '');
   let art = cleanArt(src.inner, p);
-  if (!OFFICIAL && !keepColors) art = stylizeSvg(art);
+  if (!OFFICIAL && !keepColors) art = stylizeSvg(art, { yellow });
   const sx = W / src.w, sy = H / src.h;
   const xlink = src.xlink ? ' xmlns:xlink="http://www.w3.org/1999/xlink"' : '';
   const clip = outline ? `<path d="${outline}"/>` : `<rect width="${W}" height="${H}"/>`;
@@ -90,19 +90,23 @@ export function compose({ code, source, width: W, title, outline, keepColors }) 
   const raw = wrap(`<g transform="matrix(${sx.toPrecision(6)} 0 0 ${sy.toPrecision(6)} ${(-src.x * sx).toFixed(3)} ${(-src.y * sy).toFixed(3)})">${art}</g>`);
   const ref = render(raw, CHECK_SCALE);
   let best = { svg: raw, note: 'unflattened' };
-  try {
-    // Bake only the uniform part of the icon scale into the paths; the
-    // residual stretch stays on a wrapper so stroke widths stretch correctly.
-    const u = Math.sqrt(sx * sy);
-    const doc = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ${W} ${H}">` +
-      `<g transform="matrix(${u} 0 0 ${u} ${(-src.x * u).toFixed(4)} ${(-src.y * u).toFixed(4)})">${art}</g></svg>`;
-    const flat = minify(flattenSvg(doc, { precision: PRECISION }), PRECISION);
-    const residual = Math.abs(sx - sy) < 1e-9 ? '' : ` transform="scale(${(sx / u).toFixed(5)} ${(sy / u).toFixed(5)})"`;
-    const candidate = wrap(`<g${residual}>${flat.replace(/^<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '')}</g>`);
-    const err = mae(ref, render(candidate, CHECK_SCALE));
-    best = err <= MAX_FLATTEN_ERR ? { svg: candidate, note: `flattened, error ${err.toFixed(2)}` } : { svg: raw, note: `kept unflattened, error ${err.toFixed(2)}` };
-  } catch (e) {
-    best = { svg: raw, note: `kept unflattened: ${e.message}` };
+  // Bake only the uniform part of the icon scale into the paths; the residual
+  // stretch stays on a wrapper so stroke widths stretch correctly.
+  const u = Math.sqrt(sx * sy);
+  const doc = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ${W} ${H}">` +
+    `<g transform="matrix(${u} 0 0 ${u} ${(-src.x * u).toFixed(4)} ${(-src.y * u).toFixed(4)})">${art}</g></svg>`;
+  const residual = Math.abs(sx - sy) < 1e-9 ? '' : ` transform="scale(${(sx / u).toFixed(5)} ${(sy / u).toFixed(5)})"`;
+  for (const precision of PRECISION) {
+    try {
+      const flat = minify(flattenSvg(doc, { precision }), precision);
+      const candidate = wrap(`<g${residual}>${flat.replace(/^<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '')}</g>`);
+      const err = mae(ref, render(candidate, CHECK_SCALE));
+      if (err <= MAX_FLATTEN_ERR) { best = { svg: candidate, note: `flattened, error ${err.toFixed(2)}` }; break; }
+      best = { svg: raw, note: `kept unflattened, error ${err.toFixed(2)}` };
+    } catch (e) {
+      best = { svg: raw, note: `kept unflattened: ${e.message}` };
+      break;
+    }
   }
   for (const maxErr of MAX_REDUCE_ERR) {
     if (best.svg === raw || bytes(best.svg) <= BUDGET) break;
@@ -121,7 +125,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     const width = e.width || (e.shape === '1x1' ? 11 : 16);
     const source = e.source ? path.join(ROOT, 'src', 'flags', e.source) : path.join(FI, e.shape || '4x3', (e.from || e.code) + '.svg');
     for (const code of [e.code, ...(e.aliases || [])]) {
-      const { svg, note } = compose({ code, source, width, title: e.name, outline: e.outline, keepColors: e.colors === 'keep' });
+      const { svg, note } = compose({ code, source, width, title: e.name, outline: e.outline, keepColors: e.colors === 'keep', yellow: e.yellow });
       fs.writeFileSync(path.join(OUT, code + '.svg'), svg);
       report.push({ code, kb: (bytes(svg) / 1024).toFixed(1), note });
     }

@@ -92,13 +92,11 @@ and 1× crispness; CI reports when a rebuild differs from `dist/`. Still worth d
   need a drawn simplification, which is design work, not tooling.
 * A pixel-grid Union Jack canton shared by the ensigns (`au`, `nz`, `fj`,
   `tv`, `ky`, `vg`, `fk`, ...), whose cantons blur at 1×.
-* Refit the gloss over dark colours. It was fitted on the solid-green Libya
-  icon; over black the originals come out about 12 levels darker than ours
-  (Mark's `#212121` against our `#2d2d2e` in Egypt, Sudan, Syria, UAE and
-  others), so the gloss is a little weaker on dark bases. Adding the black
-  flags to `research/fit_overlay.py` should fix it without touching anything
-  else. Germany's warm olive frame is a one-off in the originals and stays
-  out of scope.
+* Mark's frame darkens mid-tone channels much harder than bright ones, which
+  keeps his frames saturated (deep red, forest green, gold on yellow). Only a
+  colour-burn blend reproduces it, halving the frame error, but blend modes
+  need a `style` attribute that strict Content Security Policies strip. Worth
+  revisiting if a filter- and style-free way appears.
 * Hairline seams where upstream artwork butts stripes together at
   fractional coordinates: invisible on light backgrounds, a faint line on
   dark ones. Overlapping stripes by a hair in the flatten step would remove it.
