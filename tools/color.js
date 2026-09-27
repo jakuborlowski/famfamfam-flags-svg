@@ -75,12 +75,13 @@ export function stylize([r, g, b]) {
 
 // FOTW palette families: up to hue (degrees), min saturation, min value, colour.
 // A catalog entry can set "yellow": "#ffcc00" (FOTW's dark yellow) or "soft"
-// (keep the smooth transform: the muted golds Mark used for some flags).
+// (keep the smooth transform for amber and yellow: the muted golds Mark used
+// for some flags).
 const FAMILIES = [
   [12,  0.6,  0.35, (v) => (v < 0.62 ? '#990000' : '#ff0000')],   // red, from 340
   [30,  0.75, 0.85, () => '#ff6600'],
   [42,  0.75, 0.85, () => '#ff9900'],
-  [46,  0.6,  0.8,  () => '#ffcc00'],                             // amber
+  [46,  0.6,  0.8,  (v, o) => (o.yellow === 'soft' ? null : '#ffcc00')],   // amber
   [70,  0.6,  0.8,  (v, o) => (o.yellow === 'soft' ? null : o.yellow || '#ffff00')],
   [175, 0.45, 0.35, (v) => (v < 0.75 ? '#009900' : '#00cc00')],
 ];
