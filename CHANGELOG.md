@@ -7,8 +7,25 @@ listed by code so a refresh from upstream reads as a diff.
 ## [Unreleased]
 
 ### Changed
+- Yellows are punchier: lemon `#FFFF00` by default, `#FFCC00` for `ba`, `bb`,
+  `bs`, `bt`, `co`, `mz`, `se`, and the previous golden yellow for `bn`, `bo`,
+  `de`, `ec`, `kz`, `lt`, `md`, `nu`, `td`, `va`. Saturated reds, oranges and
+  greens snap to the same palette. This follows where Mark's colours came
+  from: the 2005 Flags of the World images (`research/palette.md`).
+- The gloss, bevel, shade and frame are refitted over all the originals
+  instead of the Libya icon alone, whose gloss is one pixel off. Every colour
+  gets about 10/255 less white, so colours read stronger and blacks darker.
+- Against the originals: mean error 24.3 → 22.4 inside the icons, 27.5 → 25.6
+  on the frame.
+- `pm` is 48 KB (was 28 KB): the stronger colours need a finer precision to
+  flatten within the error bound. `as`, `ec` and `me` grew just over 8 KB.
 - The npm package contains only `dist/svg`, the CSS and the manifest; PNGs
   are in the release zip.
+
+### Fixed
+- `bg`, `bd`, `cm`, `mo` and `gd` had their greens drawn blue-teal, and lime
+  greens (`ni`) turned mustard: colours near a hue boundary snapped to the
+  wrong anchor.
 
 ## [0.1.0] - 2026-09-26
 

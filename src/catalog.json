@@ -100,12 +100,14 @@
  {
   "code": "ba",
   "name": "Bosnia and Herzegovina",
-  "legacy": true
+  "legacy": true,
+  "yellow": "#ffcc00"
  },
  {
   "code": "bb",
   "name": "Barbados",
-  "legacy": true
+  "legacy": true,
+  "yellow": "#ffcc00"
  },
  {
   "code": "bd",
@@ -144,7 +146,7 @@
  },
  {
   "code": "bl",
-  "name": "Saint Barth\u00e9lemy",
+  "name": "Saint Barthélemy",
   "legacy": false
  },
  {
@@ -155,12 +157,14 @@
  {
   "code": "bn",
   "name": "Brunei Darussalam",
-  "legacy": true
+  "legacy": true,
+  "yellow": "soft"
  },
  {
   "code": "bo",
   "name": "Bolivia",
-  "legacy": true
+  "legacy": true,
+  "yellow": "soft"
  },
  {
   "code": "bq",
@@ -175,12 +179,14 @@
  {
   "code": "bs",
   "name": "Bahamas",
-  "legacy": true
+  "legacy": true,
+  "yellow": "#ffcc00"
  },
  {
   "code": "bt",
   "name": "Bhutan",
-  "legacy": true
+  "legacy": true,
+  "yellow": "#ffcc00"
  },
  {
   "code": "bv",
@@ -240,7 +246,7 @@
  },
  {
   "code": "ci",
-  "name": "C\u00f4te d'Ivoire",
+  "name": "Côte d'Ivoire",
   "legacy": true
  },
  {
@@ -266,7 +272,8 @@
  {
   "code": "co",
   "name": "Colombia",
-  "legacy": true
+  "legacy": true,
+  "yellow": "#ffcc00"
  },
  {
   "code": "cp",
@@ -296,7 +303,7 @@
  },
  {
   "code": "cw",
-  "name": "Cura\u00e7ao",
+  "name": "Curaçao",
   "legacy": false
  },
  {
@@ -317,7 +324,8 @@
  {
   "code": "de",
   "name": "Germany",
-  "legacy": true
+  "legacy": true,
+  "yellow": "soft"
  },
  {
   "code": "dg",
@@ -359,7 +367,8 @@
  {
   "code": "ec",
   "name": "Ecuador",
-  "legacy": true
+  "legacy": true,
+  "yellow": "soft"
  },
  {
   "code": "ee",
@@ -750,7 +759,8 @@
  {
   "code": "kz",
   "name": "Kazakhstan",
-  "legacy": true
+  "legacy": true,
+  "yellow": "soft"
  },
  {
   "code": "la",
@@ -792,7 +802,8 @@
  {
   "code": "lt",
   "name": "Lithuania",
-  "legacy": true
+  "legacy": true,
+  "yellow": "soft"
  },
  {
   "code": "lu",
@@ -822,7 +833,8 @@
  {
   "code": "md",
   "name": "Moldova",
-  "legacy": true
+  "legacy": true,
+  "yellow": "soft"
  },
  {
   "code": "me",
@@ -924,7 +936,8 @@
  {
   "code": "mz",
   "name": "Mozambique",
-  "legacy": true
+  "legacy": true,
+  "yellow": "#ffcc00"
  },
  {
   "code": "na",
@@ -984,7 +997,8 @@
  {
   "code": "nu",
   "name": "Niue",
-  "legacy": true
+  "legacy": true,
+  "yellow": "soft"
  },
  {
   "code": "nz",
@@ -1080,7 +1094,7 @@
  },
  {
   "code": "re",
-  "name": "R\u00e9union",
+  "name": "Réunion",
   "legacy": true,
   "from": "fr"
  },
@@ -1129,7 +1143,8 @@
   "name": "Sweden",
   "legacy": true,
   "source": "se.svg",
-  "note": "icon-native artwork: cross arms on whole pixels at 1x"
+  "note": "icon-native artwork: cross arms on whole pixels at 1x",
+  "yellow": "#ffcc00"
  },
  {
   "code": "sg",
@@ -1234,7 +1249,8 @@
  {
   "code": "td",
   "name": "Chad",
-  "legacy": true
+  "legacy": true,
+  "yellow": "soft"
  },
  {
   "code": "tf",
@@ -1283,7 +1299,7 @@
  },
  {
   "code": "tr",
-  "name": "T\u00fcrkiye",
+  "name": "Türkiye",
   "legacy": true
  },
  {
@@ -1350,7 +1366,8 @@
  {
   "code": "va",
   "name": "Holy See",
-  "legacy": true
+  "legacy": true,
+  "yellow": "soft"
  },
  {
   "code": "vc",

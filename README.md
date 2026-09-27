@@ -59,23 +59,28 @@ as in the original.
 
 ## How the look was reproduced
 
-The originals were real flag images scaled to 16×11 with layer effects on
-top. Those effects were measured from the PNGs and fitted by least squares,
-using the solid-green pre-2011 Libya icon as a clean sample of the overlay,
-to 0.6/255 RMS. In `tools/style.js`, all along a 47.5° diagonal:
+The originals are flag drawings with one shared layer effect on top: every
+icon carries the same overlay, pixel for pixel. That overlay was read off all
+the originals at once and fitted by least squares to 0.6/255 RMS. In
+`tools/style.js`, all along a 47.5° diagonal:
 
 | Layer | What it does |
 | --- | --- |
-| Gloss | white, 44% at the top-left fading to 8% at the bottom-right |
-| Bevel | the 1 px ring inside the frame gets a constant extra 17% white |
-| Shade | up to 5% black towards the bottom-right |
-| Frame | the flag's own edge colours darkened 3% to 28% along the diagonal |
+| Gloss | white, 40% at the top-left fading to 2% at the bottom-right |
+| Bevel | the 1 px ring inside the frame gets a constant extra 16% white |
+| Shade | up to 6% black towards the bottom-right |
+| Frame | the flag's own edge colours darkened 5% to 22% along the diagonal |
 
-Colours were the other half: Mark did not use official flag colours. Reds
-land on pure red, greens on `#009900`, yellows on golden yellow, pale blues
-come out brighter. `tools/color.js` applies a smooth version of that to the
-source artwork (`FAM_COLORS=official` keeps official colours). The scripts
-that derived all these numbers are in `research/`.
+Colours were the other half, and they turned out to have a source. Mark
+picked most of them from the [Flags of the World](https://www.fotw.info/flags/fotwcols.html)
+reference images of 2005, which were drawn in a 32-colour web-safe palette:
+every red `#FF0000`, every green `#009900`, every yellow `#FFFF00` unless the
+contributor coded it "dark yellow", `#FFCC00`. Archived copies of those images
+match his colours flag by flag. `tools/color.js` snaps saturated reds,
+oranges, yellows and greens onto that palette and maps everything else
+smoothly; the catalog records which flags get the dark yellow and which keep
+the muted golds Mark used for some coats of arms. `FAM_COLORS=official` keeps
+official colours. The scripts and notes behind all of this are in `research/`.
 
 Artwork comes from [flag-icons](https://github.com/lipis/flag-icons), stretched
 to fill the icon as the originals were, then flattened into the 16×11

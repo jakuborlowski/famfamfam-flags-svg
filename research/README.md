@@ -11,11 +11,15 @@ FAM_COLORS=official npm run build && node research/render_raw.js
 .venv/bin/python research/fit_palette.py           # official colours -> Mark's palette
 ```
 
-`fit_overlay.py` needs only `ref/png/ly.png`. The pre-2011 Libya flag is one
-solid green, so that icon is the overlay itself; a 12-parameter model fits its
-interior to 0.6/255 RMS.
+`fit_overlay.py` reads the overlay off every original at once. With a white
+gloss and a black shade, a channel painted 0 shows `255·w·(1−d)` and a channel
+painted 255 shows `255·(1−d)` whatever the flag, so the most common value of
+each at every pixel gives the gloss and the shade directly. Profiles along the
+47.5° axis fit that map to 0.6/255 RMS. The frame is fitted against the base
+colour just inside it. Until 0.1.0 the overlay was fitted on the Libya icon
+alone, whose gloss sits one pixel off every other flag's; that made the gloss
+about 10/255 too strong everywhere and washed colours out.
 
-`fit_palette.py` compares overlay-free renders of our artwork (official
-colours) with the originals on flat regions, inverts the overlay to recover
-the colour Mark actually painted with, and fits a hue-dependent transform.
-The result is what makes the set look punchy rather than official.
+`fit_palette.py` fits the smooth transform used for dull and emblem colours.
+The saturated colours come from a palette instead; `palette.md` explains where
+that palette came from.

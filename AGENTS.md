@@ -47,8 +47,10 @@ npm run compare pl,jp,us   # subset
   (flag-icons code), `source` (file in `src/flags/`), `aliases`, `shape`
   (`4x3` default, `1x1` for 11×11), `width`, `outline` (clip path in icon
   units for non-rectangular flags), `colors: "keep"` (skip the palette
-  transform, for artwork already in the famfamfam palette), `note`, `legacy`
-  (was in the original set).
+  transform, for artwork already in the famfamfam palette), `yellow`
+  (`"#ffcc00"` for flags Flags of the World coded dark yellow in 2005,
+  `"soft"` for the muted golds Mark used; default lemon `#ffff00`, see
+  `research/palette.md`), `note`, `legacy` (was in the original set).
 - `src/flags/`: artwork flag-icons does not carry.
 - `ref/png/`: the original icons, ground truth for `compare`.
 - `tools/`: build pipeline. `build.js` composes; `style.js`/`color.js` are the
