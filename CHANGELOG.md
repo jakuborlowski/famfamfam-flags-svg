@@ -6,6 +6,8 @@ listed by code so a refresh from upstream reads as a diff.
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-09-28
+
 ### Changed
 - Yellows are punchier: lemon `#FFFF00` by default, `#FFCC00` for `ba`, `bb`,
   `bs`, `bt`, `co`, `mz`, `se`, and the previous golden yellow for `bn`, `bo`,

@@ -16,7 +16,7 @@ gloss and a black shade, a channel painted 0 shows `255·w·(1−d)` and a chann
 painted 255 shows `255·(1−d)` whatever the flag, so the most common value of
 each at every pixel gives the gloss and the shade directly. Profiles along the
 47.5° axis fit that map to 0.6/255 RMS. The frame is fitted against the base
-colour just inside it. Until 0.1.0 the overlay was fitted on the Libya icon
+colour just inside it. In 0.1.0 the overlay was fitted on the Libya icon
 alone, whose gloss sits one pixel off every other flag's; that made the gloss
 about 10/255 too strong everywhere and washed colours out.
 
