@@ -30,8 +30,23 @@ slightly darkened reds that match neither Flags of the World nor the CIA World
 Factbook of the time. Those keep the smooth transform (`"yellow": "soft"` in
 the catalog).
 
-**What this means for the rebuild.** Saturated reds, oranges, yellows and
-greens snap to the palette; blues vary too much in the originals to snap.
-Against the originals this lowered the mean error from 24.3 to 22.4 inside
-the icons and from 27.5 to 25.6 on the frame, with the largest gains on the
-lemon-yellow flags.
+**Blues were edited by hand.** For 34 of 117 blue regions Mark used the 2005
+Flags of the World colour pixel-exact, including some that are not web-safe
+(`#10319C`, `#002173`, `#188CC6`), which only a colour picker on those images
+can produce. The other blues he brightened, flag by flag: the same source
+colour was kept on one flag and lifted on another, so no rule reproduces them
+all. The British ensigns only look darker because Flags of the World coded
+them in its darkest navy, `#000066`, to begin with. The US canton came from
+no 2005 source at all: Flags of the World had `#000066`, the CIA World
+Factbook `#3B5AA3`, Wikipedia `#002868`; Mark painted it royal blue, about
+`#003CFA`.
+
+**What this means for the rebuild.** Saturated reds, oranges, yellows,
+greens and blues snap to the palette. Blues follow a rule (sky `#33CCFF`,
+light `#3399FF`, azure `#0066CC`, everything darker `#0033CC`, since Mark
+lifted most navies), and the catalog carries two kinds of per-flag data with
+this provenance: `"blue": "navy"` for the flags coded `#000066` in 2005, and
+an exact colour for the 18 flags where Mark used the 2005 colour unchanged.
+Against the originals the yellow work lowered the mean error from 24.3 to
+22.4 inside the icons and from 27.5 to 25.6 on the frame; the blues took it
+to 21.2 and 25.5, with the blue areas themselves going from 28.1 to 16.0.

@@ -76,10 +76,11 @@ picked most of them from the [Flags of the World](https://www.fotw.info/flags/fo
 reference images of 2005, which were drawn in a 32-colour web-safe palette:
 every red `#FF0000`, every green `#009900`, every yellow `#FFFF00` unless the
 contributor coded it "dark yellow", `#FFCC00`. Archived copies of those images
-match his colours flag by flag. `tools/color.js` snaps saturated reds,
-oranges, yellows and greens onto that palette and maps everything else
-smoothly; the catalog records which flags get the dark yellow and which keep
-the muted golds Mark used for some coats of arms. `FAM_COLORS=official` keeps
+match his colours flag by flag. His blues he mostly brightened by hand, so
+navies read as blue at 16 px. `tools/color.js` snaps saturated reds,
+oranges, yellows, greens and blues onto that palette and maps everything else
+smoothly; the catalog records the per-flag choices that came from the 2005
+images, such as dark yellow, the darkest navies and the exact blues. `FAM_COLORS=official` keeps
 official colours. The scripts and notes behind all of this are in `research/`.
 
 Artwork comes from [flag-icons](https://github.com/lipis/flag-icons), stretched

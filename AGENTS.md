@@ -50,7 +50,10 @@ npm run compare pl,jp,us   # subset
   transform, for artwork already in the famfamfam palette), `yellow`
   (`"#ffcc00"` for flags Flags of the World coded dark yellow in 2005,
   `"soft"` for the muted golds Mark used; default lemon `#ffff00`, see
-  `research/palette.md`), `note`, `legacy` (was in the original set).
+  `research/palette.md`), `blue` (`"navy"` for flags Flags of the World coded
+  `#000066` in 2005, or an exact colour where Mark used the 2005 colour
+  unchanged; default: the blue rule in `tools/color.js`), `note`, `legacy`
+  (was in the original set).
 - `src/flags/`: artwork flag-icons does not carry.
 - `ref/png/`: the original icons, ground truth for `compare`.
 - `tools/`: build pipeline. `build.js` composes; `style.js`/`color.js` are the

@@ -6,6 +6,18 @@ listed by code so a refresh from upstream reads as a diff.
 
 ## [Unreleased]
 
+### Changed
+- Blues follow Mark's: saturated blues snap to the Flags of the World blues
+  (sky `#33CCFF`, light `#3399FF`, azure `#0066CC`, blue `#0033CC`) instead of
+  a smooth transform, so navies read as blue at 16 px the way Mark drew them.
+  The US canton is royal blue, Ukraine `#0099FF`.
+- Catalog `blue` field: `"navy"` for `au`, `ck`, `fk`, `hm`, `io`, `mh`, `ms`,
+  `mu`, `nz`, `sh`, `tc`, `tf`, `vg` (coded `#000066` in 2005), and the exact
+  2005 colour for `an`, `aw`, `bb`, `cx`, `dj`, `ee`, `ga`, `gs`, `kz`, `ky`,
+  `mn`, `ph`, `pn`, `pw`, `ru`, `se`, `th`, `ua`.
+- Against the originals: mean error 22.4 → 21.2 inside the icons, 25.6 → 25.5
+  on the frame, 28.1 → 16.0 over blue areas.
+
 ## [0.1.1] - 2026-09-28
 
 ### Changed

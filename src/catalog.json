@@ -38,7 +38,8 @@
   "code": "an",
   "legacy": true,
   "name": "Netherlands Antilles (1986-2010)",
-  "source": "an.svg"
+  "source": "an.svg",
+  "blue": "#000099"
  },
  {
   "code": "ao",
@@ -78,12 +79,14 @@
  {
   "code": "au",
   "name": "Australia",
-  "legacy": true
+  "legacy": true,
+  "blue": "navy"
  },
  {
   "code": "aw",
   "name": "Aruba",
-  "legacy": true
+  "legacy": true,
+  "blue": "#3399cc"
  },
  {
   "code": "ax",
@@ -107,7 +110,8 @@
   "code": "bb",
   "name": "Barbados",
   "legacy": true,
-  "yellow": "#ffcc00"
+  "yellow": "#ffcc00",
+  "blue": "#003399"
  },
  {
   "code": "bd",
@@ -252,7 +256,8 @@
  {
   "code": "ck",
   "name": "Cook Islands",
-  "legacy": true
+  "legacy": true,
+  "blue": "navy"
  },
  {
   "code": "cl",
@@ -309,7 +314,8 @@
  {
   "code": "cx",
   "name": "Christmas Island",
-  "legacy": true
+  "legacy": true,
+  "blue": "#0000bf"
  },
  {
   "code": "cy",
@@ -335,7 +341,8 @@
  {
   "code": "dj",
   "name": "Djibouti",
-  "legacy": true
+  "legacy": true,
+  "blue": "#6699ff"
  },
  {
   "code": "dk",
@@ -373,7 +380,8 @@
  {
   "code": "ee",
   "name": "Estonia",
-  "legacy": true
+  "legacy": true,
+  "blue": "#0066cc"
  },
  {
   "code": "eg",
@@ -449,7 +457,8 @@
  {
   "code": "fk",
   "name": "Falkland Islands",
-  "legacy": true
+  "legacy": true,
+  "blue": "navy"
  },
  {
   "code": "fm",
@@ -471,7 +480,8 @@
  {
   "code": "ga",
   "name": "Gabon",
-  "legacy": true
+  "legacy": true,
+  "blue": "#3366cc"
  },
  {
   "code": "gb",
@@ -577,7 +587,8 @@
  {
   "code": "gs",
   "name": "South Georgia and the South Sandwich Islands",
-  "legacy": true
+  "legacy": true,
+  "blue": "#000066"
  },
  {
   "code": "gt",
@@ -607,7 +618,8 @@
  {
   "code": "hm",
   "name": "Heard Island and McDonald Islands",
-  "legacy": true
+  "legacy": true,
+  "blue": "navy"
  },
  {
   "code": "hn",
@@ -662,7 +674,8 @@
  {
   "code": "io",
   "name": "British Indian Ocean Territory",
-  "legacy": true
+  "legacy": true,
+  "blue": "navy"
  },
  {
   "code": "iq",
@@ -754,13 +767,15 @@
  {
   "code": "ky",
   "name": "Cayman Islands",
-  "legacy": true
+  "legacy": true,
+  "blue": "#002173"
  },
  {
   "code": "kz",
   "name": "Kazakhstan",
   "legacy": true,
-  "yellow": "soft"
+  "yellow": "soft",
+  "blue": "#33ccff"
  },
  {
   "code": "la",
@@ -854,7 +869,8 @@
  {
   "code": "mh",
   "name": "Marshall Islands",
-  "legacy": true
+  "legacy": true,
+  "blue": "navy"
  },
  {
   "code": "mk",
@@ -874,7 +890,8 @@
  {
   "code": "mn",
   "name": "Mongolia",
-  "legacy": true
+  "legacy": true,
+  "blue": "#0000ff"
  },
  {
   "code": "mo",
@@ -899,7 +916,8 @@
  {
   "code": "ms",
   "name": "Montserrat",
-  "legacy": true
+  "legacy": true,
+  "blue": "navy"
  },
  {
   "code": "mt",
@@ -909,7 +927,8 @@
  {
   "code": "mu",
   "name": "Mauritius",
-  "legacy": true
+  "legacy": true,
+  "blue": "navy"
  },
  {
   "code": "mv",
@@ -1003,7 +1022,8 @@
  {
   "code": "nz",
   "name": "New Zealand",
-  "legacy": true
+  "legacy": true,
+  "blue": "navy"
  },
  {
   "code": "om",
@@ -1038,7 +1058,8 @@
  {
   "code": "ph",
   "name": "Philippines",
-  "legacy": true
+  "legacy": true,
+  "blue": "#000099"
  },
  {
   "code": "pk",
@@ -1060,7 +1081,8 @@
  {
   "code": "pn",
   "name": "Pitcairn",
-  "legacy": true
+  "legacy": true,
+  "blue": "#10319c"
  },
  {
   "code": "pr",
@@ -1080,7 +1102,8 @@
  {
   "code": "pw",
   "name": "Palau",
-  "legacy": true
+  "legacy": true,
+  "blue": "#0099ff"
  },
  {
   "code": "py",
@@ -1111,7 +1134,8 @@
  {
   "code": "ru",
   "name": "Russia",
-  "legacy": true
+  "legacy": true,
+  "blue": "#0000ff"
  },
  {
   "code": "rw",
@@ -1144,7 +1168,8 @@
   "legacy": true,
   "source": "se.svg",
   "note": "icon-native artwork: cross arms on whole pixels at 1x",
-  "yellow": "#ffcc00"
+  "yellow": "#ffcc00",
+  "blue": "#006699"
  },
  {
   "code": "sg",
@@ -1154,7 +1179,8 @@
  {
   "code": "sh",
   "name": "Saint Helena, Ascension and Tristan da Cunha",
-  "legacy": true
+  "legacy": true,
+  "blue": "navy"
  },
  {
   "code": "sh-ac",
@@ -1244,7 +1270,8 @@
  {
   "code": "tc",
   "name": "Turks and Caicos Islands",
-  "legacy": true
+  "legacy": true,
+  "blue": "navy"
  },
  {
   "code": "td",
@@ -1255,7 +1282,8 @@
  {
   "code": "tf",
   "name": "French Southern Territories",
-  "legacy": true
+  "legacy": true,
+  "blue": "navy"
  },
  {
   "code": "tg",
@@ -1265,7 +1293,8 @@
  {
   "code": "th",
   "name": "Thailand",
-  "legacy": true
+  "legacy": true,
+  "blue": "#000099"
  },
  {
   "code": "tj",
@@ -1325,7 +1354,8 @@
  {
   "code": "ua",
   "name": "Ukraine",
-  "legacy": true
+  "legacy": true,
+  "blue": "#0099ff"
  },
  {
   "code": "ug",
@@ -1382,7 +1412,8 @@
  {
   "code": "vg",
   "name": "Virgin Islands (British)",
-  "legacy": true
+  "legacy": true,
+  "blue": "navy"
  },
  {
   "code": "vi",
