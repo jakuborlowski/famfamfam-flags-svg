@@ -15,10 +15,10 @@ missing then, and current designs wherever a flag has changed since.
 Straight from a CDN, nothing to install:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/famfamfam-flags-svg@0.1.1/dist/famfamfam-flags.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/famfamfam-flags-svg@0.1.2/dist/famfamfam-flags.css">
 <span class="famfamfam-flag famfamfam-flag-pl" role="img" aria-label="Poland"></span>
 
-<img src="https://cdn.jsdelivr.net/npm/famfamfam-flags-svg@0.1.1/dist/svg/pl.svg" width="16" height="11" alt="Poland">
+<img src="https://cdn.jsdelivr.net/npm/famfamfam-flags-svg@0.1.2/dist/svg/pl.svg" width="16" height="11" alt="Poland">
 ```
 
 Or host the files yourself, which is better for production sites since it

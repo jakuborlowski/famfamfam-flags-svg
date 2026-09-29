@@ -6,6 +6,8 @@ listed by code so a refresh from upstream reads as a diff.
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-09-29
+
 ### Changed
 - Blues follow Mark's: saturated blues snap to the Flags of the World blues
   (sky `#33CCFF`, light `#3399FF`, azure `#0066CC`, blue `#0033CC`) instead of
