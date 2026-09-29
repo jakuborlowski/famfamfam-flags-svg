@@ -72,12 +72,12 @@ function overlay(p, W, H, outline) {
     `<path d="M0 0h${W}v${H}H0zM1 1v${ih}h${iw}V1z" fill="url(#${p}-edge)" fill-rule="evenodd"/>`;
 }
 
-export function compose({ code, source, width: W, title, outline, keepColors, yellow }) {
+export function compose({ code, source, width: W, title, outline, keepColors, yellow, blue }) {
   const H = 11;
   const src = loadSource(source);
   const p = 'f' + code.replace(/[^a-z0-9]/gi, '');
   let art = cleanArt(src.inner, p);
-  if (!OFFICIAL && !keepColors) art = stylizeSvg(art, { yellow });
+  if (!OFFICIAL && !keepColors) art = stylizeSvg(art, { yellow, blue });
   const sx = W / src.w, sy = H / src.h;
   const xlink = src.xlink ? ' xmlns:xlink="http://www.w3.org/1999/xlink"' : '';
   const clip = outline ? `<path d="${outline}"/>` : `<rect width="${W}" height="${H}"/>`;
@@ -125,7 +125,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     const width = e.width || (e.shape === '1x1' ? 11 : 16);
     const source = e.source ? path.join(ROOT, 'src', 'flags', e.source) : path.join(FI, e.shape || '4x3', (e.from || e.code) + '.svg');
     for (const code of [e.code, ...(e.aliases || [])]) {
-      const { svg, note } = compose({ code, source, width, title: e.name, outline: e.outline, keepColors: e.colors === 'keep', yellow: e.yellow });
+      const { svg, note } = compose({ code, source, width, title: e.name, outline: e.outline, keepColors: e.colors === 'keep', yellow: e.yellow, blue: e.blue });
       fs.writeFileSync(path.join(OUT, code + '.svg'), svg);
       report.push({ code, kb: (bytes(svg) / 1024).toFixed(1), note });
     }

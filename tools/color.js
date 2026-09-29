@@ -6,9 +6,9 @@
 //
 // So colours go through two steps. stylize() is a smooth mapping (saturation
 // push, hue pull towards the primaries, per-hue brightness) that suits dull and
-// emblem colours; palette() then snaps saturated reds, oranges, yellows and
-// greens onto their FOTW colour, fading out near family edges so nothing jumps.
-// Blues vary too much in the originals to snap. FAM_COLORS=official skips both.
+// emblem colours; palette() then snaps saturated reds, oranges, yellows,
+// greens and blues onto their FOTW colour, fading out near family edges so
+// nothing jumps. FAM_COLORS=official skips both.
 
 const NAMED = {
   red: '#ff0000', white: '#ffffff', black: '#000000', gold: '#ffd700', green: '#008000',
@@ -29,12 +29,16 @@ const NAMED = {
 // except that yellow ends at 70 and green reaches 175: lime greens (78) and
 // teal greens (164-167, Bulgaria, Cameroon) are greens, and snapping them to the
 // nearest anchor turned them mustard and blue in 0.1.0.
-const HUES = [0,   22,  52,  120,  205, 235,   300];
-const EDGE = [11,  37,  70,  175,  220, 267.5, 330];
-const PULL = [0.9, 0.3, 0.8, 1.0,  0.5, 0.45,  0.5];   // how far hue snaps to the anchor
+// Blue sits at 225, not 235, and azure ends at 213: Mark's navies and royal
+// blues are 220-230, and the old 220 edge pulled 211-217 navies to azure.
+// Blues get a weaker saturation push: Mark kept light tints (Djibouti,
+// Micronesia, Argentina) as tints.
+const HUES = [0,   22,  52,  120,  205, 225,   300];
+const EDGE = [11,  37,  70,  175,  213, 262.5, 330];
+const PULL = [0.9, 0.3, 0.8, 1.0,  0.5, 0.9,   0.5];   // how far hue snaps to the anchor
 const VTGT = [1.0, 1.0, 1.0, 0.57, 1.0, 1.0,   0.8];   // brightness target
 const VK   = [0.9, 0.8, 0.6, 0.35, 0.6, 0.35,  0.3];   // pull strength towards it
-const KS   = 0.9;                                      // saturation push
+const KS   = [0.9, 0.9, 0.9, 0.9,  0.4, 0.4,   0.9];   // saturation push
 
 function interp(h, ys) {
   const xs = [...HUES, 360], vs = [...ys, ys[0]];
@@ -68,7 +72,7 @@ export function stylize([r, g, b]) {
   const k = EDGE.findIndex((e) => h <= e);
   const toAnchor = ((h - HUES[k < 0 ? 0 : k] + 540) % 360) - 180;
   const h2 = h - interp(h, PULL) * toAnchor * gate;
-  const s2 = s + (1 - s) * KS * gate;
+  const s2 = s + (1 - s) * interp(h, KS) * gate;
   const v2 = v + (interp(h, VTGT) - v) * interp(h, VK) * gate;
   return hsvToRgb([h2, Math.min(1, s2), Math.min(1, v2)]);
 }
@@ -87,11 +91,36 @@ const FAMILIES = [
 ];
 const ramp = (x) => Math.min(1, Math.max(0, x));
 
+// FOTW blues: sky #33ccff, light #3399ff, azure #0066cc, blue #0033cc. Mark
+// lifted most navies towards blue (Finland, Laos, Norway, the US canton); the
+// flags FOTW coded in its darkest navy #000066 stayed dark after his lift
+// (catalog "blue": "navy", NAVY is his median there). A catalog colour
+// ("blue": "#0099ff") is a flag where Mark used the FOTW colour unchanged;
+// "soft" keeps the smooth transform. See research/palette.md.
+const NAVY = '#08348c';
+function blue(h, s, v, o) {
+  if (o.blue === 'soft') return null;
+  if (o.blue && o.blue.startsWith('#')) return o.blue;
+  if (h < 195) return '#33ccff';
+  if (v < 0.6) return o.blue === 'navy' ? NAVY : '#0033cc';
+  if (h < 213) return v < 0.8 ? '#0066cc' : '#3399ff';
+  return '#0033cc';
+}
+
 export function palette(rgb, opts = {}) {
   const smooth = stylize(rgb);
   const [h, s, v] = rgbToHsv(rgb);
   const hr = h >= 340 ? h - 360 : h;
-  if (hr > 175) return smooth;
+  if (hr > 175) {
+    const hex = blue(hr, s, v, opts);
+    if (!hex) return smooth;
+    // fade in from teal and out towards violet, below the saturation floor
+    // (0.7 keeps light tints smooth, 0.35 still catches greyish navies such as
+    // the US canton), and towards black
+    const w = ramp((hr - 175) / 5) * ramp((265 - hr) / 10) * ramp((s - (v < 0.6 ? 0.35 : 0.7)) / 0.1 + 1) * ramp((v - 0.25) / 0.1);
+    const t = parseColor(hex);
+    return smooth.map((c, i) => c + (t[i] - c) * w);
+  }
   const [, s0, v0, target] = FAMILIES.find(([h1]) => hr < h1);
   const hex = target(v, opts);
   if (!hex) return smooth;
