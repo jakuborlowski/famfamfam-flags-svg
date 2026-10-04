@@ -87,6 +87,25 @@ reference example. This is what the original set did by hand.
    the 4× PNG. The build prints flags that were reduced or kept unflattened.
 4. Add a line to `CHANGELOG.md` under Unreleased, and to `LICENSE` if a new source.
 
+## Releasing
+
+Versions: patch for changes that bring flags closer to the intended look
+(Mark's style, current flags) and fixes; minor for new flags, a changed flag
+design, new outputs or a change of direction; major for anything that can
+break a consumer (renamed or removed files, changed dimensions, a dropped
+guarantee, a changed manifest format). Before 1.0, breaking changes bump
+the minor.
+
+1. Move the changelog's Unreleased entries under `## [x.y.z] - date`; bump
+   `package.json` and the pinned CDN links in the README.
+2. Commit, then push an annotated tag `vx.y.z`. Release tags are protected:
+   they can't be moved or deleted, so check before pushing.
+3. The release workflow checks the tag against `package.json`, attaches the
+   zip to the GitHub release and stages the npm package (trusted publishing,
+   with provenance). The maintainer approves it on npmjs.com, where it goes
+   live.
+4. Re-upload `docs/social.png` in the repo settings if it changed.
+
 ## Refreshing from upstream
 
 `npm update flag-icons`, rebuild, then diff `dist/png/16@4x` against the

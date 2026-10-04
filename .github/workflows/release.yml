@@ -1,4 +1,8 @@
-# On a version tag: render PNGs, run the checks, attach dist as a zip.
+# On a version tag: check the tag matches package.json, run the checks, attach
+# dist as a zip to the GitHub release, and stage the npm package. The staged
+# version goes live only when the maintainer approves it with 2FA, on
+# npmjs.com or with `npm stage approve <id>`. npm trusts this workflow through
+# OIDC (trusted publishing), so there is no token; provenance is attached.
 name: release
 on:
   push:
@@ -7,13 +11,17 @@ jobs:
   release:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write   # create the GitHub release
+      id-token: write   # OIDC token for npm trusted publishing
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
+          registry-url: https://registry.npmjs.org
+      - name: Tag matches package.json
+        run: test "v$(node -p 'require("./package.json").version')" = "$GITHUB_REF_NAME"
       - run: npm ci
       - run: npm test
       - run: npm run png
@@ -22,3 +30,7 @@ jobs:
         with:
           files: famfamfam-flags-svg.zip
           body_path: .github/release-notes.md
+      # npm stage needs npm 11.17 or newer; Node 22 ships npm 10.
+      - run: npm install -g npm@11.17.0
+      - name: Stage the npm package (approve on npmjs.com to publish)
+        run: npm stage publish --provenance --access public
