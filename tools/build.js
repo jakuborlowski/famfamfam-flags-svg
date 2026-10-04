@@ -149,13 +149,13 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     for (const code of [e.code, ...(e.aliases || [])]) {
       const { svg, note } = compose({ code, source, width, title: e.name, outline: e.outline, keepColors: e.colors === 'keep', yellow: e.yellow, blue: e.blue });
       fs.writeFileSync(path.join(OUT, code + '.svg'), svg);
-      report.push({ code, kb: (bytes(svg) / 1024).toFixed(1), note });
+      report.push({ code, bytes: bytes(svg), kb: (bytes(svg) / 1024).toFixed(1), note });
     }
   }
   console.log(`wrote ${report.length} flags to dist/svg`);
   for (const r of report.filter((r) => /unflattened/.test(r.note))) console.log(`  ${r.code}: ${r.note}`);
   const reduced = report.filter((r) => /geometry|pruned/.test(r.note));
   if (reduced.length) console.log(`reduced ${reduced.length}: ${reduced.map((r) => `${r.code} ${r.kb}K`).join(', ')}`);
-  const over = report.filter((r) => r.kb * 1024 > BUDGET).sort((a, b) => b.kb - a.kb);
+  const over = report.filter((r) => r.bytes > BUDGET).sort((a, b) => b.bytes - a.bytes);
   console.log(`over ${BUDGET / 1024} KB: ${over.length}${over.length ? ' -> ' + over.map((r) => `${r.code} ${r.kb}K`).join(', ') : ''}`);
 }

@@ -60,7 +60,7 @@ country in your data has a flag:
   images, filters or external references. `npm test` checks all of it.
 * **Small.** Most flags are about 2 KB. Emblem flags are held to 8 KB by
   reducing geometry under measured render-error bounds, overall and in every
-  small area so no emblem is lost; the 21 that still exceed it are listed in
+  small area so no emblem is lost; the 30 that still exceed it are listed in
   `src/oversize.json`, the largest at 48 KB.
 * **Crisp at 1×.** The frame and bevel sit on whole pixels, and flags whose
   official artwork cannot survive 16 px (the US stripes, the Nordic crosses,

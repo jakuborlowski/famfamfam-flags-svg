@@ -28,7 +28,8 @@ listed by code so a refresh from upstream reads as a diff.
   Saint Helena, as the 2005 icon did, instead of the Union Jack.
 - Against the originals: mean error 21.2 → 20.7 inside the icons, 25.5 →
   25.1 on the frame.
-- Over the 8 KB budget: 21 files, listed in `src/oversize.json`.
+- Over the 8 KB budget: 30 files, listed in `src/oversize.json`; nine of them
+  by less than 40 bytes.
 
 ## [0.1.2] - 2026-09-29
 
