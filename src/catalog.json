@@ -90,7 +90,7 @@
  },
  {
   "code": "ax",
-  "name": "Aland Islands",
+  "name": "Åland Islands",
   "legacy": true,
   "source": "ax.svg",
   "note": "icon-native artwork: cross arms on whole pixels at 1x"
@@ -195,7 +195,9 @@
  {
   "code": "bv",
   "name": "Bouvet Island",
-  "legacy": true
+  "legacy": true,
+  "source": "no.svg",
+  "note": "icon-native artwork: the Norwegian flag, cross arms on whole pixels at 1x"
  },
  {
   "code": "bw",
@@ -324,7 +326,7 @@
  },
  {
   "code": "cz",
-  "name": "Czech Republic",
+  "name": "Czechia",
   "legacy": true
  },
  {
@@ -428,7 +430,7 @@
  },
  {
   "code": "eu",
-  "name": "Europe",
+  "name": "European Union",
   "legacy": true,
   "aliases": [
    "europeanunion"
@@ -895,7 +897,7 @@
  },
  {
   "code": "mo",
-  "name": "Macau",
+  "name": "Macao",
   "legacy": true
  },
  {
@@ -1180,7 +1182,9 @@
   "code": "sh",
   "name": "Saint Helena, Ascension and Tristan da Cunha",
   "legacy": true,
-  "blue": "navy"
+  "blue": "navy",
+  "from": "sh-hl",
+  "note": "the flag of Saint Helena, as in the 2005 icon; the territory as a whole flies the Union Jack"
  },
  {
   "code": "sh-ac",
@@ -1205,7 +1209,9 @@
  {
   "code": "sj",
   "name": "Svalbard and Jan Mayen",
-  "legacy": true
+  "legacy": true,
+  "source": "no.svg",
+  "note": "icon-native artwork: the Norwegian flag, cross arms on whole pixels at 1x"
  },
  {
   "code": "sk",

@@ -6,6 +6,30 @@ listed by code so a refresh from upstream reads as a diff.
 
 ## [Unreleased]
 
+### Fixed
+- Emblems are no longer lost to size reduction. The reducer also bounds the
+  error in every small area, not only over the whole image, so a small coat
+  of arms can't be deleted. Nicaragua's coat of arms, Mexico's eagle, the
+  Vatican's red cord and Guatemala's scroll are back. Flags still over 8 KB
+  can also keep their source's `<use>` reuse, which brings `eac` from 15 KB
+  to 4 KB and `kz` under budget.
+- Names: `eu` is "European Union" (was "Europe"), `cz` "Czechia", `mo`
+  "Macao", `ax` "Åland Islands".
+- Manifest entries for alias files carry the same fields as the canonical
+  entry (`aliases`, `iconNative`, `note`), so code looping over `aliases`
+  doesn't break on them.
+
+### Changed
+- Vertical band edges sit on whole pixels, as in the originals: France,
+  Italy, Ireland, Belgium, Peru, Nigeria and the other tricolours, about 25
+  flags, lose the blended column beside each band at 1×. Horizontal edges are unchanged,
+  since Mark blended those. At 4× the bands become 5:6:5 instead of equal.
+- `bv` and `sj` use the pixel-grid Norwegian flag; `sh` shows the flag of
+  Saint Helena, as the 2005 icon did, instead of the Union Jack.
+- Against the originals: mean error 21.2 → 20.7 inside the icons, 25.5 →
+  25.1 on the frame.
+- Over the 8 KB budget: 21 files, listed in `src/oversize.json`.
+
 ## [0.1.2] - 2026-09-29
 
 ### Changed

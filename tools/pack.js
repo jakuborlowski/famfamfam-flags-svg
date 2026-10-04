@@ -27,7 +27,8 @@ for (const e of catalog) {
   const svg = fs.readFileSync(path.join(SVG, e.code + '.svg'), 'utf8');
   const [w, h] = size(svg);
   manifest.push({ code: e.code, name: e.name, width: w, height: h, aliases: e.aliases || [], legacy: !!e.legacy, iconNative: /^icon-native/.test(e.note || ''), ...(e.note ? { note: e.note } : {}) });
-  for (const alias of e.aliases || []) manifest.push({ code: alias, name: e.name, width: w, height: h, aliasOf: e.code, legacy: true });
+  // Alias files get the same fields as their canonical entry, plus aliasOf.
+  for (const alias of e.aliases || []) manifest.push({ ...manifest[manifest.length - 1], code: alias, aliases: [], aliasOf: e.code, legacy: true });
 }
 manifest.sort((a, b) => a.code.localeCompare(b.code));
 fs.writeFileSync(path.join(ROOT, 'dist', 'manifest.json'), JSON.stringify(manifest, null, 1) + '\n');

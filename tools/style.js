@@ -42,3 +42,11 @@ export function gradient(id, layer) {
   ).join('');
   return `<linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}">${stops}</linearGradient>`;
 }
+
+// Mark put the edges of vertical bands on whole pixel columns (France,
+// Italy, Ireland, Nigeria and other tricolours split 5/6/5 with no blended
+// column), but not horizontal ones (Russia, Germany and Ukraine have blended
+// rows). Vertical edges of rectangular artwork within this distance of a whole
+// pixel are moved onto it; measured on the originals, 0.35 leaves true
+// half-pixel edges alone.
+export const SNAP_X = 0.35;

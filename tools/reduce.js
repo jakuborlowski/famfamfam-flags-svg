@@ -49,6 +49,20 @@ const artPaths = (doc) => {
   return out;
 };
 
+// Worst mean error over any 8x8 window (2x2 icon pixels at 4x): a whole-image
+// mean lets a small emblem vanish entirely, this does not.
+const LOCAL_MAX = 24;   // mean error /255 allowed in any 8x8 window at 4x
+export function localErr(a, b, blk = 8) {
+  const W = a.width, H = a.height; let worst = 0;
+  for (let by = 0; by + blk <= H; by += blk / 2) for (let bx = 0; bx + blk <= W; bx += blk / 2) {
+    let s = 0;
+    for (let y = by; y < by + blk; y++) for (let x = bx; x < bx + blk; x++) { const i = (y * W + x) * 4; for (let c = 0; c < 3; c++) s += Math.abs(a.pixels[i + c] - b.pixels[i + c]); }
+    worst = Math.max(worst, s / (blk * blk * 3));
+  }
+  return worst;
+}
+const ok = (ref, r, maxErr) => { const e = mae(ref, r); return { e, pass: e <= maxErr && localErr(ref, r) <= LOCAL_MAX }; };
+
 export function reduce(svg, { budget, ref, scale = 4, maxErr = 1.0, minExtent = 0.12, tol = 0.04 }) {
   const render = (s) => rasterize(s, scale);
   const ser = new XMLSerializer();
@@ -57,9 +71,9 @@ export function reduce(svg, { budget, ref, scale = 4, maxErr = 1.0, minExtent = 
   let best = { svg, bytes: Buffer.byteLength(svg), err: mae(ref, render(svg)) };
   const consider = (label) => {
     const out = ser.serializeToString(doc);
-    const err = mae(ref, render(out));
-    if (err <= maxErr) best = { svg: out, bytes: Buffer.byteLength(out), err, label };
-    return err <= maxErr;
+    const { e: err, pass } = ok(ref, render(out), maxErr);
+    if (pass) best = { svg: out, bytes: Buffer.byteLength(out), err, label };
+    return pass;
   };
 
   // 1 + 2: geometry per path, most aggressive setting that stays within the bound
@@ -93,8 +107,8 @@ export function reduce(svg, { budget, ref, scale = 4, maxErr = 1.0, minExtent = 
     const parent = p.parentNode, next = p.nextSibling;
     parent.removeChild(p);
     const out = ser.serializeToString(doc);
-    const err = mae(ref, render(out));
-    if (err > maxErr) { parent.insertBefore(p, next); continue; }
+    const { e: err, pass } = ok(ref, render(out), maxErr);
+    if (!pass) { parent.insertBefore(p, next); continue; }
     best = { svg: out, bytes: Buffer.byteLength(out), err, label: 'pruned' };
     if (best.bytes <= budget) break;
   }

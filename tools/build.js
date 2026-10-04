@@ -13,6 +13,7 @@ import { stylizeSvg } from './color.js';
 import { flattenSvg, minify } from './flatten.js';
 import { reduce } from './reduce.js';
 import { render, mae } from './render.js';
+import { snapEdges } from './snap.js';
 
 export const BUDGET = 8 * 1024;         // bytes per flag
 const CHECK_SCALE = 4;                  // every geometry change is verified at this zoom
@@ -101,18 +102,39 @@ export function compose({ code, source, width: W, title, outline, keepColors, ye
       const flat = minify(flattenSvg(doc, { precision }), precision);
       const candidate = wrap(`<g${residual}>${flat.replace(/^<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '')}</g>`);
       const err = mae(ref, render(candidate, CHECK_SCALE));
-      if (err <= MAX_FLATTEN_ERR) { best = { svg: candidate, note: `flattened, error ${err.toFixed(2)}` }; break; }
+      if (err <= MAX_FLATTEN_ERR) { best = { svg: candidate, note: `flattened, error ${err.toFixed(2)}`, flat: true }; break; }
       best = { svg: raw, note: `kept unflattened, error ${err.toFixed(2)}` };
     } catch (e) {
       best = { svg: raw, note: `kept unflattened: ${e.message}` };
       break;
     }
   }
-  for (const maxErr of MAX_REDUCE_ERR) {
-    if (best.svg === raw || bytes(best.svg) <= BUDGET) break;
-    const r = reduce(best.svg, { budget: BUDGET, ref, scale: CHECK_SCALE, maxErr });
-    if (r.bytes < bytes(best.svg)) best = { svg: r.svg, note: `${r.label}, error ${r.err.toFixed(2)}` };
+  // Shrink a candidate under the reduction bounds, as before.
+  const shrink = (b) => {
+    for (const maxErr of MAX_REDUCE_ERR) {
+      if (b.svg === raw || bytes(b.svg) <= BUDGET) break;
+      const r = reduce(b.svg, { budget: BUDGET, ref, scale: CHECK_SCALE, maxErr });
+      if (r.bytes < bytes(b.svg)) b = { svg: r.svg, note: `${r.label}, error ${r.err.toFixed(2)}` };
+    }
+    return b;
+  };
+  best = { ...shrink(best), flat: best.flat };
+  // Second candidate for flags still over budget: svgo on the unflattened
+  // document, which keeps <use> and source-space precision. Keep whichever ends smaller.
+  if (bytes(best.svg) > BUDGET) {
+    for (const precision of PRECISION) {
+      let m;
+      try { m = minify(raw, precision); } catch { break; }
+      const err = mae(ref, render(m, CHECK_SCALE));
+      if (err > MAX_FLATTEN_ERR) continue;
+      const alt = shrink({ svg: m, note: `minified unflattened, error ${err.toFixed(2)}` });
+      if (bytes(alt.svg) < bytes(best.svg)) best = { ...alt, note: alt.note + ' (unflattened)', flat: false };
+      break;
+    }
   }
+  // Tricolour edges onto whole pixels; only for flattened artwork, whose
+  // coordinates are final.
+  if (best.flat) best = { ...best, svg: snapEdges(best.svg) };
   return best;
 }
 
