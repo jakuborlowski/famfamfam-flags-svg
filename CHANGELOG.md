@@ -6,6 +6,8 @@ listed by code so a refresh from upstream reads as a diff.
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-10-04
+
 ### Fixed
 - Emblems are no longer lost to size reduction. The reducer also bounds the
   error in every small area, not only over the whole image, so a small coat
