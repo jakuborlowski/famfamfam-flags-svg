@@ -6,6 +6,10 @@ listed by code so a refresh from upstream reads as a diff.
 
 ## [Unreleased]
 
+### Changed
+- npm releases come from the release workflow through trusted publishing,
+  with provenance; the maintainer approves each staged version.
+
 ## [0.1.3] - 2026-10-04
 
 ### Fixed
