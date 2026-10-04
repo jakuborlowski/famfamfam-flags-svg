@@ -38,10 +38,18 @@ avoids a third-party request. Get them as a zip of `dist/` from the
 
 Files are named by lowercase ISO 3166-1 alpha-2 code where one exists and
 by flag-icons' code otherwise (`gb-sct`, `eu`, `un`). `dist/manifest.json`
-has one entry per file with `code`, `name`, `width`, `height`, `aliases`
-(and `aliasOf` on alias files), so you can generate alt text or check that
-every country in your data has a flag. Switzerland is 11×11 and Nepal 9×11,
-as in the original.
+has one entry per file, so you can generate alt text or check that every
+country in your data has a flag:
+
+| Field | Meaning |
+| --- | --- |
+| `code`, `name` | file name without `.svg`, and the name used in the file's `<title>` |
+| `width`, `height` | icon size: 16×11, except Switzerland 11×11 and Nepal 9×11 |
+| `aliases` | other files with the same flag (the original set's legacy names) |
+| `aliasOf` | on an alias file: the code it is a copy of |
+| `legacy` | the flag was in the 2005 set (true for `eu`, whose 2005 file was `europeanunion`) |
+| `iconNative` | drawn on the pixel grid rather than scaled from official artwork |
+| `note` | why a flag was drawn or chosen the way it was, when that needs saying |
 
 ## Guarantees
 
@@ -51,8 +59,9 @@ as in the original.
   so any number can share one document, and no scripts, styles, text,
   images, filters or external references. `npm test` checks all of it.
 * **Small.** Most flags are about 2 KB. Emblem flags are held to 8 KB by
-  reducing geometry under a measured render-error bound; the 19 that still
-  exceed it are listed in `src/oversize.json`, the largest at 28 KB.
+  reducing geometry under measured render-error bounds, overall and in every
+  small area so no emblem is lost; the 30 that still exceed it are listed in
+  `src/oversize.json`, the largest at 48 KB.
 * **Crisp at 1×.** The frame and bevel sit on whole pixels, and flags whose
   official artwork cannot survive 16 px (the US stripes, the Nordic crosses,
   the Union Jack) are drawn on the pixel grid the way the originals were.

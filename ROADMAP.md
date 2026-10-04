@@ -99,12 +99,17 @@ and 1× crispness; CI reports when a rebuild differs from `dist/`. Still worth d
   revisiting if a filter- and style-free way appears.
 * Hairline seams where upstream artwork butts stripes together at
   fractional coordinates: invisible on light backgrounds, a faint line on
-  dark ones. Overlapping stripes by a hair in the flatten step would remove it.
+  dark ones. 0.1.3 snaps vertical band edges to whole pixels, which removes
+  them from most tricolours. Overlapping stripes by a hair does not help (the
+  blend spans a whole screen pixel); painting the artwork twice more with
+  `<use>` removes them everywhere for about 48 bytes per file.
 
 ## 4. Packaging and site
 
 * Publish to npm as `famfamfam-flags-svg` (checked free; `famfamfam-flags`
   is the legacy PNG package), with `dist` only.
+* `preview.html` draws Switzerland and Nepal at the wrong size at 2× and up
+  (fixed widths), has no viewport tag and no dark background.
 * GitHub Pages from `preview.html`, grown into a gallery with search,
   collection filter, size toggle and a copy-the-snippet button.
 * A subset builder: `npm run pack -- pl,de,fr` producing CSS (and optionally

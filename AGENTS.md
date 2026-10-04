@@ -37,7 +37,7 @@ npm run png          # dist/png at 1×, 2×, 4× (gitignored; the release workfl
 node tools/hero.js   # docs/hero.png for the README
 node tools/social.js # docs/social.png, the repo's social preview (upload by hand in Settings)
 npm run compare      # error vs originals + tmp/compare.png side-by-side sheet
-                     #   baseline: interior 24.3, border 27.5 (mean abs diff /255; artwork differences dominate)
+                     #   baseline: interior 20.7, border 25.1 (mean abs diff /255; artwork differences dominate)
 npm run compare pl,jp,us   # subset
 ```
 
@@ -58,7 +58,9 @@ npm run compare pl,jp,us   # subset
 - `ref/png/`: the original icons, ground truth for `compare`.
 - `tools/`: build pipeline. `build.js` composes; `style.js`/`color.js` are the
   look; `flatten.js` bakes transforms into icon space; `simplify.js` and
-  `reduce.js` shrink emblem flags under a render-error bound; `render.js` is
+  `reduce.js` shrink emblem flags under a render-error bound (whole image and
+  every 8×8 window at 4×, so emblems can't vanish); `snap.js` puts vertical
+  band edges on whole pixels, as Mark did; `render.js` is
   the one rasterizer call; `test.js` is the contract. `research/`: how the
   style was measured.
 - `src/oversize.json`: codes allowed over the size budget (complex coats of
