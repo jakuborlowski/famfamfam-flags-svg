@@ -8,12 +8,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { gradient, GLOSS, BEVEL, SHADE, EDGE } from './style.js';
+import { gradient, GLOSS, BEVEL, SHADE, EDGE, FRAME } from './style.js';
 import { stylizeSvg } from './color.js';
 import { flattenSvg, minify } from './flatten.js';
 import { reduce } from './reduce.js';
 import { render, mae } from './render.js';
 import { snapEdges } from './snap.js';
+import { thinBands, thinDiagonals } from './thin.js';
+import { bakeFrame } from './frame.js';
 
 export const BUDGET = 8 * 1024;         // bytes per flag
 const CHECK_SCALE = 4;                  // every geometry change is verified at this zoom
@@ -73,14 +75,33 @@ function overlay(p, W, H, outline) {
     `<path d="M0 0h${W}v${H}H0zM1 1v${ih}h${iw}V1z" fill="url(#${p}-edge)" fill-rule="evenodd"/>`;
 }
 
-export function compose({ code, source, width: W, title, outline, keepColors, yellow, blue }) {
+// Shapes that abut at a fractional pixel each cover part of it, and
+// antialiasing composites those partial coverages as if independent, so a
+// little of the page shows through: a hairline seam, faint on light pages and
+// dark on dark ones, at whatever zoom puts an edge between pixels. Painting
+// the artwork three times takes a seam pixel's alpha from 1-c to 1-c^3
+// (75% -> 98%) and changes nothing where the artwork already covers.
+const PAINTS = 3;
+// xlink:href rather than href: SVG 1.1 renderers (librsvg before 2.50,
+// Inkscape before 1.3, Batik) only read that, and SVG 2 ones read both.
+const artUse = (p) => `<use xlink:href="#${p}-art"/>`.repeat(PAINTS - 1);
+export function paintArt(svg, p) {
+  const open = `<g clip-path="url(#${p}-clip)">`;
+  const start = svg.indexOf(open) + open.length;
+  const gloss = svg.indexOf(`url(#${p}-gloss)`, start);
+  if (start < open.length || gloss < 0) throw new Error('paintArt: no clip group or overlay in ' + p);
+  const end = svg.lastIndexOf('<', gloss);
+  return svg.slice(0, start) + `<g id="${p}-art">` + svg.slice(start, end) + '</g>' + artUse(p) + svg.slice(end);
+}
+
+export function compose({ code, source, width: W, title, outline, keepColors, yellow, blue, native }) {
   const H = 11;
   const src = loadSource(source);
   const p = 'f' + code.replace(/[^a-z0-9]/gi, '');
   let art = cleanArt(src.inner, p);
   if (!OFFICIAL && !keepColors) art = stylizeSvg(art, { yellow, blue });
   const sx = W / src.w, sy = H / src.h;
-  const xlink = src.xlink ? ' xmlns:xlink="http://www.w3.org/1999/xlink"' : '';
+  const xlink = ' xmlns:xlink="http://www.w3.org/1999/xlink"';   // the extra paints use xlink:href
   const clip = outline ? `<path d="${outline}"/>` : `<rect width="${W}" height="${H}"/>`;
   const wrap = (artMarkup) =>
     `<svg xmlns="http://www.w3.org/2000/svg"${xlink} width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">` +
@@ -109,33 +130,57 @@ export function compose({ code, source, width: W, title, outline, keepColors, ye
       break;
     }
   }
-  // Shrink a candidate under the reduction bounds, as before.
-  const shrink = (b) => {
+  // Mark's pixel rules for flattened artwork, whose coordinates are final:
+  // nothing thinner than a pixel, vertical band edges on whole pixels. They
+  // are intended changes, so reduction then measures against the result.
+  // A rule that would open a gap in the artwork (as the 0.1.3 snap did in
+  // Canada) is skipped for that flag.
+  let target = ref;
+  if (best.flat) {
+    const opacity = (svg) => { const px = render(svg, CHECK_SCALE).pixels; let m = 255; for (let i = 3; i < px.length; i += 4) m = Math.min(m, px[i]); return m; };
+    const floor = Math.min(240, opacity(best.svg));
+    let adjusted = best.svg;
+    for (const rule of native ? [snapEdges] : [thinDiagonals, thinBands, snapEdges]) {
+      const next = rule(adjusted);
+      if (next !== adjusted && opacity(next) >= floor) adjusted = next;
+    }
+    if (adjusted !== best.svg) { best = { ...best, svg: adjusted }; target = render(adjusted, CHECK_SCALE); }
+  }
+  // Bytes added after reduction (the baked frame, the extra paints) come out
+  // of the budget it aims for.
+  // Only the coarse frame's cost is reserved: frame detail gives way before
+  // emblem detail.
+  const frame = (svg, minRun) => bakeFrame(svg, { p, W, H, outline, minRun });
+  const budget = BUDGET - bytes(`<g id="${p}-art"></g>${artUse(p)}`) - (bytes(frame(best.svg, FRAME.minRunTight)) - bytes(best.svg));
+  // Shrink a candidate under the reduction bounds.
+  const shrink = (b, against) => {
     for (const maxErr of MAX_REDUCE_ERR) {
-      if (b.svg === raw || bytes(b.svg) <= BUDGET) break;
-      const r = reduce(b.svg, { budget: BUDGET, ref, scale: CHECK_SCALE, maxErr });
+      if (b.svg === raw || bytes(b.svg) <= budget) break;
+      const r = reduce(b.svg, { budget, ref: against, scale: CHECK_SCALE, maxErr });
       if (r.bytes < bytes(b.svg)) b = { svg: r.svg, note: `${r.label}, error ${r.err.toFixed(2)}` };
     }
     return b;
   };
-  best = { ...shrink(best), flat: best.flat };
+  best = { ...shrink(best, target), flat: best.flat };
   // Second candidate for flags still over budget: svgo on the unflattened
   // document, which keeps <use> and source-space precision. Keep whichever ends smaller.
-  if (bytes(best.svg) > BUDGET) {
+  if (bytes(best.svg) > budget) {
     for (const precision of PRECISION) {
       let m;
       try { m = minify(raw, precision); } catch { break; }
       const err = mae(ref, render(m, CHECK_SCALE));
       if (err > MAX_FLATTEN_ERR) continue;
-      const alt = shrink({ svg: m, note: `minified unflattened, error ${err.toFixed(2)}` });
+      const alt = shrink({ svg: m, note: `minified unflattened, error ${err.toFixed(2)}` }, ref);
       if (bytes(alt.svg) < bytes(best.svg)) best = { ...alt, note: alt.note + ' (unflattened)', flat: false };
       break;
     }
   }
-  // Tricolour edges onto whole pixels; only for flattened artwork, whose
-  // coordinates are final.
-  if (best.flat) best = { ...best, svg: snapEdges(best.svg) };
-  return best;
+  let svg = paintArt(frame(best.svg), p);
+  if (bytes(svg) > BUDGET) {
+    const tight = paintArt(frame(best.svg, FRAME.minRunTight), p);
+    if (bytes(tight) < bytes(svg)) svg = tight;
+  }
+  return { ...best, svg };
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
@@ -147,7 +192,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     const width = e.width || (e.shape === '1x1' ? 11 : 16);
     const source = e.source ? path.join(ROOT, 'src', 'flags', e.source) : path.join(FI, e.shape || '4x3', (e.from || e.code) + '.svg');
     for (const code of [e.code, ...(e.aliases || [])]) {
-      const { svg, note } = compose({ code, source, width, title: e.name, outline: e.outline, keepColors: e.colors === 'keep', yellow: e.yellow, blue: e.blue });
+      const { svg, note } = compose({ code, source, width, title: e.name, outline: e.outline, keepColors: e.colors === 'keep', yellow: e.yellow, blue: e.blue, native: /^icon-native/.test(e.note || '') });
       fs.writeFileSync(path.join(OUT, code + '.svg'), svg);
       report.push({ code, bytes: bytes(svg), kb: (bytes(svg) / 1024).toFixed(1), note });
     }

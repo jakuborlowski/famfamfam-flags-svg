@@ -90,19 +90,19 @@ and 1× crispness; CI reports when a rebuild differs from `dist/`. Still worth d
 * Hand-simplified emblems for the flags still listed in `src/oversize.json`.
   The automatic reduction gets most coats of arms under budget; the rest
   need a drawn simplification, which is design work, not tooling.
-* A pixel-grid Union Jack canton shared by the ensigns (`au`, `nz`, `fj`,
-  `tv`, `ky`, `vg`, `fk`, ...), whose cantons blur at 1×.
-* Mark's frame darkens mid-tone channels much harder than bright ones, which
-  keeps his frames saturated (deep red, forest green, gold on yellow). Only a
-  colour-burn blend reproduces it, halving the frame error, but blend modes
-  need a `style` attribute that strict Content Security Policies strip. Worth
-  revisiting if a filter- and style-free way appears.
-* Hairline seams where upstream artwork butts stripes together at
-  fractional coordinates: invisible on light backgrounds, a faint line on
-  dark ones. 0.1.3 snaps vertical band edges to whole pixels, which removes
-  them from most tricolours. Overlapping stripes by a hair does not help (the
-  blend spans a whole screen pixel); painting the artwork twice more with
-  `<use>` removes them everywhere for about 48 bytes per file.
+* Small stars as bright single pixels: Mark's Southern Cross, EU ring and
+  similar small stars sit on pixel centres; ours spread over 2 to 4 pixels.
+  A general pass that moves stars under a pixel onto pixel centres was
+  prototyped (28 flags, stars 32% brighter at 1×) but held back: its
+  detection is heuristic and the error against the originals doesn't move,
+  because Mark's stars sit in different pixels from the modern artwork's.
+  (A pixel-grid ensign canton is not worth doing: Mark's cantons are blurred
+  too.)
+* An icon-native Nepal: Mark drew it on the pixel grid with a solid blue
+  border; ours keeps the generic frame over a thin border.
+* The frame follows the artwork's edge colours, so where our artwork differs
+  from Mark's at the edge (the British Indian Ocean Territory's white waves,
+  France's darker blue) the frame differs more than before.
 
 ## 4. Packaging and site
 

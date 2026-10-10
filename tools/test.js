@@ -43,7 +43,18 @@ for (const f of files) {
   const bytes = Buffer.byteLength(svg);
   if (bytes > BUDGET && !oversize.has(code)) fail(`${f}: ${(bytes / 1024).toFixed(1)} KB over the ${BUDGET / 1024} KB budget (add to src/oversize.json)`);
   if (bytes <= BUDGET && oversize.has(code)) fail(`${f}: in src/oversize.json but within budget, remove it`);
-  try { render(svg, 1); } catch (e) { fail(`${f}: does not render: ${e.message}`); }
+  // No gaps: every pixel of a rectangular icon is opaque at 1x, 2x and 4x
+  // (seams between shapes, painted three times, stay above 240).
+  try {
+    const rect = /<clipPath id="[^"]+"><rect /.test(svg);
+    for (const scale of rect ? [1, 2, 4] : [1]) {
+      const r = render(svg, scale);
+      if (!rect) continue;
+      let worst = 255, at = null;
+      for (let i = 3; i < r.pixels.length; i += 4) if (r.pixels[i] < worst) { worst = r.pixels[i]; at = (i - 3) / 4; }
+      if (worst < 240) fail(`${f}: transparent pixel (alpha ${worst}) at ${at % r.width},${Math.floor(at / r.width)} at ${scale}x`);
+    }
+  } catch (e) { fail(`${f}: does not render: ${e.message}`); }
 }
 
 // The frame and bevel must land on whole pixels at 1x. On the red half of the
@@ -57,4 +68,4 @@ for (const f of files) {
 }
 
 if (failures.length) { console.error(failures.join('\n')); console.error(`\n${failures.length} failures`); process.exit(1); }
-console.log(`${files.length} files ok: well-formed, titled, prefixed ids, no scripts, aria or external refs, within budget, crisp at 1x`);
+console.log(`${files.length} files ok: well-formed, titled, prefixed ids, no scripts, aria or external refs, within budget, no gaps, crisp at 1x`);
