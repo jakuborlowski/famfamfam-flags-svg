@@ -21,6 +21,9 @@ for (const f of files) if (!expected.has(f.replace(/\.svg$/, ''))) fail(`${f} is
 if (manifest.length !== files.length) fail(`manifest has ${manifest.length} entries for ${files.length} files`);
 for (const m of manifest) if (!expected.has(m.code)) fail(`manifest has unknown ${m.code}`);
 
+// Non-rectangular icons (Nepal) are transparent outside their outline.
+const outlined = new Set(catalog.filter((e) => e.outline).flatMap((e) => [e.code, ...(e.aliases || [])]));
+
 const allIds = new Map();
 for (const f of files) {
   const code = f.replace(/\.svg$/, '');
@@ -46,7 +49,7 @@ for (const f of files) {
   // No gaps: every pixel of a rectangular icon is opaque at 1x, 2x and 4x
   // (seams between shapes, painted three times, stay above 240).
   try {
-    const rect = /<clipPath id="[^"]+"><rect /.test(svg);
+    const rect = !outlined.has(code);
     for (const scale of rect ? [1, 2, 4] : [1]) {
       const r = render(svg, scale);
       if (!rect) continue;
