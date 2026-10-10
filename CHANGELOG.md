@@ -6,6 +6,8 @@ listed by code so a refresh from upstream reads as a diff.
 
 ## [Unreleased]
 
+## [0.1.4] - 2026-10-11
+
 ### Changed
 - The frame is baked from each flag's own edge colours with Mark's colour
   burn, fitted on his frame pixels (`research/fit_frame.py`): deep red,
