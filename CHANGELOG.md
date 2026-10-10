@@ -7,8 +7,32 @@ listed by code so a refresh from upstream reads as a diff.
 ## [Unreleased]
 
 ### Changed
+- The frame is baked from each flag's own edge colours with Mark's colour
+  burn, fitted on his frame pixels (`research/fit_frame.py`): deep red,
+  forest green and navy edges instead of a uniform grey darkening, Belize's
+  and Sri Lanka's borders as their frame. Plain fills only, so still safe
+  under strict CSP. Frame error against the originals 25.1 → 19.5, better
+  on 171 flags, worse on 63 (mostly where our edge artwork differs from
+  Mark's). The median file grows from 2.2 to 2.9 KB, the set from 1,158 to
+  1,277 KB.
+- Nothing thinner than a pixel: stripes and fimbriations narrower than a
+  pixel and a half get whole-pixel edges and at least one pixel, as Mark
+  drew them. Botswana's white lines, the Gambia's, Mozambique's and
+  Suriname's fimbriations and Israel's stripes read again at 1×.
+- Against the originals: mean error 20.7 → 20.5 inside the icons, 25.1 →
+  19.5 on the frame. Over the 8 KB budget: 20 files (was 30).
 - npm releases come from the release workflow through trusted publishing,
   with provenance; the maintainer approves each staged version.
+
+### Fixed
+- Canada had a nearly transparent column beside its white band since 0.1.3:
+  the band snap moved the white but not the red bands that share a path with
+  the maple leaf. Bands now move per sub-shape, and a new test fails any icon
+  with a transparent pixel at 1×, 2× or 4×.
+- Hairline seams between neighbouring shapes, which showed on dark pages in
+  48 files at some sizes, are gone: the artwork is painted three times.
+- The band snap no longer rewrites unmoved coordinates after size reduction,
+  which had pushed several files just over budget.
 
 ## [0.1.3] - 2026-10-04
 

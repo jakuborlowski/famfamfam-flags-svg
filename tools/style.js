@@ -24,11 +24,36 @@ export const BEVEL = { color: '#fff', opacity: 0.164 };
 // Faint darkening towards the bottom-right.
 export const SHADE = { color: '#000', knots: [[4.056, 0], [17, 0.0600]] };
 
-// The 1px frame: the flag's own edge colours, darkened with black along the
-// diagonal, fitted on the frame pixels of all the originals. Mark's frame
-// darkens mid channels harder than bright ones (closer to a colour burn);
-// only blend modes can do that, and those need a style attribute that strict
-// Content Security Policies strip, so the frame stays a plain black fill.
+// The 1px frame: the flag's own edge colours, darkened along the diagonal.
+// Mark's frame darkens mid channels much harder than bright ones (a colour
+// burn: 255 stays, 150 nearly vanishes), which keeps his frames saturated:
+// deep red, forest green, navy. No plain fill can do that over unknown
+// artwork, and blend modes need a style attribute that strict Content
+// Security Policies strip; but the build knows the artwork. It reads the
+// colours along the edge and paints each run with its own frame ramp, a
+// gradient whose stops are frameColor() at the knots below (tools/frame.js).
+// Per channel: colour burn by BURN, then BLACK multiply; then GREY of the
+// colour's neutral part comes off, since Mark's white frames are greyer than
+// his reds are dark. Fitted on the frame pixels of the originals against the
+// base colour just inside, in this exact form: research/fit_frame.py.
+export const FRAME = {
+  knots: [3.54, 9.49, 16.4],
+  burn: [0.84, 0.634, 0.481],
+  black: [-0.009, 0.052, 0.134],
+  grey: 0.052,
+  // Runs of one edge colour shorter than this (icon units) merge into their
+  // neighbours: a wavy or ornamented edge reads as its main colours, not as
+  // "piano keys". minRunTight is the coarser frame a file over budget falls
+  // back to, so frame detail gives way before emblem detail.
+  minRun: 0.5,
+  minRunTight: 1,
+};
+export function frameColor(rgb, i) {
+  const c = FRAME.burn[i], k = FRAME.black[i], g = FRAME.grey * Math.min(...rgb);
+  return rgb.map((v) => Math.min(1, Math.max(0, (1 - k) * Math.max(0, 1 - (1 - v) / c) - g)));
+}
+// The generic frame the build starts from, before the frame is baked: black
+// along the diagonal, the best a single overlay can do. Also Nepal's.
 export const EDGE = { color: '#000', knots: [[3.886, 0.048], [7.892, 0.094], [17.474, 0.217]] };
 
 // Build a <linearGradient> whose stops follow a profile along u.
@@ -50,3 +75,10 @@ export function gradient(id, layer) {
 // pixel are moved onto it; measured on the originals, 0.35 leaves true
 // half-pixel edges alone.
 export const SNAP_X = 0.35;
+
+// Stripes and fimbriations thinner than this (in pixels at 1x) get whole-pixel
+// edges and at least one pixel, as Mark drew them; see thin.js.
+export const THIN = 1.5;
+// Diagonal fimbriations narrower than this (in pixels, across the band) are
+// widened to it; see thin.js.
+export const THIN_DIAG = 1.0;

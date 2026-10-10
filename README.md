@@ -58,13 +58,18 @@ country in your data has a flag:
 * **Safe to inline.** Every file has a `<title>`, ids prefixed with its code
   so any number can share one document, and no scripts, styles, text,
   images, filters or external references. `npm test` checks all of it.
-* **Small.** Most flags are about 2 KB. Emblem flags are held to 8 KB by
+* **Small.** Most flags are about 3 KB. Emblem flags are held to 8 KB by
   reducing geometry under measured render-error bounds, overall and in every
-  small area so no emblem is lost; the 30 that still exceed it are listed in
+  small area so no emblem is lost; the 20 that still exceed it are listed in
   `src/oversize.json`, the largest at 48 KB.
-* **Crisp at 1×.** The frame and bevel sit on whole pixels, and flags whose
+* **Crisp at 1×.** The frame and bevel sit on whole pixels, band edges and
+  thin stripes land on whole pixels as in the originals, and flags whose
   official artwork cannot survive 16 px (the US stripes, the Nordic crosses,
   the Union Jack) are drawn on the pixel grid the way the originals were.
+* **No gaps or seams.** Every pixel of every icon is opaque at 1×, 2× and
+  4×, on light and dark pages: the artwork is painted three times so
+  neighbouring shapes never let the page show through between them. (Pages
+  that inline hundreds of flags get three references to each artwork.)
 
 ## How the look was reproduced
 
@@ -78,7 +83,7 @@ the originals at once and fitted by least squares to 0.6/255 RMS. In
 | Gloss | white, 40% at the top-left fading to 2% at the bottom-right |
 | Bevel | the 1 px ring inside the frame gets a constant extra 16% white |
 | Shade | up to 6% black towards the bottom-right |
-| Frame | the flag's own edge colours darkened 5% to 22% along the diagonal |
+| Frame | the flag's own edge colours, colour-burned and darkened along the diagonal |
 
 Colours were the other half, and they turned out to have a source. Mark
 picked most of them from the [Flags of the World](https://www.fotw.info/flags/fotwcols.html)
@@ -91,6 +96,14 @@ oranges, yellows, greens and blues onto that palette and maps everything else
 smoothly; the catalog records the per-flag choices that came from the 2005
 images, such as dark yellow, the darkest navies and the exact blues. `FAM_COLORS=official` keeps
 official colours. The scripts and notes behind all of this are in `research/`.
+
+The frame is the one layer that depends on the artwork. Mark's frame darkens
+mid tones far harder than bright ones, a colour burn, which keeps his frames
+deep red, forest green and navy rather than grey. Blend modes would need a
+`style` attribute, which strict Content Security Policies strip, so the build
+bakes it instead: it reads the colours along each flag's edge and paints every
+run with that colour's frame ramp, fitted on Mark's frame pixels to 4.9/255
+(`research/fit_frame.py`, `tools/frame.js`).
 
 Artwork comes from [flag-icons](https://github.com/lipis/flag-icons), stretched
 to fill the icon as the originals were, then flattened into the 16×11
