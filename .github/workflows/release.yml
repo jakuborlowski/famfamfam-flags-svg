@@ -3,34 +3,50 @@
 # version goes live only when the maintainer approves it with 2FA, on
 # npmjs.com or with `npm stage approve <id>`. npm trusts this workflow through
 # OIDC (trusted publishing), so there is no token; provenance is attached.
+#
+# Run it by hand (Actions > release > Run workflow) with an existing tag to
+# retry the npm staging for that tag without touching its GitHub release.
 name: release
 on:
   push:
     tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing release tag to stage on npm again, e.g. v0.1.4
+        required: true
 jobs:
   release:
     runs-on: ubuntu-latest
     permissions:
       contents: write   # create the GitHub release
       id-token: write   # OIDC token for npm trusted publishing
+    env:
+      TAG: ${{ inputs.tag || github.ref_name }}
     steps:
       - uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.tag || github.ref }}
       - uses: actions/setup-node@v5
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
           registry-url: https://registry.npmjs.org
       - name: Tag matches package.json
-        run: test "v$(node -p 'require("./package.json").version')" = "$GITHUB_REF_NAME"
+        run: test "v$(node -p 'require("./package.json").version')" = "$TAG"
       - run: npm ci
       - run: npm test
       - run: npm run png
+        if: github.event_name == 'push'
       - run: cp LICENSE dist/ && cd dist && zip -qr ../famfamfam-flags-svg.zip .
+        if: github.event_name == 'push'
       - uses: softprops/action-gh-release@v3
+        if: github.event_name == 'push'
         with:
           files: famfamfam-flags-svg.zip
           body_path: .github/release-notes.md
-      # npm stage needs npm 11.17 or newer; Node 22 ships npm 10.
-      - run: npm install -g npm@11.17.0
+      # The npm that trusted publishing documents; Node 24 ships an older one.
+      - run: npm install -g npm@11.21.0
       - name: Stage the npm package (approve on npmjs.com to publish)
-        run: npm stage publish --provenance --access public
+        # verbose shows why an OIDC token exchange fails (it never prints tokens)
+        run: npm stage publish --provenance --access public --loglevel verbose
