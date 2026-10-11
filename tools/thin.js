@@ -4,6 +4,8 @@
 // neighbours. Runs on flattened artwork, before size reduction.
 import svgpath from 'svgpath';
 import { THIN, THIN_DIAG } from './style.js';
+import { render } from './render.js';
+import { toHex } from './color.js';
 
 // Thin stripes. Mark drew every stripe and fimbriation thinner than about a
 // pixel and a half as whole pixel rows, at least one row wide: the white
@@ -261,4 +263,44 @@ export function thinDiagonals(svg) {
     art = art.slice(0, s.index) + `<path ${s.pre}d="${out}"${s.post}/>` + art.slice(s.index + s.len);
   }
   return svg.slice(0, start) + art + svg.slice(end);
+}
+
+// Thin borders: Guam, Sri Lanka and Montenegro are edged all round in one
+// colour, about two thirds of a pixel wide at 16 px. Mark drew that border
+// as the frame, exactly one pixel. Where the artwork has one colour all
+// round that gives way within THIN, the build sets the border to one pixel:
+// the artwork is scaled so the border's inner edge lands on the frame's, over
+// a field of the border colour. Returns that map in icon units, or null.
+const S = 32;   // px per unit when measuring the border
+export function thinBorder(svg, W, H) {
+  const img = render(svg, S);
+  const px = ([x, y]) => { const i = (Math.floor(y * S) * img.width + Math.floor(x * S)) * 4; return [img.pixels[i], img.pixels[i + 1], img.pixels[i + 2]]; };
+  const near = (a, b) => Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]) + Math.abs(a[2] - b[2]) < 24;
+  const sides = [[], [], [], []];   // top, bottom, left, right: depth -> point, every quarter unit
+  for (let t = 0.5; t < W - 0.5; t += 0.25) sides[0].push((d) => [t, d]), sides[1].push((d) => [t, H - d]);
+  for (let t = 0.5; t < H - 0.5; t += 0.25) sides[2].push((d) => [d, t]), sides[3].push((d) => [W - d, t]);
+  const edge = px(sides[0][0](0.5 / S));
+  const depth = (q) => {
+    if (!near(px(q(0.5 / S)), edge)) return null;
+    let k = 1;
+    while (k < THIN * S && near(px(q((k + 0.5) / S)), edge)) k++;
+    if (k >= THIN * S) return THIN;
+    // to a fraction of a pixel: how much of the edge colour each pixel up
+    // to the change holds, against the colour past it
+    const inner = px(q((k + 1.5) / S)), dir = edge.map((v, c) => v - inner[c]), len = dir.reduce((t, v) => t + v * v, 0) || 1;
+    let sum = 0;
+    for (let j = 0; j <= k; j++) sum += Math.min(1, Math.max(0, px(q((j + 0.5) / S)).reduce((t, v, c) => t + (v - inner[c]) * dir[c], 0) / len));
+    return sum / S;
+  };
+  // Each side's width is where most of it changes colour (an emblem or a
+  // stripe of the same colour may run on into the border); sides can differ.
+  const b = [];
+  for (const side of sides) {
+    const ds = side.map(depth);
+    if (ds.includes(null)) return null;   // not one colour all round
+    b.push(ds.sort((p, q) => p - q)[ds.length >> 1]);
+  }
+  if (b.some((w) => w >= THIN) || b.every((w) => Math.abs(w - 1) <= 1 / S)) return null;
+  const kx = (W - 2) / (W - b[2] - b[3]), ky = (H - 2) / (H - b[0] - b[1]);
+  return { fill: toHex(edge.map((v) => v / 255)), k: [kx, ky], e: [1 - b[2] * kx, 1 - b[0] * ky] };
 }

@@ -100,9 +100,9 @@ and 1× crispness; CI reports when a rebuild differs from `dist/`. Still worth d
   too.)
 * An icon-native Nepal: Mark drew it on the pixel grid with a solid blue
   border; ours keeps the generic frame over a thin border.
-* The frame follows the artwork's edge colours, so where our artwork differs
+* The frame is the artwork's edge repainted, so where our artwork differs
   from Mark's at the edge (the British Indian Ocean Territory's white waves,
-  France's darker blue) the frame differs more than before.
+  France's darker blue) the frame differs too.
 
 ## 4. Packaging and site
 

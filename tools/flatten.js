@@ -143,12 +143,13 @@ export function flattenSvg(xml, { precision = 2 } = {}) {
     const inh = { ...inherited };
     if (el.hasAttribute('stroke')) inh.stroke = el.getAttribute('stroke');
     if (el.hasAttribute('stroke-width')) { inh.sw = parseFloat(el.getAttribute('stroke-width')); el.removeAttribute('stroke-width'); }
+    if (el.getAttribute('stroke-dasharray') === 'none') el.removeAttribute('stroke-dasharray');
     if (el.hasAttribute('stroke-dasharray')) throw new Error('stroke-dasharray not supported');
     bakeRefs(el, m);                                     // clip-path applies in the element's own space
 
     if (tag === 'use') {
       const target = pristine.get(hrefOf(el));
-      if (!target) throw new Error('use target missing: ' + hrefOf(el));
+      if (!target) { el.parentNode.removeChild(el); return; }   // renders nothing
       const g = doc.createElement('g');
       for (const a of Array.from(el.attributes)) if (!['href', 'xlink:href', 'x', 'y', 'width', 'height', 'id'].includes(a.name)) g.setAttribute(a.name, a.value);
       const clone = target.cloneNode(true);

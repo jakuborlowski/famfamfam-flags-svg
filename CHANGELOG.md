@@ -6,6 +6,28 @@ listed by code so a refresh from upstream reads as a diff.
 
 ## [Unreleased]
 
+### Changed
+- The frame follows the artwork again. 0.1.4 painted it as flat runs of the
+  edge colours, which at large sizes cut every diagonal, wave and emblem off
+  at the border. The frame is now the artwork's own shapes cut to the
+  one-pixel ring, each colour in its frame ramp: the same colour burn, and
+  the Union Jack's diagonals, the British Indian Ocean Territory's waves and
+  Saint Kitts and Nevis' band run on into it at any size. Frame error
+  against the originals 19.5 → 18.8, better than 0.1.4 on 44 flags and
+  worse on 27.
+- A border of one colour thinner than a pixel and a half becomes exactly
+  the one-pixel frame, as Mark drew it: `gu`, `lk`, `me`.
+- A file over budget falls back to a coarser frame, so frame detail gives
+  way before emblem detail; nothing in the frame is cut off.
+- `gp`: the sugar cane is drawn with fewer points (a twentieth of a pixel at
+  most), so it stays within the budget next to the new frame.
+- Over the 8 KB budget: 24 files (was 20), adding `io` and `dg`, whose waves
+  run into the frame on three sides, and `ir` and `kz`, whose ornaments do.
+
+### Fixed
+- `eac` is flattened like the rest; a `stroke-dasharray="none"` had kept it
+  in source coordinates.
+
 ## [0.1.4] - 2026-10-11
 
 ### Changed

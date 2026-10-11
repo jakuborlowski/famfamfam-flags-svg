@@ -8,13 +8,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { gradient, GLOSS, BEVEL, SHADE, EDGE, FRAME } from './style.js';
+import { gradient, GLOSS, BEVEL, SHADE, EDGE } from './style.js';
 import { stylizeSvg } from './color.js';
 import { flattenSvg, minify } from './flatten.js';
 import { reduce } from './reduce.js';
 import { render, mae } from './render.js';
 import { snapEdges } from './snap.js';
-import { thinBands, thinDiagonals } from './thin.js';
+import { thinBands, thinDiagonals, thinBorder } from './thin.js';
 import { bakeFrame } from './frame.js';
 
 export const BUDGET = 8 * 1024;         // bytes per flag
@@ -84,6 +84,7 @@ function overlay(p, W, H, outline) {
 const PAINTS = 3;
 // xlink:href rather than href: SVG 1.1 renderers (librsvg before 2.50,
 // Inkscape before 1.3, Batik) only read that, and SVG 2 ones read both.
+const xlinkNs = ' xmlns:xlink="http://www.w3.org/1999/xlink"';
 const artUse = (p) => `<use xlink:href="#${p}-art"/>`.repeat(PAINTS - 1);
 export function paintArt(svg, p) {
   const open = `<g clip-path="url(#${p}-clip)">`;
@@ -91,7 +92,9 @@ export function paintArt(svg, p) {
   const gloss = svg.indexOf(`url(#${p}-gloss)`, start);
   if (start < open.length || gloss < 0) throw new Error('paintArt: no clip group or overlay in ' + p);
   const end = svg.lastIndexOf('<', gloss);
-  return svg.slice(0, start) + `<g id="${p}-art">` + svg.slice(start, end) + '</g>' + artUse(p) + svg.slice(end);
+  const out = svg.slice(0, start) + `<g id="${p}-art">` + svg.slice(start, end) + '</g>' + artUse(p) + svg.slice(end);
+  // svgo drops the xlink namespace from a minified document that didn't use it yet
+  return /^<svg[^>]*xmlns:xlink=/.test(out) ? out : out.replace('<svg xmlns="http://www.w3.org/2000/svg"', '$&' + xlinkNs);
 }
 
 export function compose({ code, source, width: W, title, outline, keepColors, yellow, blue, native }) {
@@ -101,15 +104,25 @@ export function compose({ code, source, width: W, title, outline, keepColors, ye
   let art = cleanArt(src.inner, p);
   if (!OFFICIAL && !keepColors) art = stylizeSvg(art, { yellow, blue });
   const sx = W / src.w, sy = H / src.h;
-  const xlink = ' xmlns:xlink="http://www.w3.org/1999/xlink"';   // the extra paints use xlink:href
   const clip = outline ? `<path d="${outline}"/>` : `<rect width="${W}" height="${H}"/>`;
   const wrap = (artMarkup) =>
-    `<svg xmlns="http://www.w3.org/2000/svg"${xlink} width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">` +
+    `<svg xmlns="http://www.w3.org/2000/svg"${xlinkNs} width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">` +
     `<title>${escapeXml(title)}</title>` +
     `<defs>${gradient(`${p}-gloss`, GLOSS)}${gradient(`${p}-shade`, SHADE)}${gradient(`${p}-edge`, EDGE)}<clipPath id="${p}-clip">${clip}</clipPath></defs>` +
     `<g clip-path="url(#${p}-clip)">${artMarkup}${overlay(p, W, H, outline)}</g></svg>\n`;
 
-  const raw = wrap(`<g transform="matrix(${sx.toPrecision(6)} 0 0 ${sy.toPrecision(6)} ${(-src.x * sx).toFixed(3)} ${(-src.y * sy).toFixed(3)})">${art}</g>`);
+  const stretched = (a) => `<g transform="matrix(${sx.toPrecision(6)} 0 0 ${sy.toPrecision(6)} ${(-src.x * sx).toFixed(3)} ${(-src.y * sy).toFixed(3)})">${a}</g>`;
+  const stretch = (a) => wrap(stretched(a));
+  let raw = stretch(art);
+  // A border thinner than a pixel and a half becomes the frame (thin.js):
+  // the artwork is scaled inside a field of its colour, in source units.
+  const border = native ? null : thinBorder(`<svg xmlns="http://www.w3.org/2000/svg"${xlinkNs} viewBox="0 0 ${W} ${H}">${stretched(art)}</svg>`, W, H);
+  if (border) {
+    const [kx, ky] = border.k, tx = src.x * (1 - kx) + border.e[0] / sx, ty = src.y * (1 - ky) + border.e[1] / sy;
+    art = `<path fill="${border.fill}" d="M${src.x} ${src.y}h${src.w}v${src.h}h${-src.w}z"/>` +
+      `<g transform="matrix(${kx.toFixed(5)} 0 0 ${ky.toFixed(5)} ${tx.toFixed(3)} ${ty.toFixed(3)})">${art}</g>`;
+    raw = stretch(art);
+  }
   const ref = render(raw, CHECK_SCALE);
   let best = { svg: raw, note: 'unflattened' };
   // Bake only the uniform part of the icon scale into the paths; the residual
@@ -147,40 +160,55 @@ export function compose({ code, source, width: W, title, outline, keepColors, ye
     if (adjusted !== best.svg) { best = { ...best, svg: adjusted }; target = render(adjusted, CHECK_SCALE); }
   }
   // Bytes added after reduction (the baked frame, the extra paints) come out
-  // of the budget it aims for.
-  // Only the coarse frame's cost is reserved: frame detail gives way before
-  // emblem detail.
-  const frame = (svg, minRun) => bakeFrame(svg, { p, W, H, outline, minRun });
-  const budget = BUDGET - bytes(`<g id="${p}-art"></g>${artUse(p)}`) - (bytes(frame(best.svg, FRAME.minRunTight)) - bytes(best.svg));
-  // Shrink a candidate under the reduction bounds.
-  const shrink = (b, against) => {
-    for (const maxErr of MAX_REDUCE_ERR) {
-      if (b.svg === raw || bytes(b.svg) <= budget) break;
-      const r = reduce(b.svg, { budget, ref: against, scale: CHECK_SCALE, maxErr });
-      if (r.bytes < bytes(b.svg)) b = { svg: r.svg, note: `${r.label}, error ${r.err.toFixed(2)}` };
+  // of the budget it aims for; only the tight frame's are reserved, so frame
+  // detail gives way before emblem detail. The frame is cut from the
+  // artwork, so what it adds is only known after reduction: fit with the
+  // unreduced artwork's frame, and if the reduced artwork's frame is cheaper,
+  // fit again with that, so no more detail goes than the budget needs.
+  const frame = (svg, tight) => bakeFrame(svg, { p, W, H, outline, tight });
+  const finish = (svg, tight) => paintArt(frame(svg, tight), p);
+  const paints = bytes(`<g id="${p}-art"></g>${artUse(p)}`);
+  const framed = (svg) => bytes(frame(svg, true)) - bytes(svg);
+  const unreduced = best;
+  const fit = (reserve) => {
+    const budget = BUDGET - paints - reserve;
+    // Shrink a candidate under the reduction bounds.
+    const shrink = (b, against) => {
+      for (const maxErr of MAX_REDUCE_ERR) {
+        if (b.svg === raw || bytes(b.svg) <= budget) break;
+        const r = reduce(b.svg, { budget, ref: against, scale: CHECK_SCALE, maxErr });
+        if (r.bytes < bytes(b.svg)) b = { svg: r.svg, note: `${r.label}, error ${r.err.toFixed(2)}` };
+      }
+      return b;
+    };
+    let b = { ...shrink(unreduced, target), flat: unreduced.flat };
+    // Second candidate for flags still over budget: svgo on the unflattened
+    // document, which keeps <use> and source-space precision. Keep whichever ends smaller.
+    if (bytes(b.svg) > budget) {
+      for (const precision of PRECISION) {
+        let m;
+        try { m = minify(raw, precision); } catch { break; }
+        const err = mae(ref, render(m, CHECK_SCALE));
+        if (err > MAX_FLATTEN_ERR) continue;
+        const alt = shrink({ svg: m, note: `minified unflattened, error ${err.toFixed(2)}` }, ref);
+        if (bytes(alt.svg) < bytes(b.svg)) b = { ...alt, note: alt.note + ' (unflattened)', flat: false };
+        break;
+      }
     }
     return b;
   };
-  best = { ...shrink(best, target), flat: best.flat };
-  // Second candidate for flags still over budget: svgo on the unflattened
-  // document, which keeps <use> and source-space precision. Keep whichever ends smaller.
-  if (bytes(best.svg) > budget) {
-    for (const precision of PRECISION) {
-      let m;
-      try { m = minify(raw, precision); } catch { break; }
-      const err = mae(ref, render(m, CHECK_SCALE));
-      if (err > MAX_FLATTEN_ERR) continue;
-      const alt = shrink({ svg: m, note: `minified unflattened, error ${err.toFixed(2)}` }, ref);
-      if (bytes(alt.svg) < bytes(best.svg)) best = { ...alt, note: alt.note + ' (unflattened)', flat: false };
-      break;
-    }
+  const reserve = framed(unreduced.svg);
+  best = fit(reserve);
+  if (best.svg !== unreduced.svg && bytes(finish(best.svg, true)) <= BUDGET && framed(best.svg) < reserve) {
+    const again = fit(framed(best.svg));
+    if (bytes(finish(again.svg, true)) <= BUDGET) best = again;
   }
-  let svg = paintArt(frame(best.svg), p);
+  let svg = finish(best.svg), tight = false;
   if (bytes(svg) > BUDGET) {
-    const tight = paintArt(frame(best.svg, FRAME.minRunTight), p);
-    if (bytes(tight) < bytes(svg)) svg = tight;
+    const t = finish(best.svg, true);
+    if (bytes(t) < bytes(svg)) { svg = t; tight = true; }
   }
-  return { ...best, svg };
+  return { ...best, svg, border: !!border, tight };
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
@@ -192,13 +220,17 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     const width = e.width || (e.shape === '1x1' ? 11 : 16);
     const source = e.source ? path.join(ROOT, 'src', 'flags', e.source) : path.join(FI, e.shape || '4x3', (e.from || e.code) + '.svg');
     for (const code of [e.code, ...(e.aliases || [])]) {
-      const { svg, note } = compose({ code, source, width, title: e.name, outline: e.outline, keepColors: e.colors === 'keep', yellow: e.yellow, blue: e.blue, native: /^icon-native/.test(e.note || '') });
+      const { svg, note, border, tight } = compose({ code, source, width, title: e.name, outline: e.outline, keepColors: e.colors === 'keep', yellow: e.yellow, blue: e.blue, native: /^icon-native/.test(e.note || '') });
       fs.writeFileSync(path.join(OUT, code + '.svg'), svg);
-      report.push({ code, bytes: bytes(svg), kb: (bytes(svg) / 1024).toFixed(1), note });
+      report.push({ code, bytes: bytes(svg), kb: (bytes(svg) / 1024).toFixed(1), note, border, tight });
     }
   }
   console.log(`wrote ${report.length} flags to dist/svg`);
   for (const r of report.filter((r) => /unflattened/.test(r.note))) console.log(`  ${r.code}: ${r.note}`);
+  const bordered = report.filter((r) => r.border);
+  if (bordered.length) console.log(`border set to one pixel: ${bordered.map((r) => r.code).join(', ')}`);
+  const tight = report.filter((r) => r.tight);
+  if (tight.length) console.log(`tight frame: ${tight.map((r) => r.code).join(', ')}`);
   const reduced = report.filter((r) => /geometry|pruned/.test(r.note));
   if (reduced.length) console.log(`reduced ${reduced.length}: ${reduced.map((r) => `${r.code} ${r.kb}K`).join(', ')}`);
   const over = report.filter((r) => r.bytes > BUDGET).sort((a, b) => b.bytes - a.bytes);
