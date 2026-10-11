@@ -60,8 +60,8 @@ country in your data has a flag:
   images, filters or external references. `npm test` checks all of it.
 * **Small.** Most flags are about 3 KB. Emblem flags are held to 8 KB by
   reducing geometry under measured render-error bounds, overall and in every
-  small area so no emblem is lost; the 20 that still exceed it are listed in
-  `src/oversize.json`, the largest at 48 KB.
+  small area so no emblem is lost; the 24 that still exceed it are listed in
+  `src/oversize.json`, the largest at 51 KB.
 * **Crisp at 1×.** The frame and bevel sit on whole pixels, band edges and
   thin stripes land on whole pixels as in the originals, and flags whose
   official artwork cannot survive 16 px (the US stripes, the Nordic crosses,
@@ -101,9 +101,11 @@ The frame is the one layer that depends on the artwork. Mark's frame darkens
 mid tones far harder than bright ones, a colour burn, which keeps his frames
 deep red, forest green and navy rather than grey. Blend modes would need a
 `style` attribute, which strict Content Security Policies strip, so the build
-bakes it instead: it reads the colours along each flag's edge and paints every
-run with that colour's frame ramp, fitted on Mark's frame pixels to 4.9/255
-(`research/fit_frame.py`, `tools/frame.js`).
+bakes it instead: it repaints the flag's own shapes inside the frame, each
+colour with its frame ramp, fitted on Mark's frame pixels to 4.9/255
+(`research/fit_frame.py`, `tools/frame.js`). Diagonals and waves run on into
+the frame at any size, and a border thinner than a pixel, like Guam's or Sri
+Lanka's, becomes the frame, as in the originals.
 
 Artwork comes from [flag-icons](https://github.com/lipis/flag-icons), stretched
 to fill the icon as the originals were, then flattened into the 16×11
@@ -128,7 +130,7 @@ flag-icons does not carry are in `src/flags`.
 
 ```sh
 npm ci           # Node 20 or newer
-npm run build    # src -> dist/svg, about 15 s
+npm run build    # src -> dist/svg, about 30 s
 npm run pack     # CSS, manifest, preview.html
 npm test         # the guarantees above
 npm run png      # dist/png at 1×, 2×, 4× (not committed; in the release zip)

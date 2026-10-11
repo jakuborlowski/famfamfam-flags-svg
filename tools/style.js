@@ -29,8 +29,8 @@ export const SHADE = { color: '#000', knots: [[4.056, 0], [17, 0.0600]] };
 // burn: 255 stays, 150 nearly vanishes), which keeps his frames saturated:
 // deep red, forest green, navy. No plain fill can do that over unknown
 // artwork, and blend modes need a style attribute that strict Content
-// Security Policies strip; but the build knows the artwork. It reads the
-// colours along the edge and paints each run with its own frame ramp, a
+// Security Policies strip; but the build knows the artwork. It repaints the
+// artwork's own shapes inside the frame, each colour with its frame ramp, a
 // gradient whose stops are frameColor() at the knots below (tools/frame.js).
 // Per channel: colour burn by BURN, then BLACK multiply; then GREY of the
 // colour's neutral part comes off, since Mark's white frames are greyer than
@@ -41,12 +41,6 @@ export const FRAME = {
   burn: [0.84, 0.634, 0.481],
   black: [-0.009, 0.052, 0.134],
   grey: 0.052,
-  // Runs of one edge colour shorter than this (icon units) merge into their
-  // neighbours: a wavy or ornamented edge reads as its main colours, not as
-  // "piano keys". minRunTight is the coarser frame a file over budget falls
-  // back to, so frame detail gives way before emblem detail.
-  minRun: 0.5,
-  minRunTight: 1,
 };
 export function frameColor(rgb, i) {
   const c = FRAME.burn[i], k = FRAME.black[i], g = FRAME.grey * Math.min(...rgb);
