@@ -6,6 +6,10 @@ listed by code so a refresh from upstream reads as a diff.
 
 ## [Unreleased]
 
+## [0.1.5] - 2026-10-11
+
+0.1.4 was released on GitHub only; this is the first npm release since 0.1.3.
+
 ### Changed
 - The frame follows the artwork again. 0.1.4 painted it as flat runs of the
   edge colours, which at large sizes cut every diagonal, wave and emblem off
