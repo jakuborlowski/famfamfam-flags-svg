@@ -1,0 +1,3 @@
+/* The site's own stylesheet. Flags scale by a whole number, set here rather
+   than in a style attribute, which strict Content Security Policies block. */
+.partners .famfamfam-flags { --famfamfam-flags-scale: 2; }

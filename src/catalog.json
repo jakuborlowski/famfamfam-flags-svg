@@ -490,7 +490,10 @@
   "name": "United Kingdom",
   "legacy": true,
   "source": "gb.svg",
-  "note": "icon-native artwork: cross arms on whole pixels at 1x"
+  "note": "icon-native artwork: cross arms on whole pixels at 1x",
+  "aliases": [
+   "uk"
+  ]
  },
  {
   "code": "gb-eng",
@@ -584,7 +587,10 @@
   "name": "Greece",
   "legacy": true,
   "source": "gr.svg",
-  "note": "icon-native artwork: stripes on pixel rows at 1x"
+  "note": "icon-native artwork: stripes on pixel rows at 1x",
+  "aliases": [
+   "el"
+  ]
  },
  {
   "code": "gs",

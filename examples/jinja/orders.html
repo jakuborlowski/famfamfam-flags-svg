@@ -1,0 +1,26 @@
+{#- A page using the flag macro: render_template("orders.html", orders=orders),
+    each order with a country code as the data holds it and the country's name. -#}
+{% from "flags.html" import flag -%}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orders</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/famfamfam-flags-svg@0.2.0/dist/famfamfam-flags.css" integrity="sha384-rugFcdY6hZ97GbJAmbATGc0J+K7D32P2dWlm7j+7OBNePsJiqQ3yaGi4saQ3Zw2j" crossorigin="anonymous">
+</head>
+<body>
+<main>
+<h1>Orders</h1>
+<p>Shipping to {% for order in orders %}{{ flag(order.country, order.country_name) }} {% endfor %}</p>
+<table>
+  <thead><tr><th scope="col">Order</th><th scope="col">Country</th></tr></thead>
+  <tbody>
+  {%- for order in orders %}
+    <tr><td>{{ order.id }}</td><td>{{ flag(order.country) }} {{ order.country_name }}</td></tr>
+  {%- endfor %}
+  </tbody>
+</table>
+</main>
+</body>
+</html>

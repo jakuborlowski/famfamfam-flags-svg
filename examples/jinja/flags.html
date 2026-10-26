@@ -1,0 +1,27 @@
+{#- famfamfam-flags-svg for Jinja: Flask, or Django with the Jinja2 backend.
+
+    {% from "flags.html" import flag %}
+    {{ flag(order.country, name) }}    a flag on its own: an <img>, named by its alt
+    {{ flag(order.country) }} {{ name }}  beside its name: the stylesheet's class, decorative
+
+    Codes may come straight from data, "PL" or "pl"; anything but letters and
+    hyphens shows xx, so data can't reach another URL or class. Beside its
+    name, the flag needs the stylesheet in the page:
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/famfamfam-flags-svg@0.2.0/dist/famfamfam-flags.css" integrity="sha384-rugFcdY6hZ97GbJAmbATGc0J+K7D32P2dWlm7j+7OBNePsJiqQ3yaGi4saQ3Zw2j" crossorigin="anonymous">
+    and a code without a flag shows xx, the unknown flag. On its own, such a
+    code would be a 404 unless the templates know the codes that have a flag,
+    from the package's dist/manifest.json (a JSON array of entries):
+        app.jinja_env.globals["flag_codes"] = {f["code"] for f in json.load(open("manifest.json"))}
+    Names in the user's language come from Babel, for ISO codes:
+        Locale.parse(lang, sep="-").territories.get(code.upper())
+    To self-host, put dist/svg under static/ and build the src with
+    url_for("static", filename="flags/" ~ code ~ ".svg"). -#}
+{% macro flag(code, name="") -%}
+{%- set code = (code or "")|string|lower -%}
+{%- if not code.replace("-", "").isalpha() or (flag_codes is defined and code not in flag_codes) %}{% set code = "xx" %}{% endif -%}
+{%- if not name -%}
+<span class="famfamfam-flags {{ code }}" aria-hidden="true"></span>
+{%- else -%}
+<img src="https://cdn.jsdelivr.net/npm/famfamfam-flags-svg@0.2.0/dist/svg/{{ code }}.svg" height="11" alt="{{ name }}" title="{{ name }}">
+{%- endif -%}
+{%- endmacro %}

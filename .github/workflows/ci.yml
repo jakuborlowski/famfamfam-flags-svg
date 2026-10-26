@@ -20,3 +20,18 @@ jobs:
       # machine may differ by a few bytes. Report it; the committed dist is canonical.
       - name: Report differences from the committed dist
         run: git status --porcelain -- dist || true
+  # The recipes in examples/, in the headless Chrome the runner image ships.
+  examples:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - run: pip install jinja2==3.1.6
+      - run: npm ci
+      - run: npm run examples

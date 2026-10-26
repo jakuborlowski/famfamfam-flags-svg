@@ -1,47 +1,154 @@
-// dist/svg -> dist/famfamfam-flags.css, dist/manifest.json, preview.html
+// dist/svg -> everything generated from it: the stylesheet, the manifest, the
+// JS entry and its types, preview.html, llms.txt, and the pinned version, SRI
+// hash and figures in README.md and examples/. pack() returns each file's
+// contents; `npm run pack` writes them and `npm test` checks they're current.
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
+import zlib from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const SVG = path.join(ROOT, 'dist', 'svg');
-const catalog = JSON.parse(fs.readFileSync(path.join(ROOT, 'src', 'catalog.json'), 'utf8'));
+const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
+export const pkg = JSON.parse(read('package.json'));
+export const CDN = `https://cdn.jsdelivr.net/npm/${pkg.name}@${pkg.version}/`;
+const REPO = pkg.homepage.replace(/#.*/, '');
+const PAGES = 'https://jakuborlowski.github.io/famfamfam-flags-svg/';
 
-const files = fs.readdirSync(SVG).filter((f) => f.endsWith('.svg')).sort();
+// ISO 3166-1 alpha-2 as flag-icons marks it: the assigned country codes.
+export const ISO = new Set(JSON.parse(read('node_modules/flag-icons/country.json')).filter((c) => c.iso).map((c) => c.code));
+
+// Would npm publish this path? package.json and its `files`.
+export const packaged = (rel) => ['package.json', ...pkg.files].some((f) => rel === f || rel.startsWith(f + '/'));
+
+// Text files under examples/, relative to the root.
+export function examples(dir = 'examples') {
+  return fs.readdirSync(path.join(ROOT, dir), { withFileTypes: true }).flatMap((d) =>
+    d.isDirectory() ? examples(`${dir}/${d.name}`) : [`${dir}/${d.name}`]).sort();
+}
+
+const gz = (s) => zlib.gzipSync(s, { level: 9 }).length;
+const KB = (n) => `${(n / 1024).toFixed(1)} KB`;
 const size = (svg) => svg.match(/viewBox="0 0 (\d+) (\d+)"/).slice(1, 3).map(Number);
 
-// CSS: <span class="famfamfam-flag famfamfam-flag-pl"></span>
-let css = `/* famfamfam-flags-svg. Usage: <span class="famfamfam-flag famfamfam-flag-pl"></span> */\n` +
-  `.famfamfam-flag{display:inline-block;width:16px;height:11px;vertical-align:middle;background-repeat:no-repeat;background-position:center;background-size:contain}\n`;
-for (const f of files) {
-  const code = f.replace(/\.svg$/, '');
-  const svg = fs.readFileSync(path.join(SVG, f), 'utf8');
-  const [w, h] = size(svg);
-  css += `.famfamfam-flag-${code}{background-image:url("svg/${f}")${w !== 16 ? `;width:${w}px` : ''}}\n`;
-}
-fs.writeFileSync(path.join(ROOT, 'dist', 'famfamfam-flags.css'), css);
+export function pack() {
+  const catalog = JSON.parse(read('src/catalog.json'));
+  const svgs = Object.fromEntries(fs.readdirSync(path.join(ROOT, 'dist', 'svg')).filter((f) => f.endsWith('.svg')).sort()
+    .map((f) => [f.replace(/\.svg$/, ''), read(`dist/svg/${f}`)]));
+  const out = {};
 
-// Manifest: one record per file, so consumers can generate alt text and test coverage.
-const manifest = [];
-for (const e of catalog) {
-  const svg = fs.readFileSync(path.join(SVG, e.code + '.svg'), 'utf8');
-  const [w, h] = size(svg);
-  manifest.push({ code: e.code, name: e.name, width: w, height: h, aliases: e.aliases || [], legacy: !!e.legacy, iconNative: /^icon-native/.test(e.note || ''), ...(e.note ? { note: e.note } : {}) });
-  // Alias files get the same fields as their canonical entry, plus aliasOf.
-  for (const alias of e.aliases || []) manifest.push({ ...manifest[manifest.length - 1], code: alias, aliases: [], aliasOf: e.code, legacy: true });
-}
-manifest.sort((a, b) => a.code.localeCompare(b.code));
-fs.writeFileSync(path.join(ROOT, 'dist', 'manifest.json'), JSON.stringify(manifest, null, 1) + '\n');
+  // Manifest: one record per file, so consumers can generate alt text and test coverage.
+  const manifest = [];
+  for (const e of catalog) {
+    const [w, h] = size(svgs[e.code]);
+    const entry = { code: e.code, name: e.name, width: w, height: h, aliases: e.aliases || [], legacy: !!e.legacy, iconNative: /^icon-native/.test(e.note || ''), ...(e.note ? { note: e.note } : {}) };
+    manifest.push(entry);
+    // Alias files get the same fields as their canonical entry, plus aliasOf.
+    for (const alias of e.aliases || []) manifest.push({ ...entry, code: alias, aliases: [], aliasOf: e.code });
+  }
+  manifest.sort((a, b) => a.code.localeCompare(b.code));
+  out['dist/manifest.json'] = JSON.stringify(manifest, null, 1) + '\n';
 
-// Preview page.
-const rows = catalog.map((e) => {
-  const names = [e.code, ...(e.aliases || [])].join(', ');
-  return `<tr><td><img src="dist/svg/${e.code}.svg" alt=""></td><td><img src="dist/svg/${e.code}.svg" width="32" alt=""></td><td><img src="dist/svg/${e.code}.svg" width="64" alt=""></td><td><img src="dist/svg/${e.code}.svg" width="160" alt=""></td><td><code>${names}</code></td><td>${e.name}${e.legacy ? '' : ' <small>(new)</small>'}</td></tr>`;
-}).join('\n');
-const html = `<!doctype html><meta charset="utf-8"><title>famfamfam-flags-svg</title>
+  // Stylesheet: the classic package's classes, `famfamfam-flags pl`, so a site
+  // moves over by changing one URL. A height and an aspect ratio rather than a
+  // width per flag, so one variable
+  // scales them all, Switzerland and Nepal included. Spans and <i> become inline
+  // blocks; other elements keep their display, so the classic <div> stays a
+  // block. An unknown code shows xx. In a cascade layer, so the site's own
+  // rules win without specificity tricks.
+  let css = `/* ${pkg.name} ${pkg.version} | MIT | ${REPO}\n` +
+    `   <span class="famfamfam-flags pl" aria-hidden="true"></span>, scaled by --famfamfam-flags-scale */\n` +
+    `@layer famfamfam-flags{\n` +
+    `.famfamfam-flags{height:calc(11px*var(--famfamfam-flags-scale,1));aspect-ratio:16/11;vertical-align:middle;background:url("svg/xx.svg") no-repeat center/contain;-webkit-print-color-adjust:exact;print-color-adjust:exact}\n` +
+    `:where(span,i).famfamfam-flags{display:inline-block}\n`;
+  for (const m of manifest) if (m.width !== 16 || m.height !== 11) css += `.famfamfam-flags.${m.code}{aspect-ratio:${m.width === m.height ? 1 : `${m.width}/${m.height}`}}\n`;
+  for (const m of manifest) css += `.famfamfam-flags.${m.code}{background-image:url("svg/${m.code}.svg")}\n`;
+  css += '}\n';
+  out['dist/famfamfam-flags.css'] = css;
+  const sri = 'sha384-' + crypto.createHash('sha384').update(css).digest('base64');
+
+  // JS entry: the flags, a code check that takes country codes as data holds
+  // them ("PL"), and the URL of a flag pinned to the installed version. flags
+  // has no prototype, so flags[code] is undefined for any code without a file.
+  const q = JSON.stringify;
+  const info = '{ readonly name: string; readonly width: number; readonly height: number }';
+  out['dist/index.js'] = `// ${pkg.name} ${pkg.version}, generated by tools/pack.js from dist/manifest.json.\n` +
+    `export const version = ${q(pkg.version)};\n\n` +
+    `/** Every flag file by code: its English name and icon size in pixels. flags[code] is\n` +
+    ` *  undefined for a code without a file. */\n` +
+    `export const flags = {\n  __proto__: null,\n${manifest.map((m) => `  ${q(m.code)}: { name: ${q(m.name)}, width: ${m.width}, height: ${m.height} },`).join('\n')}\n};\n\n` +
+    `/** True for a code with a flag file, aliases and xx included, in lower or upper case: "pl", "PL", "UK". */\n` +
+    `export const isFlagCode = (code) => typeof code === "string" &&\n` +
+    `  (code === code.toLowerCase() || code === code.toUpperCase()) && Object.hasOwn(flags, code.toLowerCase());\n\n` +
+    `/** The URL of a flag's SVG, on jsDelivr at this version unless \`base\` points at your own copy of dist/svg.\n` +
+    ` *  A code without a flag gives xx, the unknown flag. */\n` +
+    `export function flagUrl(code, base = \`https://cdn.jsdelivr.net/npm/${pkg.name}@\${version}/dist/svg/\`) {\n` +
+    `  return base + (isFlagCode(code) ? code.toLowerCase() : "xx") + ".svg";\n}\n`;
+  out['dist/index.d.ts'] = `// ${pkg.name} ${pkg.version}, generated by tools/pack.js from dist/manifest.json.\n\n` +
+    `/** A code with a flag file, lowercase as in its file name: an ISO 3166-1 country ("pl"),\n` +
+    ` *  an alias ("uk"), or a region or organisation ("gb-sct", "eu"). */\n` +
+    `export type FlagCode =\n${manifest.map((m) => `  | ${q(m.code)}`).join('\n')};\n\n` +
+    `/** This package's version; flagUrl's default base is pinned to it. */\n` +
+    `export declare const version: ${q(pkg.version)};\n\n` +
+    `/** Every flag file by code: its English name and icon size in pixels (16×11, "ch" 11×11, "np" 9×11).\n` +
+    ` *  flags[code] is undefined for a code without a file: flags[code.toLowerCase()]?.name. */\n` +
+    `export declare const flags: { readonly [code in FlagCode]: ${info} } & { readonly [code: string]: ${info} | undefined };\n\n` +
+    `/** True for a code with a flag file, aliases and xx included, in lower or upper case: "pl", "PL", "UK".\n` +
+    ` *  Narrows a code from data for flagUrl. */\n` +
+    `export declare function isFlagCode(code: unknown): code is FlagCode | Uppercase<FlagCode>;\n\n` +
+    `/** The URL of a flag's SVG, on jsDelivr at this version unless \`base\` points at your own copy of dist/svg:\n` +
+    ` *  flagUrl("pl", "/flags/") is "/flags/pl.svg". At runtime a code without a flag gives xx, the unknown flag. */\n` +
+    `export declare function flagUrl(code: FlagCode | Uppercase<FlagCode>, base?: string): string;\n`;
+
+  // Preview page.
+  const rows = catalog.map((e) => {
+    const names = [e.code, ...(e.aliases || [])].join(', ');
+    return `<tr><td><img src="dist/svg/${e.code}.svg" alt=""></td><td><img src="dist/svg/${e.code}.svg" width="32" alt=""></td><td><img src="dist/svg/${e.code}.svg" width="64" alt=""></td><td><img src="dist/svg/${e.code}.svg" width="160" alt=""></td><td><code>${names}</code></td><td>${e.name}${e.legacy ? '' : ' <small>(new)</small>'}</td></tr>`;
+  }).join('\n');
+  out['preview.html'] = `<!doctype html><meta charset="utf-8"><title>famfamfam-flags-svg</title>
 <style>body{font:14px/1.4 system-ui,sans-serif;margin:24px;color:#222}table{border-collapse:collapse}td{padding:4px 12px;vertical-align:middle;border-bottom:1px solid #eee}img{vertical-align:middle;image-rendering:auto}small{color:#888}h1{font-weight:600}</style>
 <h1>famfamfam-flags-svg</h1>
 <p>${catalog.length} flags at 1x, 2x, 4x and 10x. Original pixel icons by Mark James; vector rebuild on top of flag-icons.</p>
 <table>${rows}</table>`;
-fs.writeFileSync(path.join(ROOT, 'preview.html'), html);
-console.log(`css + manifest for ${files.length} flags, preview.html`);
+
+  // Snippets are copied verbatim, so every CDN link carries this version and
+  // every link to the stylesheet its hash. The figures around them are
+  // measured, and only ones a rebuild on another CPU can't change.
+  const pin = (text) => text
+    .replace(/(cdn\.jsdelivr\.net\/npm\/famfamfam-flags-svg@)[^/\s"'`)]+/g, `$1${pkg.version}`)
+    .replace(/(famfamfam-flags\.css" integrity=")sha384-[A-Za-z0-9+/]{64}/g, `$1${sri}`);
+  const spans = {
+    count: `${catalog.length} flags in ${manifest.length} files`,
+    iso: `${ISO.size}`,
+    cost: `The stylesheet is ${KB(Buffer.byteLength(css))}, ${KB(gz(css))} gzipped, and fetches only the flags a page shows.`,
+    codes: manifest.filter((m) => !ISO.has(m.code))
+      .map((m) => m.aliasOf ? `\`${m.code}\` = \`${m.aliasOf}\`` : `\`${m.code}\` ${m.name}`).join(', '),
+  };
+  const fill = (text) => text.replace(new RegExp(`<!-- (${Object.keys(spans).join('|')}) -->[\\s\\S]*?<!-- /\\1 -->`, 'g'),
+    (m, k) => `<!-- ${k} -->${spans[k]}<!-- /${k} -->`);
+  const readme = out['README.md'] = fill(pin(read('README.md')));
+  for (const f of examples()) out[f] = pin(read(f));
+
+  // llms.txt: the README's usage and rules, with links made absolute.
+  const section = readme.match(/<!-- llms -->\n([\s\S]*?)\n<!-- \/llms -->/);
+  if (!section) throw new Error('README.md has no <!-- llms --> section');
+  const body = section[1]
+    .replace(/<!-- \/?[a-z]+ -->/g, '')
+    .replace(/\]\(#([^)]+)\)/g, `](${REPO}#$1)`)
+    .replace(/\]\((?!https?:)([^)]+)\)/g, `](${REPO}/blob/main/$1)`);
+  out['llms.txt'] = `# ${pkg.name}\n\n> ${pkg.description} ${spans.count}: every ISO 3166-1 country, ` +
+    `some regions and organisations, and aliases. MIT.\n\n${body}\n\n## Links\n\n` +
+    `- [manifest.json](${CDN}dist/manifest.json): one entry per file: code, English name, width, height, aliases\n` +
+    `- [Changelog](${REPO}/blob/main/CHANGELOG.md): every flag change, by code\n` +
+    `- [README](${REPO}#readme): self-hosting, moving from the classic famfamfam-flags package, guarantees\n` +
+    `- [Every flag](${PAGES}preview.html), at four sizes\n`;
+  return out;
+}
+
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  const out = pack();
+  const changed = Object.entries(out).filter(([f, s]) => !fs.existsSync(path.join(ROOT, f)) || read(f) !== s);
+  for (const [f, s] of changed) fs.writeFileSync(path.join(ROOT, f), s);
+  console.log(`css, manifest and JS entry for ${JSON.parse(out['dist/manifest.json']).length} files, preview.html, llms.txt; ` +
+    `README.md and examples/ pinned to ${pkg.version}${changed.length ? `; wrote ${changed.map(([f]) => f).join(', ')}` : '; nothing changed'}`);
+}

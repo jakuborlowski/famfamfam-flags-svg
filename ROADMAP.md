@@ -1,6 +1,6 @@
 # Roadmap
 
-Where this could go, in rough order. Apart from what section 3 marks done,
+Where this could go, in rough order. Apart from what sections 3 and 4 mark done,
 nothing below is started; the point is to know which decisions today keep
 these doors open.
 
@@ -106,8 +106,9 @@ and 1× crispness; CI reports when a rebuild differs from `dist/`. Still worth d
 
 ## 4. Packaging and site
 
-* Publish to npm as `famfamfam-flags-svg` (checked free; `famfamfam-flags`
-  is the legacy PNG package), with `dist` only.
+Done: a typed JS entry with an `exports` map; the classic package's
+classes; `llms.txt`; recipes run in a browser by CI. Still worth doing:
+
 * `preview.html` draws Switzerland and Nepal at the wrong size at 2× and up
   (fixed widths), has no viewport tag and no dark background.
 * GitHub Pages from `preview.html`, grown into a gallery with search,
