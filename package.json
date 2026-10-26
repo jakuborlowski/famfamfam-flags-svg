@@ -1,6 +1,6 @@
 {
   "name": "famfamfam-flags-svg",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "description": "The classic famfamfam flag icons by Mark James, rebuilt as resolution-independent SVGs in the original glossy 16x11 style.",
   "license": "MIT",
   "author": "Jakub Orłowski",
@@ -22,11 +22,29 @@
     "node": ">=20"
   },
   "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./css": "./dist/famfamfam-flags.css",
+    "./svg/*": "./dist/svg/*",
+    "./manifest.json": "./dist/manifest.json",
+    "./*": "./*"
+  },
+  "sideEffects": [
+    "*.css"
+  ],
   "style": "dist/famfamfam-flags.css",
   "files": [
     "dist/svg",
     "dist/famfamfam-flags.css",
     "dist/manifest.json",
+    "dist/index.js",
+    "dist/index.d.ts",
+    "llms.txt",
     "README.md",
     "CHANGELOG.md",
     "LICENSE"
@@ -36,16 +54,23 @@
     "pack": "node tools/pack.js",
     "png": "node tools/rasterize.js",
     "test": "node tools/test.js",
+    "examples": "node tools/examples.js",
     "compare": "node tools/compare.js"
   },
   "devDependencies": {
     "@resvg/resvg-js": "^2.6.2",
+    "@types/react": "^19.3.0",
     "@xmldom/xmldom": "^0.9.12",
+    "axe-core": "^4.14.0",
     "fit-curve": "^0.2.0",
     "flag-icons": "^7.5.0",
     "pngjs": "^7.0.0",
+    "puppeteer-core": "^25.16.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "simplify-js": "^1.2.4",
     "svgo": "^4.1.0",
-    "svgpath": "^2.6.0"
+    "svgpath": "^2.6.0",
+    "typescript": "^7.0.2"
   }
 }

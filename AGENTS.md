@@ -19,10 +19,17 @@ for what it is and `ROADMAP.md` for where it is going.
   reduces automatically with a render-error bound; if a flag still exceeds
   the budget, add its code to `src/oversize.json`, or draw a
   simplified emblem in `src/flags/`. Never raise the error bound to pass a test.
-- `dist/svg`, `dist/manifest.json` and the CSS are committed and canonical;
-  `dist/png` is not (the release builds it). Rebuilds on another CPU may
-  differ by a byte or two because reduction decisions key on rendered
-  pixels; CI reports that, it does not fail on it.
+- `dist/svg`, `dist/manifest.json`, the CSS and the JS entry are committed
+  and canonical; `dist/png` is not (the release builds it). Rebuilds on
+  another CPU may differ by a byte or two because reduction decisions key on
+  rendered pixels; CI reports that, it does not fail on it.
+- The docs are the API: agents copy snippets verbatim. The pinned version and
+  SRI hash in every snippet of `README.md` and `examples/`, the figures in its
+  `<!-- name -->` spans and all of `llms.txt` come from `npm run pack`; edit
+  the prose, never those. `npm test` fails when they are stale or link to a
+  file the npm package doesn't ship.
+- Every recipe in `examples/` must pass `npm run examples`: every flag request
+  a 200 under the README's CSP, every flag drawn at its size, axe clean.
 - Never commit `tmp/`, `node_modules/`.
 
 ## Commands
@@ -31,8 +38,12 @@ for what it is and `ROADMAP.md` for where it is going.
 npm ci
 npm run build        # src -> dist/svg (FAM_COLORS=official keeps official colours,
                      #   FAM_ONLY=pl,jp builds a subset without clearing dist/svg)
-npm run pack         # dist/famfamfam-flags.css, dist/manifest.json, preview.html
-npm test             # well-formed, titled, prefixed ids, no scripts/aria/external refs, size budget, 1× crispness
+npm run pack         # dist/famfamfam-flags.css, manifest.json, index.js + index.d.ts, preview.html,
+                     #   llms.txt; pins version, SRI hash and figures in README.md and examples/
+npm test             # well-formed, titled, prefixed ids, no scripts/aria/external refs, size budget,
+                     #   1× crispness, every ISO 3166-1 country, generated docs current, CDN links shipped
+npm run examples     # examples/ in headless Chrome + axe, React recipe through tsc (Node 22.12+,
+                     #   Chrome or CHROME_PATH, Python with Jinja2 or PYTHON)
 npm run png          # dist/png at 1×, 2×, 4× (gitignored; the release workflow builds it)
 node tools/hero.js   # docs/hero.png for the README
 node tools/social.js # docs/social.png, the repo's social preview (upload by hand in Settings)
@@ -55,6 +66,11 @@ npm run compare pl,jp,us   # subset
   unchanged; default: the blue rule in `tools/color.js`), `note`, `legacy`
   (was in the original set).
 - `src/flags/`: artwork flag-icons does not carry.
+- `examples/`: copyable recipes (plain HTML, email, Jinja, React), linked from
+  the README and run by `tools/examples.js`.
+- `llms.txt`: the README's Use and Rules sections (between `<!-- llms -->`
+  markers) with absolute links; generated, shipped in the npm package and
+  served by Pages.
 - `ref/png/`: the original icons, ground truth for `compare`.
 - `tools/`: build pipeline. `build.js` composes; `style.js`/`color.js` are the
   look; `flatten.js` bakes transforms into icon space; `simplify.js` and
@@ -66,8 +82,10 @@ npm run compare pl,jp,us   # subset
   by repainting the artwork's own shapes, cut to the ring by `ring.js`, in
   Mark's frame colours, and the artwork is painted three times against
   seams; `render.js` is
-  the one rasterizer call; `test.js` is the contract. `research/`: how the
-  style was measured.
+  the one rasterizer call; `pack.js` writes everything downstream of
+  `dist/svg` (stylesheet, manifest, JS entry, `llms.txt`, the docs' pins);
+  `test.js` is the contract; `examples.js` runs the recipes in a browser.
+  `research/`: how the style was measured.
 - `src/oversize.json`: codes allowed over the size budget (complex coats of
   arms the automatic reduction cannot bring under 8 KB within the error bound).
 
@@ -102,7 +120,8 @@ guarantee, a changed manifest format). Before 1.0, breaking changes bump
 the minor.
 
 1. Move the changelog's Unreleased entries under `## [x.y.z] - date`; bump
-   `package.json` and the pinned CDN links in the README.
+   `package.json` and run `npm run pack`, which pins every snippet in the
+   README, `llms.txt` and `examples/` to the new version and hash.
 2. Commit, then push an annotated tag `vx.y.z`. Release tags are protected:
    they can't be moved or deleted, so check before pushing.
 3. The release workflow checks the tag against `package.json`, attaches the
@@ -110,6 +129,13 @@ the minor.
    with provenance). The maintainer approves it on npmjs.com, where it goes
    live.
 4. Re-upload `docs/social.png` in the repo settings if it changed.
+
+Around each minor release, test the docs with a fresh agent: give one with
+no context of this repo only the package name and the task "show each
+order's country as a flag" in three small projects (plain HTML, Flask,
+React with Vite). Before the release is live, hand it the new `README.md`
+and `llms.txt` as what it fetched. Compare its code with the README's
+answers; every difference is a documentation bug.
 
 ## Refreshing from upstream
 

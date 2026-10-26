@@ -1,0 +1,40 @@
+<!doctype html>
+<!-- famfamfam-flags-svg in plain HTML, from the CDN. A flag on its own is an
+     <img> named by its alt; a flag beside its name is a class, hidden from
+     screen readers. The strict Content-Security-Policy this page works under:
+       default-src 'none'; img-src https://cdn.jsdelivr.net; style-src 'self' https://cdn.jsdelivr.net -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flags in plain HTML</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/famfamfam-flags-svg@0.2.0/dist/famfamfam-flags.css" integrity="sha384-rugFcdY6hZ97GbJAmbATGc0J+K7D32P2dWlm7j+7OBNePsJiqQ3yaGi4saQ3Zw2j" crossorigin="anonymous">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<main>
+<h1>Flags in plain HTML</h1>
+
+<h2>On its own</h2>
+<p>
+  <img src="https://cdn.jsdelivr.net/npm/famfamfam-flags-svg@0.2.0/dist/svg/pl.svg" height="11" alt="Poland" title="Poland">
+  <img src="https://cdn.jsdelivr.net/npm/famfamfam-flags-svg@0.2.0/dist/svg/ch.svg" height="11" alt="Switzerland" title="Switzerland">
+  <img src="https://cdn.jsdelivr.net/npm/famfamfam-flags-svg@0.2.0/dist/svg/np.svg" height="11" alt="Nepal" title="Nepal">
+</p>
+
+<h2>Beside its name</h2>
+<ul>
+  <li><span class="famfamfam-flags pl" aria-hidden="true"></span> Poland</li>
+  <li><span class="famfamfam-flags ch" aria-hidden="true"></span> Switzerland</li>
+  <li><span class="famfamfam-flags np" aria-hidden="true"></span> Nepal</li>
+  <li><span class="famfamfam-flags gb-sct" aria-hidden="true"></span> Scotland</li>
+</ul>
+
+<h2>Twice the size</h2>
+<p class="partners">
+  <span class="famfamfam-flags pl" aria-hidden="true"></span> Poland
+  <img src="https://cdn.jsdelivr.net/npm/famfamfam-flags-svg@0.2.0/dist/svg/ch.svg" height="22" alt="Switzerland" title="Switzerland">
+</p>
+</main>
+</body>
+</html>

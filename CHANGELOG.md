@@ -6,6 +6,54 @@ listed by code so a refresh from upstream reads as a diff.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-26
+
+For whoever wires the set into a site, often an agent that has never seen
+it: the README says which snippet to use and the rules integrations get
+wrong, every version and hash in it comes from the build, and the classes
+are the classic package's.
+
+### Added
+- `uk` (United Kingdom) and `el` (Greece, as EU data writes it): alias files
+  for `gb` and `gr`.
+- A JS entry with types: `import { flagUrl, isFlagCode, flags, version } from
+  "famfamfam-flags-svg"`. `flagUrl` gives a flag's URL on jsDelivr at the
+  installed version, or under a base of your own, and `xx` for a code
+  without a flag; `isFlagCode` takes codes in lower or upper case, as data
+  holds them; `flags` has each file's English name and size, and nothing for any
+  other key. In TypeScript a mistyped code is a compile error.
+- An `exports` map: `.` with its types, `./css`, `./svg/*` and
+  `./manifest.json`, plus `./*`, so every path that resolved before still
+  does.
+- `llms.txt`, in the package and on the Pages site: the README's usage and
+  rules.
+- Recipes in `examples/`: plain HTML, email, Jinja, React. CI opens each in
+  headless Chrome under the README's Content Security Policy, with the CDN
+  answered from the checkout: every flag request must succeed, every flag
+  must draw at its size, and axe must report nothing.
+
+### Changed
+- The classes are the classic famfamfam-flags package's,
+  `class="famfamfam-flags pl"`, so a site using it moves over by changing
+  the stylesheet URL. They replace the 0.1 classes: `famfamfam-flag
+  famfamfam-flag-pl` becomes `famfamfam-flags pl`.
+- The stylesheet sizes flags by height and aspect ratio, so one variable,
+  `--famfamfam-flags-scale`, scales them all, Switzerland and Nepal
+  included. Spans and `<i>` are inline blocks and other elements keep their
+  display; an unknown code shows `xx`; flags print without "background
+  graphics"; everything sits in `@layer famfamfam-flags`, so a site's own
+  rules win.
+- The README opens with one snippet per case, a flag on its own, beside its
+  name, or from JavaScript, pinned and with the stylesheet's SRI hash, then
+  the rules: lowercase codes, `gb` for the United Kingdom, unknown codes,
+  sizes, accessibility, names in the user's language, CSP, email. The
+  `role="img"` span is gone (Sonar flags it, Web:S6819, and CSS backgrounds
+  don't print); a flag that needs a name is an `<img>`. `<img>` snippets set
+  only a height, so Switzerland and Nepal size themselves.
+- `npm test` also checks that every ISO 3166-1 code has a flag, that the
+  generated docs are current, and that every CDN link in them is a file the
+  npm package ships.
+
 ## [0.1.5] - 2026-10-11
 
 0.1.4 was released on GitHub only; this is the first npm release since 0.1.3.

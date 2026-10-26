@@ -679,6 +679,17 @@
   "iconNative": false
  },
  {
+  "code": "el",
+  "name": "Greece",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": true,
+  "note": "icon-native artwork: stripes on pixel rows at 1x",
+  "aliasOf": "gr"
+ },
+ {
   "code": "england",
   "name": "England",
   "width": 16,
@@ -845,7 +856,9 @@
   "name": "United Kingdom",
   "width": 16,
   "height": 11,
-  "aliases": [],
+  "aliases": [
+   "uk"
+  ],
   "legacy": true,
   "iconNative": true,
   "note": "icon-native artwork: cross arms on whole pixels at 1x"
@@ -997,7 +1010,9 @@
   "name": "Greece",
   "width": 16,
   "height": 11,
-  "aliases": [],
+  "aliases": [
+   "el"
+  ],
   "legacy": true,
   "iconNative": true,
   "note": "icon-native artwork: stripes on pixel rows at 1x"
@@ -2342,6 +2357,17 @@
   "aliases": [],
   "legacy": true,
   "iconNative": false
+ },
+ {
+  "code": "uk",
+  "name": "United Kingdom",
+  "width": 16,
+  "height": 11,
+  "aliases": [],
+  "legacy": true,
+  "iconNative": true,
+  "note": "icon-native artwork: cross arms on whole pixels at 1x",
+  "aliasOf": "gb"
  },
  {
   "code": "um",
