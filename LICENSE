@@ -65,7 +65,6 @@ Files in src/flags:
     pm.svg  Wikimedia Commons "Flag of Saint-Pierre and Miquelon.svg", public domain
     wf.svg  Wikimedia Commons "Flag of Wallis and Futuna.svg", public domain
     yt.svg  Wikimedia Commons "Flag of Mayotte (local).svg", public domain
-    np.svg  geometry from flag-icons (MIT, above), border widened
     fam.svg, us.svg, lr.svg, my.svg, gr.svg, uy.svg, dk.svg, se.svg, no.svg,
-    fi.svg, is.svg, fo.svg, ax.svg, gb.svg
+    fi.svg, is.svg, fo.svg, ax.svg, gb.svg, np.svg
             drawn for this project, MIT (above)

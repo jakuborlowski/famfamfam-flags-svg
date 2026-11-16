@@ -24,10 +24,13 @@ for what it is and `ROADMAP.md` for where it is going.
   another CPU may differ by a byte or two because reduction decisions key on
   rendered pixels; CI reports that, it does not fail on it.
 - The docs are the API: agents copy snippets verbatim. The pinned version and
-  SRI hash in every snippet of `README.md` and `examples/`, the figures in its
-  `<!-- name -->` spans and all of `llms.txt` come from `npm run pack`; edit
-  the prose, never those. `npm test` fails when they are stale or link to a
-  file the npm package doesn't ship.
+  SRI hash in every snippet of `README.md`, `docs/guide.md` and `examples/`,
+  the figures in their `<!-- name -->` spans and all of `llms.txt` come from
+  `npm run pack`; edit the prose, never those. `npm test` fails when they are
+  stale or link to a file the npm package doesn't ship.
+- The README stays short: the three snippets, the rules one line each, the
+  guarantees, how the look is made. Detail goes in `docs/guide.md`, which
+  `llms.txt` carries whole, so nothing an agent needs lives only in the README.
 - Every recipe in `examples/` must pass `npm run examples`: every flag request
   a 200 under the README's CSP, every flag drawn at its size, axe clean.
 - Never commit `tmp/`, `node_modules/`.
@@ -38,17 +41,18 @@ for what it is and `ROADMAP.md` for where it is going.
 npm ci
 npm run build        # src -> dist/svg (FAM_COLORS=official keeps official colours,
                      #   FAM_ONLY=pl,jp builds a subset without clearing dist/svg)
-npm run pack         # dist/famfamfam-flags.css, manifest.json, index.js + index.d.ts, preview.html,
-                     #   llms.txt; pins version, SRI hash and figures in README.md and examples/
+npm run pack         # dist/famfamfam-flags.css, manifest.json, index.js + index.d.ts, preview.html
+                     #   (the gallery), llms.txt; pins version, SRI hash and figures in README.md,
+                     #   docs/guide.md and examples/
 npm test             # well-formed, titled, prefixed ids, no scripts/aria/external refs, size budget,
                      #   1× crispness, every ISO 3166-1 country, generated docs current, CDN links shipped
 npm run examples     # examples/ in headless Chrome + axe, React recipe through tsc (Node 22.12+,
                      #   Chrome or CHROME_PATH, Python with Jinja2 or PYTHON)
 npm run png          # dist/png at 1×, 2×, 4× (gitignored; the release workflow builds it)
-node tools/hero.js   # docs/hero.png for the README
+node tools/hero.js   # docs/hero.png and docs/anatomy.png for the README
 node tools/social.js # docs/social.png, the repo's social preview (upload by hand in Settings)
 npm run compare      # error vs originals + tmp/compare.png side-by-side sheet
-                     #   baseline: interior 20.4, border 18.8 (mean abs diff /255; artwork differences dominate)
+                     #   baseline: interior 20.3, border 18.6 (mean abs diff /255; artwork differences dominate)
 npm run compare pl,jp,us   # subset
 ```
 
@@ -57,7 +61,8 @@ npm run compare pl,jp,us   # subset
 - `src/catalog.json`: one entry per flag: `code`, `name`, optional `from`
   (flag-icons code), `source` (file in `src/flags/`), `aliases`, `shape`
   (`4x3` default, `1x1` for 11×11), `width`, `outline` (clip path in icon
-  units for non-rectangular flags), `colors: "keep"` (skip the palette
+  units for non-rectangular flags), `inset` (with `outline`: the frame's
+  inner edge, where it isn't the outline one unit in), `colors: "keep"` (skip the palette
   transform, for artwork already in the famfamfam palette), `yellow`
   (`"#ffcc00"` for flags Flags of the World coded dark yellow in 2005,
   `"soft"` for the muted golds Mark used; default lemon `#ffff00`, see
@@ -68,20 +73,28 @@ npm run compare pl,jp,us   # subset
 - `src/flags/`: artwork flag-icons does not carry.
 - `examples/`: copyable recipes (plain HTML, email, Jinja, React), linked from
   the README and run by `tools/examples.js`.
-- `llms.txt`: the README's Use and Rules sections (between `<!-- llms -->`
-  markers) with absolute links; generated, shipped in the npm package and
-  served by Pages.
+- `docs/guide.md`: the rules in full, self-hosting, moving from the classic
+  package, the manifest. `docs/hero.png` and `docs/anatomy.png` are the
+  README's pictures.
+- `llms.txt`: the README's Use section (between `<!-- llms -->` markers) and
+  the guide's sections, with absolute links; generated, shipped in the npm
+  package and served by Pages.
+- `preview.html`: the gallery Pages serves, generated from the template
+  `tools/preview.html`.
 - `ref/png/`: the original icons, ground truth for `compare`.
 - `tools/`: build pipeline. `build.js` composes; `style.js`/`color.js` are the
-  look; `flatten.js` bakes transforms into icon space; `simplify.js` and
-  `reduce.js` shrink emblem flags under a render-error bound (whole image and
-  every 8×8 window at 4×, so emblems can't vanish); `snap.js` puts vertical
+  look; `flatten.js` bakes transforms into icon space; `simplify.js` redraws
+  an outline within a tolerance and `reduce.js` shrinks emblem flags with it
+  under a render-error bound (whole image and every 8×8 window at 4×, so
+  emblems can't vanish), taking the moves that cost the least error per byte
+  first; `snap.js` puts vertical
   band edges on whole pixels and `thin.js` makes no stripe thinner than a
   pixel and no border thinner than the frame, as Mark did (each rule is
   skipped for a flag where it would open a gap); `frame.js` bakes the frame
   by repainting the artwork's own shapes, cut to the ring by `ring.js`, in
-  Mark's frame colours, and the artwork is painted three times against
-  seams; `render.js` is
+  Mark's frame colours (an outlined icon's frame is the ring between its
+  `outline` and `inset`, which takes the frame colours of a one-colour border
+  under it), and the artwork is painted three times against seams; `render.js` is
   the one rasterizer call; `pack.js` writes everything downstream of
   `dist/svg` (stylesheet, manifest, JS entry, `llms.txt`, the docs' pins);
   `test.js` is the contract; `examples.js` runs the recipes in a browser.
@@ -98,7 +111,11 @@ elements centred on pixel centres (x.5, y.5) and sized about one unit so
 they read as a single pixel at 1× and as the real shape at 4×. Keep the
 real structure (canton covering the right number of stripes, correct
 colours) and set `note` to `icon-native ...` in the catalog. `us.svg` is the
-reference example. This is what the original set did by hand.
+reference example. This is what the original set did by hand. A border
+belongs to the frame: draw it one unit wide, and the frame takes its colour.
+Where Mark changed a flag's shape to fit the grid, follow him: `np.svg` has
+his flat top, his shorter upper pennant and his one-pixel steps, not the
+flag's true outline.
 
 ## Adding or updating a flag
 
@@ -134,7 +151,8 @@ Around each minor release, test the docs with a fresh agent: give one with
 no context of this repo only the package name and the task "show each
 order's country as a flag" in three small projects (plain HTML, Flask,
 React with Vite). Before the release is live, hand it the new `README.md`
-and `llms.txt` as what it fetched. Compare its code with the README's
+and `llms.txt` as what it fetched. Do the same after any rewrite of the
+README or the guide. Compare its code with the README's
 answers; every difference is a documentation bug.
 
 ## Refreshing from upstream

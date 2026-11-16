@@ -6,6 +6,73 @@ listed by code so a refresh from upstream reads as a diff.
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-11-16
+
+Smaller files that are closer to their artwork, Nepal with Mark's border, a
+README half as long, and a gallery.
+
+### Added
+- `preview.html` is a gallery: search by name, code or alias with accents
+  folded, flags at 1× to 8×, a light or dark page, and a click copies the
+  `<img>`, the class, the URL or the code. Switzerland and Nepal keep their
+  shape at every size (they were stretched at 2× and up), and the page has
+  a viewport. Its template is `tools/preview.html`.
+- `docs/guide.md`: the rules in full, self-hosting, moving from the classic
+  package and the manifest, under headings.
+- `docs/anatomy.png`, from `tools/hero.js`: one icon built up layer by layer.
+
+### Changed
+- Reduction takes the cheapest move first. A flag over budget can have each
+  of its paths drawn coarser at one of five tolerances, or left out; every
+  such move is rendered on its own, and they are applied in order of error
+  added per byte saved until the file fits. Before, every path was
+  simplified at one tolerance and whole paths were then dropped. The error
+  bounds are the same. Files over the 8 KB budget: 24 → 11, the largest
+  (`pm`) 51 → 21 KB, `sh-ac` 31 → 16, `yt` 20 → 9, `tm` 15 → 11, `bz` 15 → 9;
+  `dist/svg` is 8% smaller. Of the 64 reduced flags, 49 are closer to their
+  unreduced artwork, 4 the same and 11 further (`kz` the most, 0.24 → 1.44,
+  which brings it within budget); mean error 1.09 → 0.85. Mayotte has its
+  crescent and flowers back, Saint Pierre and Miquelon its second lion and
+  the ship's windows. By code: `ad` `af` `ar` `arab` `as` `aw` `bm` `bn`
+  `bo` `bt` `by` `bz` `dg` `dm` `do` `eac` `ec` `eg` `es` `es-ga` `fj` `fk`
+  `gb-nir` `gb-wls` `gd` `gs` `gt` `hr` `ht` `io` `ir` `je` `kh` `ky` `kz`
+  `li` `lk` `md` `me` `mp` `mt` `mx` `ni` `om` `pm` `pn` `pt` `py` `rs` `sa`
+  `sh` `sh-ac` `sh-hl` `sh-ta` `sm` `sv` `sx` `tc` `tm` `un` `va` `vg` `vi`
+  `yt`. No longer over budget: `arab` `as` `bt` `fk` `gb-wls` `gt` `ir` `ky`
+  `kz` `py` `rs` `va`.
+- A flag that fits only past the first error bound is also tried
+  unflattened, and the candidate with less error wins. `vg` keeps its lamps
+  that way.
+- `np`: drawn on Mark's pixel grid, in the shape he gave it rather than the
+  flag's true outline: the top cut flat, three pixels wide; both pennants
+  stepping one pixel a row; the upper pennant a pixel shorter than the
+  lower; the crimson's inner corner sharp, with two pixels of field beside
+  it. The border is one pixel wide and is the frame, solid navy at 16 px,
+  where it was a faint line under a translucent one, and moon and sun sit
+  where his do. For this an outlined icon can give its frame's inner edge
+  (`inset` in the catalog), and the frame takes the frame colours of a
+  one-colour border under it. Error against the original: 60 → 39 inside,
+  90 → 38 on the edge.
+- `qa`: maroon again. Red began at hue 340 on the magenta side and Qatar's
+  maroon is at 342, so the smooth transform turned it crimson; red now
+  begins at 335 and Qatar gets the dark red Latvia has. Mark painted about
+  `#581008`. The same edge moves a small emblem colour in `vi` and in `gt`.
+- The README is half the length: the three snippets, the rules as a table,
+  the guarantees and how the look is made. The detail moved to
+  `docs/guide.md`, and `llms.txt` is the snippets plus the whole guide, so
+  it has everything it had.
+
+### Fixed
+- Simplified outlines stay within their tolerance. The curve fit took its
+  error squared, so a refitted curve could sit a seventh of a pixel off, and
+  it was fitted to the few points kept, so a long straight edge with a
+  shallow corner could bow away from the line. Curves are now fitted to
+  samples of the whole outline, and a run of points is drawn as lines when
+  that is shorter. Path data from the simplifier is written in relative
+  coordinates. `gp`'s coarser frame is redrawn by it.
+- `source-map-js` 1.2.2 (GHSA-68fv-2mgg-jv7q), a development dependency of
+  svgo; nothing in the published package depended on it.
+
 ## [0.2.0] - 2026-10-26
 
 For whoever wires the set into a site, often an agent that has never seen

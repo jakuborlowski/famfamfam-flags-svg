@@ -1,7 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="6.5 -9.5 388.2 499">
-  <!-- Geometry from flag-icons (MIT); border widened so it survives the icon frame. -->
-  <g fill-rule="evenodd">
-    <path fill="#ce0000" stroke="#000063" stroke-width="30" d="M6.5 489.5h378.8L137.4 238.1l257.3.3L6.6-9.5v499z"/>
-    <path fill="#fff" d="m180.7 355.8-27 9 21.2 19.8-28.5-1.8 11.7 26.2-25.5-12.3.5 28.6-18.8-20.9-10.7 26.6-9.2-26.3-20.3 20.6 1.8-27.7L49 409l12.6-25-29.3.6 21.5-18.3-27.3-10.5 27-9L32.2 327l28.4 1.8L49 302.6l25.6 12.3-.5-28.6 18.8 20.9 10.7-26.6 9.1 26.3 20.4-20.6-1.9 27.7 27-11.4-12.7 25 29.4-.6-21.5 18.3zm-32.4-184.7-11.3 8.4 5.6 4.6a94 94 0 0 0 30.7-36c1.8 21.3-17.7 69-68.7 69.5a70.6 70.6 0 0 1-71.5-70.3c10 18.2 16.2 27 32 36.5l4.7-4.4-10.6-8.9 13.7-3.6-7.4-12.4 14.4 1-1.8-14.4 12.6 7.4 4-13.5 9 10.8 8.5-10.3 4.6 14 11.8-8.2-1.5 14.3 14.2-1.7-6.7 13.2z"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 11">
+  <!-- Nepal: drawn on the 9x11 icon grid as Mark James drew his. The top is cut flat, three pixels wide, both
+       pennants step one pixel a row (a 45 degree edge half a pixel off the grid, so each row ends on a nearly
+       whole pixel), the upper pennant is a pixel shorter than the lower, and the border is one pixel wide along
+       every row, which leaves the crimson its sharp inner corner and two pixels of field beside it. The crimson
+       path is the catalog's "inset", where the frame ends. Moon and sun sit where his do, on one axis. -->
+  <path fill="#003893" d="M0 0h9v11H0z"/>
+  <path fill="#dc143c" d="M1 1H2.5L6.5 5H2.5L7.5 10H1z"/>
+  <path fill="#fff" d="M1.35 3.35A1.664 1.664 0 0 0 4.65 3.35A2.295 2.295 0 0 1 1.35 3.35zM3 2.1L3.237 2.527L3.707 2.393L3.573 2.863L4 3.1L3.573 3.337L3.707 3.807L3.237 3.673L3 4.1L2.763 3.673L2.293 3.807L2.427 3.337L2 3.1L2.427 2.863L2.293 2.393L2.763 2.527z"/>
+  <path fill="#fff" d="M3 6.4L3.272 6.986L3.8 6.614L3.742 7.258L4.386 7.2L4.014 7.728L4.6 8L4.014 8.272L4.386 8.8L3.742 8.742L3.8 9.386L3.272 9.014L3 9.6L2.728 9.014L2.2 9.386L2.258 8.742L1.614 8.8L1.986 8.272L1.4 8L1.986 7.728L1.614 7.2L2.258 7.258L2.2 6.614L2.728 6.986z"/>
 </svg>

@@ -82,13 +82,18 @@ export function stylize([r, g, b]) {
 // (keep the smooth transform for amber and yellow: the muted golds Mark used
 // for some flags).
 const FAMILIES = [
-  [12,  0.6,  0.35, (v) => (v < 0.62 ? '#990000' : '#ff0000')],   // red, from 340
+  [12,  0.6,  0.35, (v) => (v < 0.62 ? '#990000' : '#ff0000')],   // red, from 335
   [30,  0.75, 0.85, () => '#ff6600'],
   [42,  0.75, 0.85, () => '#ff9900'],
   [46,  0.6,  0.8,  (v, o) => (o.yellow === 'soft' ? null : '#ffcc00')],   // amber
   [70,  0.6,  0.8,  (v, o) => (o.yellow === 'soft' ? null : o.yellow || '#ffff00')],
   [175, 0.45, 0.35, (v) => (v < 0.75 ? '#009900' : '#00cc00')],
 ];
+// Where red begins on the magenta side, and is fully red 5 degrees on. Maroons
+// lean that way: Qatar's is at 342, and with the edge at 340 the snap had
+// only begun there, so the smooth transform turned it crimson where Mark
+// painted about #581008.
+const RED_FROM = 335;
 const ramp = (x) => Math.min(1, Math.max(0, x));
 
 // FOTW blues: sky #33ccff, light #3399ff, azure #0066cc, blue #0033cc. Mark
@@ -110,7 +115,7 @@ function blue(h, s, v, o) {
 export function palette(rgb, opts = {}) {
   const smooth = stylize(rgb);
   const [h, s, v] = rgbToHsv(rgb);
-  const hr = h >= 340 ? h - 360 : h;
+  const hr = h >= RED_FROM ? h - 360 : h;
   if (hr > 175) {
     const hex = blue(hr, s, v, opts);
     if (!hex) return smooth;
@@ -125,7 +130,7 @@ export function palette(rgb, opts = {}) {
   const hex = target(v, opts);
   if (!hex) return smooth;
   // fade out over 5 degrees at the blue and magenta ends, and 0.1 below the floors
-  const w = ramp((175 - hr) / 5) * ramp((hr + 20) / 5) * ramp((s - s0) / 0.1 + 1) * ramp((v - v0) / 0.1 + 1);
+  const w = ramp((175 - hr) / 5) * ramp((hr + 360 - RED_FROM) / 5) * ramp((s - s0) / 0.1 + 1) * ramp((v - v0) / 0.1 + 1);
   const t = parseColor(hex);
   return smooth.map((c, i) => c + (t[i] - c) * w);
 }

@@ -1,0 +1,165 @@
+<!doctype html>
+<!-- The gallery template. tools/pack.js fills in the version, the count, the
+     CDN base and one card per flag, and writes preview.html, which GitHub
+     Pages serves. Edit this file, then npm run pack. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>famfamfam-flags-svg: every flag</title>
+<meta name="description" content="__COUNT__ flag icons in Mark James' famfamfam style, rebuilt as SVG. Search by name or code, try them at any size and copy a snippet.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="dist/svg/fam.svg" type="image/svg+xml">
+<style>
+:root { --bg: #fff; --card: #f5f5f7; --hover: #e9e9ee; --text: #1d1d1f; --muted: #5d6068; --line: #d9d9de; --accent: #0057d9; --s: 2; color-scheme: light; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #15161a; --card: #1f2127; --hover: #2b2e36; --text: #ececf0; --muted: #a3a6ae; --line: #393c45; --accent: #7fb0ff; color-scheme: dark; } }
+:root[data-theme="dark"] { --bg: #15161a; --card: #1f2127; --hover: #2b2e36; --text: #ececf0; --muted: #a3a6ae; --line: #393c45; --accent: #7fb0ff; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 0 16px 48px; background: var(--bg); color: var(--text); font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+header, .bar, main, footer { max-width: 1120px; margin: 0 auto; }
+header { padding: 32px 0 8px; }
+h1 { margin: 0; font-size: 26px; font-weight: 650; letter-spacing: -0.01em; }
+h1 small { margin-left: 6px; font-size: 14px; font-weight: 400; color: var(--muted); }
+header p { margin: 6px 0 0; color: var(--muted); max-width: 62ch; }
+a { color: var(--accent); }
+nav { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 12px 0; background: var(--bg); border-bottom: 1px solid var(--line); }
+@media (min-width: 900px) { .bar { position: sticky; top: 0; z-index: 1; } }
+.bar input[type="search"] { flex: 1 1 240px; min-width: 0; height: 38px; padding: 0 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--text); font: inherit; }
+fieldset { display: flex; margin: 0; padding: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+legend, .label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+fieldset label { position: relative; }
+fieldset input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+fieldset span { display: block; min-width: 40px; padding: 0 10px; line-height: 36px; text-align: center; color: var(--muted); }
+fieldset input:checked + span { background: var(--text); color: var(--bg); }
+fieldset input:focus-visible + span, .bar input[type="search"]:focus-visible, .bar button:focus-visible, #flags button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.bar button { height: 38px; padding: 0 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--text); font: inherit; cursor: pointer; }
+#count { margin: 14px auto 10px; max-width: 1120px; color: var(--muted); }
+#flags { display: grid; grid-template-columns: repeat(auto-fill, minmax(max(7.5rem, calc(16px * var(--s) + 28px)), 1fr)); gap: 8px; margin: 0; padding: 0; list-style: none; }
+#flags button { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; height: 100%; padding: 14px 8px 10px; border: 0; border-radius: 10px; background: var(--card); color: inherit; font: inherit; cursor: pointer; }
+#flags button:hover { background: var(--hover); }
+#flags img { display: block; height: calc(11px * var(--s)); width: auto; }
+#flags code { font: 600 13px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+#flags span { font-size: 12px; line-height: 1.25; color: var(--muted); text-align: center; overflow-wrap: anywhere; }
+i { display: inline-block; padding: 0 5px; border: 1px solid var(--line); border-radius: 999px; font-size: 10px; font-style: normal; line-height: 14px; letter-spacing: 0.04em; text-transform: uppercase; vertical-align: 1px; }
+[hidden] { display: none !important; }
+#none { margin: 40px 0; text-align: center; color: var(--muted); }
+#toast { position: fixed; left: 50%; bottom: 24px; max-width: calc(100vw - 32px); padding: 10px 14px; border-radius: 8px; background: var(--text); color: var(--bg); font: 13px/1.3 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; opacity: 0; transform: translate(-50%, 8px); transition: opacity .15s, transform .15s; pointer-events: none; }
+#toast.on { opacity: 1; transform: translate(-50%, 0); }
+footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+@media (prefers-reduced-motion: reduce) { #toast { transition: none; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>famfamfam-flags-svg <small>__VERSION__</small></h1>
+  <p>Mark James' famfamfam flag icons, rebuilt as SVG: the same 16×11 footprint and gloss, sharp at any size. Click a flag to copy it.</p>
+  <nav>
+    <a href="https://github.com/jakuborlowski/famfamfam-flags-svg#readme">How to use them</a>
+    <a href="https://github.com/jakuborlowski/famfamfam-flags-svg">GitHub</a>
+    <a href="https://www.npmjs.com/package/famfamfam-flags-svg">npm</a>
+  </nav>
+</header>
+<form class="bar" role="search">
+  <label class="label" for="q">Search flags</label>
+  <input type="search" id="q" placeholder="Search __COUNT__ flags by name or code" autocomplete="off" spellcheck="false">
+  <fieldset id="size">
+    <legend>Size</legend>
+    <label><input type="radio" name="size" value="1"><span>1×</span></label>
+    <label><input type="radio" name="size" value="2" checked><span>2×</span></label>
+    <label><input type="radio" name="size" value="3"><span>3×</span></label>
+    <label><input type="radio" name="size" value="4"><span>4×</span></label>
+    <label><input type="radio" name="size" value="8"><span>8×</span></label>
+  </fieldset>
+  <fieldset id="copy">
+    <legend>What a click copies</legend>
+    <label><input type="radio" name="copy" value="img" checked><span>&lt;img&gt;</span></label>
+    <label><input type="radio" name="copy" value="class"><span>class</span></label>
+    <label><input type="radio" name="copy" value="url"><span>URL</span></label>
+    <label><input type="radio" name="copy" value="code"><span>code</span></label>
+  </fieldset>
+  <button type="button" id="theme">Dark</button>
+</form>
+<p id="count" role="status">__COUNT__ flags</p>
+<main>
+<ul id="flags">
+<!--cards-->
+</ul>
+<p id="none" hidden>No flag matches. Codes are ISO 3166-1 alpha-2, such as <code>pl</code> or <code>gb</code>.</p>
+</main>
+<div id="toast" role="status"></div>
+<footer>
+  Original icons by Mark James, public domain. Artwork from flag-icons, MIT. This rebuild is MIT.
+  <i>new</i> marks a flag that was not in the 2005 set.
+</footer>
+<script>
+const CDN = "__CDN__";
+const root = document.documentElement, $ = (id) => document.getElementById(id);
+const cards = [...document.querySelectorAll("#flags button")];
+const total = cards.length;
+const plain = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
+
+function search() {
+  const words = plain($("q").value).split(/\s+/).filter(Boolean);
+  let shown = 0;
+  for (const card of cards) {
+    const hit = words.every((w) => card.dataset.find.includes(w));
+    card.parentNode.hidden = !hit;
+    if (hit) shown++;
+  }
+  $("count").textContent = shown === total ? `${total} flags` : `${shown} of ${total} flags`;
+  $("none").hidden = shown > 0;
+}
+$("q").addEventListener("input", search);
+document.querySelector(".bar").addEventListener("submit", (e) => e.preventDefault());
+document.addEventListener("keydown", (e) => {
+  if (e.key === "/" && document.activeElement !== $("q")) { e.preventDefault(); $("q").focus(); }
+  if (e.key === "Escape" && document.activeElement === $("q")) { $("q").value = ""; search(); }
+});
+
+$("size").addEventListener("change", (e) => root.style.setProperty("--s", e.target.value));
+
+const snippets = {
+  img: (code, name) => `<img src="${CDN}dist/svg/${code}.svg" height="11" alt="${name.replace(/&/g, "&amp;").replace(/"/g, "&quot;")}">`,
+  class: (code) => `<span class="famfamfam-flags ${code}" aria-hidden="true"></span>`,
+  url: (code) => `${CDN}dist/svg/${code}.svg`,
+  code: (code) => code,
+};
+let hide;
+function toast(text) {
+  $("toast").textContent = text;
+  $("toast").classList.add("on");
+  clearTimeout(hide);
+  hide = setTimeout(() => $("toast").classList.remove("on"), 2200);
+}
+async function copy(text) {
+  try { await navigator.clipboard.writeText(text); return true; } catch { /* not a secure context: the old way */ }
+  const area = Object.assign(document.createElement("textarea"), { value: text });
+  document.body.append(area); area.select();
+  let ok = false;
+  try { ok = document.execCommand("copy"); } catch { /* no clipboard at all */ }
+  area.remove();
+  return ok;
+}
+$("flags").addEventListener("click", async (e) => {
+  const card = e.target.closest("button");
+  if (!card) return;
+  const text = snippets[document.querySelector('input[name="copy"]:checked').value](card.dataset.code, card.dataset.name);
+  toast((await copy(text)) ? `Copied ${text}` : text);
+});
+
+const dark = () => (root.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")) === "dark";
+const label = () => { $("theme").textContent = dark() ? "Light" : "Dark"; };
+try { const saved = localStorage.getItem("theme"); if (saved) root.dataset.theme = saved; } catch { /* storage blocked */ }
+label();
+$("theme").addEventListener("click", () => {
+  root.dataset.theme = dark() ? "light" : "dark";
+  try { localStorage.setItem("theme", root.dataset.theme); } catch { /* storage blocked */ }
+  label();
+});
+
+const q = new URLSearchParams(location.search).get("q");
+if (q) { $("q").value = q; search(); }
+</script>
+</body>
+</html>

@@ -1739,7 +1739,8 @@
   "height": 11,
   "aliases": [],
   "legacy": true,
-  "iconNative": false
+  "iconNative": true,
+  "note": "icon-native artwork: the shape of the 2005 icon, its top cut flat and the upper pennant a pixel shorter, with a border one pixel wide, which is the frame"
  },
  {
   "code": "nr",

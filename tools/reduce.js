@@ -1,10 +1,12 @@
 // Size reduction for emblem-heavy flags, applied to artwork already flattened
-// into icon space. Three passes, each verified by rendering:
-//   1. drop subpaths whose extent is below a fraction of a pixel at 4x,
-//   2. thin points along each path (Douglas-Peucker) and refit curves,
-//   3. render-guided pruning: remove whole paths whose absence changes the
-//      4x render the least, until the file is within budget or the error
-//      bound is reached.
+// into icon space. Every path can be drawn with fewer bytes in several ways:
+// with its smallest subpaths dropped and its outline redrawn coarser
+// (simplify.js) at one of a few tolerances, or left out altogether. Each of those
+// moves is measured on its own by rendering at 4x, and they are applied
+// cheapest first, by error added per byte saved, until the file is within
+// budget or the next one would break the error bound. So a path nobody sees
+// goes before one that carries the emblem, and a big outline is drawn a
+// little coarser before a small detail is lost.
 import { DOMParser, XMLSerializer } from '@xmldom/xmldom';
 import svgpath from 'svgpath';
 import { render as rasterize, mae } from './render.js';
@@ -63,53 +65,59 @@ export function localErr(a, b, blk = 8) {
 }
 const ok = (ref, r, maxErr) => { const e = mae(ref, r); return { e, pass: e <= maxErr && localErr(ref, r) <= LOCAL_MAX }; };
 
-export function reduce(svg, { budget, ref, scale = 4, maxErr = 1.0, minExtent = 0.12, tol = 0.04 }) {
+// How a path may be simplified, gentlest first: subpaths smaller than `ext`
+// units dropped, the outline redrawn within `tol` units (1 unit = 1 px at 1x).
+const LEVELS = [[0.03, 0.01], [0.06, 0.02], [0.12, 0.04], [0.16, 0.06], [0.2, 0.08]];
+const GONE = LEVELS.length;   // one past the coarsest level: the path removed
+
+// `geometry: false` only removes paths: for artwork still in source units,
+// where a tolerance in icon units means nothing.
+export function reduce(svg, { budget, ref, scale = 4, maxErr = 1.0, geometry = true }) {
   const render = (s) => rasterize(s, scale);
   const ser = new XMLSerializer();
   const doc = new DOMParser().parseFromString(svg, 'image/svg+xml');
+  const write = () => { const out = ser.serializeToString(doc); return { svg: out, bytes: Buffer.byteLength(out) }; };
   ref = ref || render(svg);
   let best = { svg, bytes: Buffer.byteLength(svg), err: mae(ref, render(svg)) };
-  const consider = (label) => {
-    const out = ser.serializeToString(doc);
-    const { e: err, pass } = ok(ref, render(out), maxErr);
-    if (pass) best = { svg: out, bytes: Buffer.byteLength(out), err, label };
-    return pass;
-  };
-
-  // 1 + 2: geometry per path, most aggressive setting that stays within the bound
-  const original = new Map(artPaths(doc).map((p) => [p, p.getAttribute('d')]));
-  for (const [ext, t] of [[minExtent, tol], [minExtent / 2, tol / 2], [0, 0]]) {
-    for (const [p, d] of original) {
-      if (!d || d.length < 40) continue;
-      let nd = ext > 0 ? dropTinySubpaths(d, ext) : d;
-      if (t > 0) { try { nd = simplifyPath(nd, { tol: t }); } catch { /* keep */ } }
-      if (nd === '') nd = 'M0 0';
-      p.setAttribute('d', nd.length < d.length ? nd : d);
-    }
-    if (consider('geometry')) break;
-    for (const [p, d] of original) p.setAttribute('d', d);       // revert and try gentler
-  }
   if (best.bytes <= budget) return best;
 
-  // 3: render-guided pruning
-  const paths = artPaths(doc);
-  const base = render(ser.serializeToString(doc));
-  const scored = [];
+  // Each path at each level: `draw` puts it in the document that way.
+  // A path put back goes before the next of its siblings still there.
+  const paths = artPaths(doc).map((el) => ({ el, parent: el.parentNode, after: [], forms: [], level: -1 }));
+  for (const p of paths) for (let n = p.el.nextSibling; n; n = n.nextSibling) p.after.push(n);
+  const draw = (p, level) => {
+    if (level === GONE) return p.parent.removeChild(p.el);
+    if (!p.el.parentNode) p.parent.insertBefore(p.el, p.after.find((n) => n.parentNode === p.parent) || null);
+    p.el.setAttribute('d', level < 0 ? p.d : p.forms[level]);
+  };
+  // Every move, measured alone against the document as it came.
+  const whole = write().bytes, moves = [];
   for (const p of paths) {
-    const parent = p.parentNode, next = p.nextSibling;
-    parent.removeChild(p);
-    const d = mae(base, render(ser.serializeToString(doc)));
-    parent.insertBefore(p, next);
-    scored.push({ p, d, bytes: (p.getAttribute('d') || '').length });
+    p.d = p.el.getAttribute('d') || '';
+    let shortest = p.d.length;
+    if (geometry && shortest >= 40) LEVELS.forEach(([ext, tol], level) => {
+      let d;
+      try { d = simplifyPath(dropTinySubpaths(p.d, ext), { tol }) || 'M0 0'; } catch { return; }
+      if (d.length < shortest) { shortest = d.length; p.forms[level] = d; }
+    });
+    for (const level of [...p.forms.keys(), GONE]) {
+      if (level < GONE && !p.forms[level]) continue;
+      draw(p, level);
+      const out = write();
+      if (out.bytes < whole) moves.push({ p, level, saved: whole - out.bytes, cost: Math.max(0, mae(ref, render(out.svg)) - best.err) });
+    }
+    draw(p, -1);
   }
-  scored.sort((a, b) => a.d - b.d || b.bytes - a.bytes);
-  for (const { p } of scored) {
-    const parent = p.parentNode, next = p.nextSibling;
-    parent.removeChild(p);
-    const out = ser.serializeToString(doc);
-    const { e: err, pass } = ok(ref, render(out), maxErr);
-    if (!pass) { parent.insertBefore(p, next); continue; }
-    best = { svg: out, bytes: Buffer.byteLength(out), err, label: 'pruned' };
+  // Cheapest first, and each kept only if the whole still passes.
+  moves.sort((a, b) => a.cost / a.saved - b.cost / b.saved || b.saved - a.saved);
+  for (const { p, level } of moves) {
+    if (level <= p.level) continue;   // already drawn coarser, or gone
+    draw(p, level);
+    const out = write();
+    const { e: err, pass } = out.bytes < best.bytes ? ok(ref, render(out.svg), maxErr) : { pass: false };
+    if (!pass) { draw(p, p.level); continue; }
+    p.level = level;
+    best = { ...out, err, label: paths.some((q) => q.level === GONE) ? 'pruned' : 'geometry' };
     if (best.bytes <= budget) break;
   }
   return best;
