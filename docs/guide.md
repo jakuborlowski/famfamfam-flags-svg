@@ -1,0 +1,164 @@
+# Guide
+
+Everything past the three snippets in the [README](../README.md#use): the
+rules integrations get wrong, self-hosting, moving over from the classic
+package, and the manifest. An agent gets the snippets and this page as one
+file, [llms.txt](../llms.txt).
+
+## Codes
+
+- **Lowercase**, in file names and classes, and every file has a class:
+  `pl.svg`, `famfamfam-flags pl`, `famfamfam-flags uk`. Data usually holds
+  `PL`, and the CDN is case-sensitive: `PL.svg` is a 404. `flagUrl` and
+  `isFlagCode` take either case, and `isFlagCode` is true for every file's
+  code: countries, aliases, regions, organisations and `xx`.
+- **Every ISO 3166-1 country has a flag**: all <!-- iso -->249<!-- /iso --> alpha-2 codes. The
+  United Kingdom is `gb`; `uk` is an alias file, and so is `el` for Greece,
+  as EU data (VAT numbers, Eurostat) writes it.
+- **An unknown code gets `xx`**, the unknown flag, a white flag crossed out:
+  the stylesheet shows it for a class it doesn't know, and `flagUrl` returns
+  it. An `<img>` for a code without a file is a 404, so check codes that
+  aren't ISO countries against the [manifest](#manifest) first. On its own,
+  name it for what it is, as in `alt="Unknown country"`. Data shouldn't
+  reach a class or a URL unchecked, where a space would make two classes:
+  the [Jinja macro](../examples/jinja/flags.html) shows `xx` for anything
+  but letters and hyphens.
+- **Languages aren't countries**: there is no `en` flag. Which flag stands
+  for a language, `gb` or `us` for `en`, is a product decision.
+
+Codes that aren't ISO countries:
+
+<!-- codes -->`an` Netherlands Antilles (1986-2010), `arab` League of Arab States, `asean` Association of Southeast Asian Nations, `cefta` Central European Free Trade Agreement, `cp` Clipperton Island, `cs` Serbia and Montenegro (2003-2006), `dg` Diego Garcia, `eac` East African Community, `es-ct` Catalonia, `es-ga` Galicia, `es-pv` Basque Country, `eu` European Union, `fam` famfamfam, `gb-eng` England, `gb-nir` Northern Ireland, `gb-sct` Scotland, `gb-wls` Wales, `ic` Canary Islands, `pc` Pacific Community, `sh-ac` Ascension Island, `sh-hl` Saint Helena, `sh-ta` Tristan da Cunha, `un` United Nations, `xk` Kosovo, `xx` Unknown<!-- /codes -->.
+
+Aliases, each a file of its own with the same flag:
+
+<!-- aliases -->`catalonia` = `es-ct`, `el` = `gr`, `england` = `gb-eng`, `europeanunion` = `eu`, `scotland` = `gb-sct`, `uk` = `gb`, `wales` = `gb-wls`<!-- /aliases -->.
+
+## Sizes
+
+- **16×11**, except `ch` 11×11 and `np` 9×11. Give an `<img>` only a
+  `height` and the width follows.
+- **Whole multiples only**: flags are crisp at 11, 22, 33 or 44 px tall.
+  Don't size them in `em`.
+- **To scale the classes**, set `--famfamfam-flags-scale` in a stylesheet of
+  your own, as in `.partners .famfamfam-flags { --famfamfam-flags-scale: 2 }`,
+  not in a `style` attribute or a `<style>` block, which strict CSPs block.
+- **To align a column**: Switzerland and Nepal are narrower, so names beside
+  them don't line up. Give every flag the same box with the flag at its
+  left: `.famfamfam-flags { aspect-ratio: 16 / 11; background-position: left }`
+  at any scale, or `width: 16px; object-fit: contain; object-position: left`
+  on an `<img>` 11 px tall, 32px on one 22 px tall.
+
+## Accessibility
+
+- A flag on its own gets the country's name as its `alt`; a flag beside its
+  name gets `alt=""`, or `aria-hidden="true"` on the span.
+- A `title` adds a tooltip, worth it on a flag alone: at 16 px Lithuania and
+  Bolivia look alike.
+- To name a flag, use an `<img>`, not a span with `role="img"` or
+  `aria-label`.
+- An inlined SVG is named by its `<title>`; beside its name, give the `<svg>`
+  `aria-hidden="true"`.
+
+## Names in the user's language
+
+Don't ship translations; the platform has them for two-letter ISO codes.
+
+- **JavaScript**:
+  `new Intl.DisplayNames([lang], { type: "region", fallback: "none" }).of(code.toUpperCase())`,
+  which throws on longer codes such as `gb-sct`.
+- **Python**: Babel's `Locale.parse(lang, sep="-").territories.get(code.upper())`.
+
+Neither knows `el` (ask for `GR`), and Intl names the retired `an` and `cs`
+after their successors. Where they give nothing, use the English `name` from
+the manifest, or `flags[code]?.name` in JavaScript, as the
+[React page](../examples/react/Orders.tsx) does.
+
+## Browsers
+
+`<img>` works in any. The stylesheet needs cascade layers and `aspect-ratio`,
+which every major browser has had since 2022 (Safari 15.4, Chrome 99,
+Firefox 97); in older ones its flags don't show.
+
+## Content Security Policy
+
+With `default-src 'none'`, an `<img>` needs `img-src https://cdn.jsdelivr.net`,
+and the stylesheet also `style-src https://cdn.jsdelivr.net`; its flags load
+under `img-src`. Self-hosted, both are `'self'`. Nothing is inline, unless a
+bundler inlines an imported flag as a `data:` URL, which `img-src` must then
+allow.
+
+## Email
+
+Gmail (which converts SVG to PNG), Outlook 2019 and later, Outlook.com, Apple
+Mail and most other clients show the SVGs
+([caniemail](https://www.caniemail.com/features/image-svg/), tested
+September 2026). Clients ignore CSS sizes, so give both:
+
+```html
+<img src="https://cdn.jsdelivr.net/npm/famfamfam-flags-svg@0.2.1/dist/svg/pl.svg" width="16" height="11" alt="Poland">
+```
+
+with `width="11"` for `ch` and `width="9"` for `np`. Outlook 2016 and older
+and Mail.ru don't show SVG; to reach them, host the PNGs from the
+[release zip](https://github.com/jakuborlowski/famfamfam-flags-svg/releases/latest/download/famfamfam-flags-svg.zip)
+yourself.
+
+## Self-hosting
+
+Hosting the files yourself saves a production site a third-party request.
+Take `dist/` from the [latest release](https://github.com/jakuborlowski/famfamfam-flags-svg/releases/latest/download/famfamfam-flags-svg.zip)
+(SVGs, PNGs at 1×, 2× and 4×, the stylesheet, the JS entry, the manifest,
+the license) or from npm, `npm install famfamfam-flags-svg`:
+
+| Import | File |
+| --- | --- |
+| `famfamfam-flags-svg` | `dist/index.js`, with types: `flagUrl(code, base?)`, `isFlagCode(code)`, which narrows a string to the `FlagCode` that `flagUrl` takes, in either case, `flags` (each file's English `name`, `width` and `height`) and `version` |
+| `famfamfam-flags-svg/css` | `dist/famfamfam-flags.css`, which loads flags from `svg/` beside it |
+| `famfamfam-flags-svg/svg/pl.svg` | one flag, which a bundler may inline as a `data:` URL |
+| `famfamfam-flags-svg/manifest.json` | the manifest |
+
+Serve `dist/svg` as static files and pass its URL to `flagUrl`:
+`flagUrl("pl", "/flags/")`. A bundler that imports the stylesheet takes
+every flag along: Vite inlines each one under 4 KB, which makes your CSS
+over half a megabyte. In a bundled app, use `<img>` with `flagUrl`.
+
+## Coming from famfamfam-flags
+
+The [classic PNG package](https://github.com/legacy-icons/famfamfam-flags)
+uses the same classes, `class="famfamfam-flags fr"`, and each of its 251
+has a file here, so moving over is one stylesheet URL. What changes:
+
+- Spans and `<i>` show up: they become inline blocks, where the classic
+  stylesheet left them collapsed unless your CSS gave them a `display`.
+  Other elements keep theirs, so a `<div>` stays a block.
+- Montenegro is 16×11, not 16×12: a pixel less in your layout. Centring
+  11 px of artwork in 12 would put it on half pixels and blur it.
+- Guadeloupe and Mayotte, `gp` and `yt`, show their local flags, where the
+  classic stylesheet showed France's.
+- Flags that changed since 2005 show today's design: Lesotho, Libya,
+  Myanmar, Syria, Martinique and others. The [changelog](../CHANGELOG.md)
+  lists every flag change by code.
+- The stylesheet sits in a cascade layer, so any rule of yours wins over it.
+  Load it before your own CSS.
+- As with the classic stylesheet, a rule of yours for a bare class like
+  `.no` or `.ad` also styles that flag. Use `<img>` there.
+
+## Manifest
+
+Files are named by lowercase ISO 3166-1 alpha-2 code where one exists and
+by flag-icons' code otherwise (`gb-sct`, `eu`, `un`). `dist/manifest.json`,
+on the CDN at `https://cdn.jsdelivr.net/npm/famfamfam-flags-svg@0.2.1/dist/manifest.json`,
+is a JSON array with one entry per file, so you can generate alt text or
+check that every country in your data has a flag. An alias file's entry
+repeats its flag's fields, name included, and adds `aliasOf`:
+
+| Field | Meaning |
+| --- | --- |
+| `code`, `name` | file name without `.svg`, and the name used in the file's `<title>` |
+| `width`, `height` | icon size: 16×11, except Switzerland 11×11 and Nepal 9×11 |
+| `aliases` | other files with the same flag (`uk` for `gb`, and the original set's legacy names) |
+| `aliasOf` | on an alias file: the code it is a copy of |
+| `legacy` | the flag was in the 2005 set, under this name or another (true for `eu`, whose 2005 file was `europeanunion`, and for `uk`, whose was `gb`) |
+| `iconNative` | drawn on the pixel grid rather than scaled from official artwork |
+| `note` | why a flag was drawn or chosen the way it was, when that needs saying |

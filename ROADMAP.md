@@ -87,9 +87,11 @@ and 1× crispness; CI reports when a rebuild differs from `dist/`. Still worth d
 * Regression vs the originals: `tools/compare.js` MAE per flag with a
   threshold, so a style tweak that drifts from Mark's look fails loudly.
 * Visual review sheet (`tmp/compare.png`) attached to every refresh PR.
-* Hand-simplified emblems for the flags still listed in `src/oversize.json`.
-  The automatic reduction gets most coats of arms under budget; the rest
-  need a drawn simplification, which is design work, not tooling.
+* Hand-simplified emblems for the 11 flags still listed in
+  `src/oversize.json` (Saint Pierre and Miquelon at 21 KB, Ascension at
+  16 KB, the rest under 12 KB). The automatic reduction now takes every
+  outline as coarse as the error bound allows; what is left needs a drawn
+  simplification, which is design work, not tooling.
 * Small stars as bright single pixels: Mark's Southern Cross, EU ring and
   similar small stars sit on pixel centres; ours spread over 2 to 4 pixels.
   A general pass that moves stars under a pixel onto pixel centres was
@@ -98,8 +100,10 @@ and 1× crispness; CI reports when a rebuild differs from `dist/`. Still worth d
   because Mark's stars sit in different pixels from the modern artwork's.
   (A pixel-grid ensign canton is not worth doing: Mark's cantons are blurred
   too.)
-* An icon-native Nepal: Mark drew it on the pixel grid with a solid blue
-  border; ours keeps the generic frame over a thin border.
+* Nepal's gloss: Mark's one non-rectangular icon has no gloss or bevel, only
+  a darkening along the diagonal (about 6% to 24% black). Ours keeps the
+  set's gloss on it, which reads better at large sizes next to the others;
+  whether an outlined icon should follow his exception is a taste call.
 * The frame is the artwork's edge repainted, so where our artwork differs
   from Mark's at the edge (the British Indian Ocean Territory's white waves,
   France's darker blue) the frame differs too.
@@ -107,12 +111,12 @@ and 1× crispness; CI reports when a rebuild differs from `dist/`. Still worth d
 ## 4. Packaging and site
 
 Done: a typed JS entry with an `exports` map; the classic package's
-classes; `llms.txt`; recipes run in a browser by CI. Still worth doing:
+classes; `llms.txt`; recipes run in a browser by CI; `preview.html` as a
+gallery with search, sizes, a dark background and click-to-copy snippets.
+Still worth doing:
 
-* `preview.html` draws Switzerland and Nepal at the wrong size at 2× and up
-  (fixed widths), has no viewport tag and no dark background.
-* GitHub Pages from `preview.html`, grown into a gallery with search,
-  collection filter, size toggle and a copy-the-snippet button.
+* The gallery in CI: open it in headless Chrome with axe, as the recipes
+  are, and give it a collection filter once there is a second collection.
 * A subset builder: `npm run pack -- pl,de,fr` producing CSS (and optionally
   an SVG sprite) with only those flags, so a site with twenty countries ships
   tens of KB rather than the whole set.

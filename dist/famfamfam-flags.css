@@ -1,4 +1,4 @@
-/* famfamfam-flags-svg 0.2.0 | MIT | https://github.com/jakuborlowski/famfamfam-flags-svg
+/* famfamfam-flags-svg 0.2.1 | MIT | https://github.com/jakuborlowski/famfamfam-flags-svg
    <span class="famfamfam-flags pl" aria-hidden="true"></span>, scaled by --famfamfam-flags-scale */
 @layer famfamfam-flags{
 .famfamfam-flags{height:calc(11px*var(--famfamfam-flags-scale,1));aspect-ratio:16/11;vertical-align:middle;background:url("svg/xx.svg") no-repeat center/contain;-webkit-print-color-adjust:exact;print-color-adjust:exact}

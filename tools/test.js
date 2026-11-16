@@ -6,7 +6,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { DOMParser } from '@xmldom/xmldom';
 import { render } from './render.js';
 import { BUDGET } from './build.js';
-import { pack, pkg, packaged, examples, CDN, ISO } from './pack.js';
+import { pack, pkg, packaged, examples, CDN, ISO, GUIDE } from './pack.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SVG = path.join(ROOT, 'dist', 'svg');
@@ -73,9 +73,9 @@ for (const f of files) {
   if (!(bevel > body + 20 && frame < bevel - 20)) fail(`pl.svg: frame/bevel not crisp at 1x (green channel body ${body}, bevel ${bevel}, frame ${frame})`);
 }
 
-// Generated files are current: the stylesheet, manifest, JS entry, llms.txt,
-// and the version, SRI hash and figures in README.md and examples/. Agents
-// copy snippets verbatim, so a stale one is a broken page.
+// Generated files are current: the stylesheet, manifest, JS entry, gallery,
+// llms.txt, and the version, SRI hash and figures in README.md, the guide and
+// examples/. Agents copy snippets verbatim, so a stale one is a broken page.
 let packed = {};
 try { packed = pack(); } catch (e) { fail(`npm run pack fails: ${e.message}`); }
 for (const [file, text] of Object.entries(packed)) {
@@ -85,7 +85,7 @@ for (const [file, text] of Object.entries(packed)) {
 
 // Every CDN link in the docs is to this version and to a file the npm package
 // ships.
-for (const doc of ['README.md', 'llms.txt', ...examples()]) {
+for (const doc of ['README.md', GUIDE, 'llms.txt', ...examples()]) {
   const text = fs.readFileSync(path.join(ROOT, doc), 'utf8');
   for (const [url, version, rel] of text.matchAll(/https:\/\/cdn\.jsdelivr\.net\/npm\/famfamfam-flags-svg@([^/\s"'`)]*)\/?([\w./@-]*)/g)) {
     if (version !== pkg.version) fail(`${doc}: ${url} is not version ${pkg.version}`);

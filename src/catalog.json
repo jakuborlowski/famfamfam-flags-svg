@@ -1014,7 +1014,9 @@
   "legacy": true,
   "source": "np.svg",
   "width": 9,
-  "outline": "M0 11L8.782 11L3.035 5.458L9 5.465L0.002 0z"
+  "outline": "M0 0H2.5L8.5 6H4.5L9 10.5V11H0z",
+  "inset": "M1 1H2.5L6.5 5H2.5L7.5 10H1z",
+  "note": "icon-native artwork: the shape of the 2005 icon, its top cut flat and the upper pennant a pixel shorter, with a border one pixel wide, which is the frame"
  },
  {
   "code": "nr",

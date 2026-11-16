@@ -12,6 +12,7 @@ import { clipToRing } from './ring.js';
 import { simplifyPath } from './simplify.js';
 import { frameColor, FRAME, COS, SIN } from './style.js';
 import { toHex, parseColor } from './color.js';
+import { render } from './render.js';
 
 const PAINTS = ['fill', 'stroke'];
 const HAIRLINE = 0.05;
@@ -48,9 +49,28 @@ function bbox(d) {
 const elements = (n) => Array.from(n.childNodes).filter((c) => c.nodeType === 1);
 const markup = (els) => els.map((e) => new XMLSerializer().serializeToString(e).replace(/ xmlns(?::xlink)?="[^"]*"/g, '')).join('');
 
-export function bakeFrame(svg, { p, W, H, outline, tight = false }) {
-  // A non-rectangular icon (Nepal) keeps the generic frame over its own border.
-  if (outline) return svg;
+// A non-rectangular icon (Nepal) has no ring of rectangles to cut shapes to:
+// its frame is the ring between the outline and `inset`, or without one a
+// stroke along the outline. Where the artwork under the frame is one colour,
+// a border, the frame takes that colour's ramp and the border becomes the
+// frame, as in Mark's Nepal. Otherwise the generic frame stays.
+function outlineFrame(svg, p, outline, inset) {
+  const group = `<g clip-path="url(#${p}-clip)">`;
+  const overlay = svg.lastIndexOf('<', svg.indexOf(`url(#${p}-gloss)`, svg.indexOf(group)));
+  const art = render(svg.slice(0, overlay) + '</g></svg>', 4).pixels;
+  const ring = render(svg.slice(0, svg.indexOf(group)) + group + (inset
+    ? `<path d="${outline}${inset}" fill="#fff" fill-rule="evenodd"/>`
+    : `<path d="${outline}" fill="none" stroke="#fff" stroke-width="1.5"/>`) + '</g></svg>', 4).pixels;
+  const under = [];
+  for (let i = 0; i < ring.length; i += 4) if (ring[i + 3] === 255) under.push([art[i], art[i + 1], art[i + 2], art[i + 3]]);
+  if (!under.length) return svg;
+  const mean = [0, 1, 2, 3].map((c) => under.reduce((sum, px) => sum + px[c], 0) / under.length);
+  if (mean[3] < 255 || under.some((px) => px.some((v, c) => Math.abs(v - mean[c]) > 6))) return svg;
+  return svg.replace(new RegExp(`<linearGradient id="${p}-edge"[^>]*>.*?</linearGradient>`), ramp(`${p}-edge`, mean.slice(0, 3).map((v) => v / 255)));
+}
+
+export function bakeFrame(svg, { p, W, H, outline, inset, tight = false }) {
+  if (outline) return outlineFrame(svg, p, outline, inset);
   const open = `<g clip-path="url(#${p}-clip)">`;
   const start = svg.indexOf(open) + open.length;
   const art = svg.slice(start, svg.lastIndexOf('<', svg.indexOf(`url(#${p}-gloss)`, start)));

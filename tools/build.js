@@ -59,10 +59,24 @@ function cleanArt(inner, prefix) {
 }
 
 // The overlay on top of the artwork. A non-rectangular icon (Nepal) gives an
-// outline path; the frame, bevel and gloss then follow it.
-function overlay(p, W, H, outline) {
+// outline path; the frame, bevel and gloss then follow it. It may also give
+// the frame's inner edge, `inset`, where that isn't the outline one unit in:
+// Mark's Nepal has a border one pixel wide measured along the rows, which on
+// its diagonals is less than a unit across.
+function overlay(p, W, H, outline, inset) {
+  if (inset) {
+    // As for a rectangle: gloss and shade inside the frame, the bevel the unit
+    // inside that, the frame the ring between the two paths.
+    return `<path d="${inset}" fill="url(#${p}-gloss)"/>` +
+      `<path d="${inset}" fill="none" stroke="${BEVEL.color}" stroke-opacity="${BEVEL.opacity}" stroke-width="2" clip-path="url(#${p}-inset)"/>` +
+      `<path d="${inset}" fill="url(#${p}-shade)"/>` +
+      `<path d="${outline}${inset}" fill="url(#${p}-edge)" fill-rule="evenodd"/>`;
+  }
   if (outline) {
     // Strokes sit on the outline and are clipped to it, so 2 units of stroke = 1 unit inside.
+    // Where the outline turns inwards (between Nepal's pennants) the join is the part inside:
+    // a mitre, so the frame comes to a point there as the outline does. The outline has to
+    // leave that point room, or it reaches across the flag.
     return `<path d="${outline}" fill="url(#${p}-gloss)"/>` +
       `<path d="${outline}" fill="none" stroke="${BEVEL.color}" stroke-opacity="${BEVEL.opacity}" stroke-width="4"/>` +
       `<path d="${outline}" fill="url(#${p}-shade)"/>` +
@@ -97,7 +111,7 @@ export function paintArt(svg, p) {
   return /^<svg[^>]*xmlns:xlink=/.test(out) ? out : out.replace('<svg xmlns="http://www.w3.org/2000/svg"', '$&' + xlinkNs);
 }
 
-export function compose({ code, source, width: W, title, outline, keepColors, yellow, blue, native }) {
+export function compose({ code, source, width: W, title, outline, inset, keepColors, yellow, blue, native }) {
   const H = 11;
   const src = loadSource(source);
   const p = 'f' + code.replace(/[^a-z0-9]/gi, '');
@@ -105,11 +119,12 @@ export function compose({ code, source, width: W, title, outline, keepColors, ye
   if (!OFFICIAL && !keepColors) art = stylizeSvg(art, { yellow, blue });
   const sx = W / src.w, sy = H / src.h;
   const clip = outline ? `<path d="${outline}"/>` : `<rect width="${W}" height="${H}"/>`;
+  const inner = inset ? `<clipPath id="${p}-inset"><path d="${inset}"/></clipPath>` : '';
   const wrap = (artMarkup) =>
     `<svg xmlns="http://www.w3.org/2000/svg"${xlinkNs} width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">` +
     `<title>${escapeXml(title)}</title>` +
-    `<defs>${gradient(`${p}-gloss`, GLOSS)}${gradient(`${p}-shade`, SHADE)}${gradient(`${p}-edge`, EDGE)}<clipPath id="${p}-clip">${clip}</clipPath></defs>` +
-    `<g clip-path="url(#${p}-clip)">${artMarkup}${overlay(p, W, H, outline)}</g></svg>\n`;
+    `<defs>${gradient(`${p}-gloss`, GLOSS)}${gradient(`${p}-shade`, SHADE)}${gradient(`${p}-edge`, EDGE)}<clipPath id="${p}-clip">${clip}</clipPath>${inner}</defs>` +
+    `<g clip-path="url(#${p}-clip)">${artMarkup}${overlay(p, W, H, outline, inset)}</g></svg>\n`;
 
   const stretched = (a) => `<g transform="matrix(${sx.toPrecision(6)} 0 0 ${sy.toPrecision(6)} ${(-src.x * sx).toFixed(3)} ${(-src.y * sy).toFixed(3)})">${a}</g>`;
   const stretch = (a) => wrap(stretched(a));
@@ -165,7 +180,7 @@ export function compose({ code, source, width: W, title, outline, keepColors, ye
   // artwork, so what it adds is only known after reduction: fit with the
   // unreduced artwork's frame, and if the reduced artwork's frame is cheaper,
   // fit again with that, so no more detail goes than the budget needs.
-  const frame = (svg, tight) => bakeFrame(svg, { p, W, H, outline, tight });
+  const frame = (svg, tight) => bakeFrame(svg, { p, W, H, outline, inset, tight });
   const finish = (svg, tight) => paintArt(frame(svg, tight), p);
   const paints = bytes(`<g id="${p}-art"></g>${artUse(p)}`);
   const framed = (svg) => bytes(frame(svg, true)) - bytes(svg);
@@ -174,24 +189,30 @@ export function compose({ code, source, width: W, title, outline, keepColors, ye
     const budget = BUDGET - paints - reserve;
     // Shrink a candidate under the reduction bounds.
     const shrink = (b, against) => {
+      const geometry = !!b.flat;   // tolerances are in icon units
       for (const maxErr of MAX_REDUCE_ERR) {
         if (b.svg === raw || bytes(b.svg) <= budget) break;
-        const r = reduce(b.svg, { budget, ref: against, scale: CHECK_SCALE, maxErr });
-        if (r.bytes < bytes(b.svg)) b = { svg: r.svg, note: `${r.label}, error ${r.err.toFixed(2)}` };
+        const r = reduce(b.svg, { budget, ref: against, scale: CHECK_SCALE, maxErr, geometry });
+        if (r.bytes < bytes(b.svg)) b = { svg: r.svg, note: `${r.label}, error ${r.err.toFixed(2)}`, err: r.err };
       }
       return b;
     };
     let b = { ...shrink(unreduced, target), flat: unreduced.flat };
-    // Second candidate for flags still over budget: svgo on the unflattened
-    // document, which keeps <use> and source-space precision. Keep whichever ends smaller.
-    if (bytes(b.svg) > budget) {
+    // Second candidate for flags still over budget, or within it only past
+    // the first error bound: svgo on the unflattened document, which keeps
+    // <use> and source-space precision, so an emblem of repeated parts (the
+    // Virgin Islands' lamps) stays whole. If only one fits, it wins; if both
+    // do, the one with less error; if neither, the smaller.
+    const fits = (c) => bytes(c.svg) <= budget;
+    if (!fits(b) || b.err > MAX_REDUCE_ERR[0]) {
       for (const precision of PRECISION) {
         let m;
         try { m = minify(raw, precision); } catch { break; }
         const err = mae(ref, render(m, CHECK_SCALE));
         if (err > MAX_FLATTEN_ERR) continue;
-        const alt = shrink({ svg: m, note: `minified unflattened, error ${err.toFixed(2)}` }, ref);
-        if (bytes(alt.svg) < bytes(b.svg)) b = { ...alt, note: alt.note + ' (unflattened)', flat: false };
+        const alt = shrink({ svg: m, note: `minified unflattened, error ${err.toFixed(2)}`, err }, ref);
+        const better = fits(alt) !== fits(b) ? fits(alt) : fits(alt) ? alt.err < b.err : bytes(alt.svg) < bytes(b.svg);
+        if (better) b = { ...alt, note: alt.note + ' (unflattened)', flat: false };
         break;
       }
     }
@@ -220,7 +241,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     const width = e.width || (e.shape === '1x1' ? 11 : 16);
     const source = e.source ? path.join(ROOT, 'src', 'flags', e.source) : path.join(FI, e.shape || '4x3', (e.from || e.code) + '.svg');
     for (const code of [e.code, ...(e.aliases || [])]) {
-      const { svg, note, border, tight } = compose({ code, source, width, title: e.name, outline: e.outline, keepColors: e.colors === 'keep', yellow: e.yellow, blue: e.blue, native: /^icon-native/.test(e.note || '') });
+      const { svg, note, border, tight } = compose({ code, source, width, title: e.name, outline: e.outline, inset: e.inset, keepColors: e.colors === 'keep', yellow: e.yellow, blue: e.blue, native: /^icon-native/.test(e.note || '') });
       fs.writeFileSync(path.join(OUT, code + '.svg'), svg);
       report.push({ code, bytes: bytes(svg), kb: (bytes(svg) / 1024).toFixed(1), note, border, tight });
     }
