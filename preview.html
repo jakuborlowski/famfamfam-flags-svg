@@ -390,8 +390,10 @@ document.addEventListener("keydown", (e) => {
 
 $("size").addEventListener("change", (e) => root.style.setProperty("--s", e.target.value));
 
+// A name as an attribute value, escaped as the build escapes it (tools/pack.js).
+const attr = (text) => text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
 const snippets = {
-  img: (code, name) => `<img src="${CDN}dist/svg/${code}.svg" height="11" alt="${name.replace(/&/g, "&amp;").replace(/"/g, "&quot;")}">`,
+  img: (code, name) => `<img src="${CDN}dist/svg/${code}.svg" height="11" alt="${attr(name)}">`,
   class: (code) => `<span class="famfamfam-flags ${code}" aria-hidden="true"></span>`,
   url: (code) => `${CDN}dist/svg/${code}.svg`,
   code: (code) => code,
